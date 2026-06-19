@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rendez 赴野 — 用对话，找到对的人",
+  title: "Rendez — 用对话，找到对的人",
   description:
     "AI agent 驱动的社交平台。通过对话找到志同道合的人和有趣的活动。",
 };

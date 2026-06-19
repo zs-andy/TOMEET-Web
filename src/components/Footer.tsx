@@ -11,7 +11,6 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="text-base font-bold text-white tracking-tight">Rendez</span>
-            <span className="text-xs text-zinc-500">赴野</span>
           </div>
           <p className="text-xs text-zinc-500">{t("copyright")}</p>
         </div>

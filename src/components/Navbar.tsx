@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
@@ -24,10 +25,9 @@ export default function Navbar() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200/60">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-14">
-            <a href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
               <span className="text-lg font-bold text-gray-900 tracking-tight">Rendez</span>
-              <span className="text-xs text-gray-400 font-medium">赴野</span>
-            </a>
+            </Link>
 
             <div className="flex items-center gap-5">
               <button
