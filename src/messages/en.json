@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "home": "Home",
+    "howItWorks": "How it Works",
+    "features": "Features",
+    "joinWaitlist": "Join Waitlist"
+  },
+  "hero": {
+    "title": "Find your people through conversation",
+    "subtitle": "Stop swiping. Tell AI what you want to do and who you want to meet — it <highlight>connects you naturally</highlight>.",
+    "cta": "Join Waitlist",
+    "seeHow": "See how it works →"
+  },
+  "problem": {
+    "title": "Social shouldn't be this hard",
+    "oldWay": "The Old Way",
+    "oldWayItems": ["Endless swiping through profiles", "Judging by photos in seconds", "Awkward ice-breakers", "Searching for common interests blindly"],
+    "newWay": "The Rendez Way",
+    "newWayItems": ["Chat with AI about what you want to do", "Deep matching based on interests", "Natural conversation opens for you", "Precise recommendations of like-minded people"]
+  },
+  "howItWorks": {
+    "title": "Three steps to your people",
+    "step1Title": "Converse",
+    "step1Desc": "Tell the Agent what you want to do and who you're looking for, just like <highlight>chatting with a friend</highlight>.",
+    "step2Title": "Understand",
+    "step2Desc": "The Agent grasps your <highlight>real needs</highlight> and preferences, not just surface-level info.",
+    "step3Title": "Match",
+    "step3Desc": "Get <highlight>precise recommendations</highlight> of people or events that fit, with conversation starters ready."
+  },
+  "demo": {
+    "title": "See the Agent in action",
+    "thinking": "Thinking..."
+  },
+  "chat": {
+    "scenes": [
+      {
+        "userMsg": "I want to find someone to go hiking this weekend, preferably experienced",
+        "agentThink": "Searching for outdoor enthusiasts near you...",
+        "agentReply": "Found 3 matches! Here's the best fit:",
+        "matchName": "Lin",
+        "matchDesc": "Outdoor lover · Weekly hiker · 3 years experience"
+      },
+      {
+        "userMsg": "Help me find a designer interested in AI to chat with",
+        "agentThink": "Matching people in AI + Design...",
+        "agentReply": "Great match found! You'll get along well:",
+        "matchName": "Alex",
+        "matchDesc": "UI/UX Designer · AI Product Design · Maker Culture"
+      },
+      {
+        "userMsg": "Any interesting events this Friday night I can join?",
+        "agentThink": "Searching for events near you this Friday...",
+        "agentReply": "Here's a great one for you:",
+        "matchName": "Creative Night",
+        "matchDesc": "This Friday 7pm · Downtown · 12 people joined"
+      },
+      {
+        "userMsg": "I just moved here, want to find people who play badminton",
+        "agentThink": "Matching badminton players in your area...",
+        "agentReply": "Welcome! Here's someone you'll enjoy playing with:",
+        "matchName": "Chris",
+        "matchDesc": "Badminton 5 yrs · Plays every Wednesday · Midtown"
+      },
+      {
+        "userMsg": "Anyone want to team up for a hackathon?",
+        "agentThink": "Finding developers interested in hackathons...",
+        "agentReply": "Found someone also looking for a team:",
+        "matchName": "Mia",
+        "matchDesc": "Full-stack engineer · 3x hackathon vet · AI apps"
+      }
+    ]
+  },
+  "features": {
+    "title": "Why Rendez",
+    "feature1Title": "Conversation is Social",
+    "feature1Desc": "No tedious profiles. Show your true self naturally through conversation.",
+    "feature2Title": "Deep Understanding",
+    "feature2Desc": "The Agent reads context and latent needs — beyond tag-based matching.",
+    "feature3Title": "Intent-Driven",
+    "feature3Desc": "Matched by what you want to do, not by photos and resumes."
+  },
+  "cta": {
+    "title": "Ready to socialize differently?",
+    "subtitle": "Join early adopters and be the first to experience AI-powered social.",
+    "button": "Join Waitlist"
+  },
+  "modal": {
+    "comingSoon": "Under Construction",
+    "comingSoonDesc": "We're working hard to bring this to you. Stay tuned!",
+    "close": "Got it"
+  },
+  "footer": {
+    "tagline": "Connecting people through conversation",
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "about": "About",
+    "blog": "Blog",
+    "careers": "Careers",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "copyright": "© 2025 Rendez. All rights reserved."
+  }
+}

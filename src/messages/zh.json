@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "home": "首页",
+    "howItWorks": "如何运作",
+    "features": "特性",
+    "joinWaitlist": "加入等候名单"
+  },
+  "hero": {
+    "title": "用对话，找到对的人",
+    "subtitle": "不再无聊地左滑右滑。告诉 AI 你想做什么、想找谁，它为你<highlight>牵线搭桥</highlight>。",
+    "cta": "加入等候名单",
+    "seeHow": "看看怎么用 →"
+  },
+  "problem": {
+    "title": "社交不该这么累",
+    "oldWay": "传统方式",
+    "oldWayItems": ["无尽地刷资料卡", "靠颜值一秒判断", "尬聊破冰", "大海捞针找同好"],
+    "newWay": "Rendez 方式",
+    "newWayItems": ["和 AI 聊你想做什么", "基于兴趣深度匹配", "自然对话替你开场", "精准推荐志同道合的人"]
+  },
+  "howItWorks": {
+    "title": "三步，遇见对的人",
+    "step1Title": "对话",
+    "step1Desc": "像聊天一样告诉 Agent 你想做什么、想找<highlight>什么样的人</highlight>。",
+    "step2Title": "理解",
+    "step2Desc": "Agent 理解你的<highlight>真实需求</highlight>和偏好，而不只是表面信息。",
+    "step3Title": "匹配",
+    "step3Desc": "为你<highlight>精准推荐</highlight>契合的人或活动，并帮你开启对话。"
+  },
+  "demo": {
+    "title": "看看 Agent 怎么帮你",
+    "thinking": "正在思考..."
+  },
+  "chat": {
+    "scenes": [
+      {
+        "userMsg": "我想找人一起周末去爬山，最好是有经验的",
+        "agentThink": "正在为你搜索附近喜欢户外运动的人...",
+        "agentReply": "找到 3 位匹配的朋友！这是最适合你的：",
+        "matchName": "小林",
+        "matchDesc": "户外爱好者 · 每周登山 · 3年经验"
+      },
+      {
+        "userMsg": "帮我找一个对 AI 感兴趣的设计师聊聊",
+        "agentThink": "正在匹配 AI + 设计领域的人...",
+        "agentReply": "太好了！这位应该很聊得来：",
+        "matchName": "Alex",
+        "matchDesc": "UI/UX 设计师 · AI 产品设计 · 热爱创客文化"
+      },
+      {
+        "userMsg": "这周五晚上有没有什么有趣的活动可以参加？",
+        "agentThink": "正在搜索你附近本周五的活动...",
+        "agentReply": "有一场很适合你的活动：",
+        "matchName": "创意之夜",
+        "matchDesc": "本周五 19:00 · 望京 · 12人已报名"
+      },
+      {
+        "userMsg": "我刚搬到北京，想认识一些喜欢打羽毛球的朋友",
+        "agentThink": "正在为你匹配北京的羽毛球爱好者...",
+        "agentReply": "欢迎来到北京！推荐这位球友：",
+        "matchName": "陈宇",
+        "matchDesc": "羽毛球 5 年 · 每周三约球 · 朝阳区"
+      },
+      {
+        "userMsg": "有没有人想一起组队参加黑客松？",
+        "agentThink": "正在寻找对黑客松感兴趣的开发者...",
+        "agentReply": "找到一位正在组队的伙伴：",
+        "matchName": "Mia",
+        "matchDesc": "全栈工程师 · 3次黑客松经验 · 擅长 AI 应用"
+      }
+    ]
+  },
+  "features": {
+    "title": "为什么选择 Rendez",
+    "feature1Title": "对话即社交",
+    "feature1Desc": "无需填写繁琐资料，对话中自然展现真实的你。",
+    "feature2Title": "深度理解",
+    "feature2Desc": "Agent 理解上下文和潜在需求，推荐不止于标签匹配。",
+    "feature3Title": "场景驱动",
+    "feature3Desc": "基于你想做的事匹配人，而不是基于照片和简历。"
+  },
+  "cta": {
+    "title": "准备好用新方式社交了吗？",
+    "subtitle": "加入早期用户，抢先体验 AI 驱动的社交方式。",
+    "button": "加入等候名单"
+  },
+  "modal": {
+    "comingSoon": "施工中",
+    "comingSoonDesc": "我们正在加紧建设中，敬请期待！",
+    "close": "知道了"
+  },
+  "footer": {
+    "tagline": "用对话，连接人与人",
+    "product": "产品",
+    "company": "公司",
+    "legal": "法律",
+    "about": "关于我们",
+    "blog": "博客",
+    "careers": "加入我们",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "copyright": "© 2025 Rendez. 保留所有权利。"
+  }
+}
