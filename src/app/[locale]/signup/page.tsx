@@ -11,7 +11,6 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const supabase = createClient();
@@ -45,7 +44,7 @@ export default function SignupPage() {
     if (error) {
       setError(t("errorServer"));
     } else {
-      setSuccess(true);
+      window.location.href = "/app";
     }
   };
 
@@ -58,17 +57,6 @@ export default function SignupPage() {
     });
     if (error) setError(t("errorServer"));
   };
-
-  if (success) {
-    return (
-      <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
-        <div className="w-full max-w-sm text-center">
-          <h1 className="text-2xl font-bold text-gray-900">{t("checkEmail")}</h1>
-          <p className="mt-3 text-sm text-gray-500 leading-relaxed">{t("checkEmailDesc")}</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
