@@ -6,8 +6,8 @@
     "joinWaitlist": "Join Waitlist"
   },
   "hero": {
-    "title": "Find your people through conversation",
-    "subtitle": "Stop swiping. Tell AI what you want to do and who you want to meet — it <highlight>connects you naturally</highlight>.",
+    "title": "Find your people through <highlight>conversation</highlight>",
+    "subtitle": "Tell AI <highlight>what you want to do</highlight> and <highlight>who you want to meet</highlight> — it connects you naturally.",
     "cta": "Join Waitlist",
     "seeHow": "See how it works →"
   },
@@ -21,17 +21,18 @@
   "howItWorks": {
     "title": "Three steps to your people",
     "step1Title": "Converse",
-    "step1Desc": "Tell the Agent what you want to do and who you're looking for, just like <highlight>chatting with a friend</highlight>.",
+    "step1Desc": "Tell the Agent <highlight>what you want to do</highlight> and <highlight>who you're looking for</highlight>, just like chatting with a friend.",
     "step2Title": "Understand",
-    "step2Desc": "The Agent grasps your <highlight>real needs</highlight> and preferences, not just surface-level info.",
+    "step2Desc": "The Agent grasps your <highlight>real needs</highlight> and <highlight>preferences</highlight>, not just surface-level info.",
     "step3Title": "Match",
-    "step3Desc": "Get <highlight>precise recommendations</highlight> of people or events that fit, with conversation starters ready."
+    "step3Desc": "Get precise recommendations of <highlight>people or events</highlight> that fit, with conversation starters ready."
   },
   "demo": {
     "title": "See the Agent in action",
     "thinking": "Thinking..."
   },
   "chat": {
+    "topics": ["Weekend Hike", "Music Fest Buddy", "AI Designer", "Friday Drinks", "Badminton", "Hackathon Team"],
     "scenes": [
       {
         "userMsg": "I want to find someone to go hiking this weekend, preferably experienced",
@@ -41,6 +42,13 @@
         "matchDesc": "Outdoor lover · Weekly hiker · 3 years experience"
       },
       {
+        "userMsg": "Anyone going to the music festival next week? Looking for a buddy",
+        "agentThink": "Searching for music festival goers near you...",
+        "agentReply": "Found someone who's also going:",
+        "matchName": "Yuki",
+        "matchDesc": "Indie music lover · 5 festivals attended · Loves meeting people"
+      },
+      {
         "userMsg": "Help me find a designer interested in AI to chat with",
         "agentThink": "Matching people in AI + Design...",
         "agentReply": "Great match found! You'll get along well:",
@@ -48,11 +56,11 @@
         "matchDesc": "UI/UX Designer · AI Product Design · Maker Culture"
       },
       {
-        "userMsg": "Any interesting events this Friday night I can join?",
-        "agentThink": "Searching for events near you this Friday...",
-        "agentReply": "Here's a great one for you:",
-        "matchName": "Creative Night",
-        "matchDesc": "This Friday 7pm · Downtown · 12 people joined"
+        "userMsg": "Looking for someone to grab drinks with Friday night, any good bar recs?",
+        "agentThink": "Finding people free Friday and nearby bars...",
+        "agentReply": "Found a drinking buddy and a great spot:",
+        "matchName": "Marco",
+        "matchDesc": "Craft beer lover · Regulars at The Hop House · Free Fridays"
       },
       {
         "userMsg": "I just moved here, want to find people who play badminton",
@@ -73,11 +81,11 @@
   "features": {
     "title": "Why Rendez",
     "feature1Title": "Conversation is Social",
-    "feature1Desc": "No tedious profiles. Show your true self naturally through conversation.",
+    "feature1Desc": "The Agent builds your profile — music taste, personality, hobbies, photos and more. Show your true self naturally through conversation.",
     "feature2Title": "Deep Understanding",
     "feature2Desc": "The Agent reads context and latent needs — beyond tag-based matching.",
     "feature3Title": "Intent-Driven",
-    "feature3Desc": "Matched by what you want to do, not by photos and resumes."
+    "feature3Desc": "Precisely matched based on needs and context understood through conversation."
   },
   "cta": {
     "title": "Ready to socialize differently?",

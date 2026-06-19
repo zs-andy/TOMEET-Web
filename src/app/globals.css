@@ -15,5 +15,6 @@
 body {
   background: var(--color-gray-50);
   color: var(--color-gray-900);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  line-height: 1.75;
 }

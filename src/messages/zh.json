@@ -6,8 +6,8 @@
     "joinWaitlist": "加入等候名单"
   },
   "hero": {
-    "title": "用对话，找到对的人",
-    "subtitle": "不再无聊地左滑右滑。告诉 AI 你想做什么、想找谁，它为你<highlight>牵线搭桥</highlight>。",
+    "title": "用<highlight>对话</highlight>，找到对的人",
+    "subtitle": "告诉 AI 你想<highlight>做什么</highlight>、<highlight>想找谁</highlight>，它为你牵线搭桥。",
     "cta": "加入等候名单",
     "seeHow": "看看怎么用 →"
   },
@@ -21,17 +21,18 @@
   "howItWorks": {
     "title": "三步，遇见对的人",
     "step1Title": "对话",
-    "step1Desc": "像聊天一样告诉 Agent 你想做什么、想找<highlight>什么样的人</highlight>。",
+    "step1Desc": "像聊天一样告诉 Agent 你想<highlight>做什么</highlight>、想找<highlight>什么样的人</highlight>。",
     "step2Title": "理解",
-    "step2Desc": "Agent 理解你的<highlight>真实需求</highlight>和偏好，而不只是表面信息。",
+    "step2Desc": "Agent 理解你的<highlight>真实需求</highlight>和<highlight>偏好</highlight>，而不只是表面信息。",
     "step3Title": "匹配",
-    "step3Desc": "为你<highlight>精准推荐</highlight>契合的人或活动，并帮你开启对话。"
+    "step3Desc": "为你精准推荐契合的<highlight>人或活动</highlight>，并帮你开启对话。"
   },
   "demo": {
     "title": "看看 Agent 怎么帮你",
     "thinking": "正在思考..."
   },
   "chat": {
+    "topics": ["周末爬山", "音乐节搭子", "AI 设计师", "周五喝酒", "羽毛球球友", "黑客松组队"],
     "scenes": [
       {
         "userMsg": "我想找人一起周末去爬山，最好是有经验的",
@@ -41,6 +42,13 @@
         "matchDesc": "户外爱好者 · 每周登山 · 3年经验"
       },
       {
+        "userMsg": "下周音乐节有没有人一起去？想找个搭子",
+        "agentThink": "正在搜索对音乐节感兴趣的人...",
+        "agentReply": "找到一位也想去的朋友：",
+        "matchName": "小鱼",
+        "matchDesc": "独立音乐爱好者 · 去过 5 次音乐节 · 喜欢交朋友"
+      },
+      {
         "userMsg": "帮我找一个对 AI 感兴趣的设计师聊聊",
         "agentThink": "正在匹配 AI + 设计领域的人...",
         "agentReply": "太好了！这位应该很聊得来：",
@@ -48,11 +56,11 @@
         "matchDesc": "UI/UX 设计师 · AI 产品设计 · 热爱创客文化"
       },
       {
-        "userMsg": "这周五晚上有没有什么有趣的活动可以参加？",
-        "agentThink": "正在搜索你附近本周五的活动...",
-        "agentReply": "有一场很适合你的活动：",
-        "matchName": "创意之夜",
-        "matchDesc": "本周五 19:00 · 望京 · 12人已报名"
+        "userMsg": "周五晚上想找人一起喝酒，顺便推荐个合适的酒吧",
+        "agentThink": "正在搜索你附近本周五的酒吧和想喝酒的人...",
+        "agentReply": "找到一位也想周五小酌的朋友，还有个好去处：",
+        "matchName": "子墨",
+        "matchDesc": "精酿爱好者 · 常去望京 Hops 精酿 · 周五有空"
       },
       {
         "userMsg": "我刚搬到北京，想认识一些喜欢打羽毛球的朋友",
@@ -73,11 +81,11 @@
   "features": {
     "title": "为什么选择 Rendez",
     "feature1Title": "对话即社交",
-    "feature1Desc": "无需填写繁琐资料，对话中自然展现真实的你。",
+    "feature1Desc": "Agent 帮你建立个人画像——音乐品味、性格、爱好、照片等，对话中自然展现真实的你。",
     "feature2Title": "深度理解",
     "feature2Desc": "Agent 理解上下文和潜在需求，推荐不止于标签匹配。",
     "feature3Title": "场景驱动",
-    "feature3Desc": "基于你想做的事匹配人，而不是基于照片和简历。"
+    "feature3Desc": "基于对话中理解的需求和场景精准匹配。"
   },
   "cta": {
     "title": "准备好用新方式社交了吗？",

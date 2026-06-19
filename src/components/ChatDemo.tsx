@@ -17,6 +17,7 @@ type Phase = "typing" | "thinking" | "replying" | "match" | "done";
 export default function ChatDemo() {
   const chatT = useTranslations("chat");
   const rawScenes = chatT.raw("scenes") as Scene[];
+  const topics = chatT.raw("topics") as string[];
 
   const [sceneIndex, setSceneIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("typing");
@@ -30,6 +31,12 @@ export default function ChatDemo() {
     setDisplayedAgent("");
     setPhase("typing");
   }, []);
+
+  const goToScene = (i: number) => {
+    if (i === sceneIndex) return;
+    setSceneIndex(i);
+    reset();
+  };
 
   useEffect(() => {
     if (phase !== "typing") return;
@@ -80,6 +87,37 @@ export default function ChatDemo() {
 
   return (
     <div>
+      {/* Topic tabs */}
+      <div className="flex items-center justify-center gap-3 sm:gap-4 mb-5 flex-wrap">
+        {topics.map((topic, i) => (
+          <button
+            key={i}
+            onClick={() => goToScene(i)}
+            className="relative cursor-pointer transition-all duration-300 ease-out"
+          >
+            <motion.span
+              animate={{
+                scale: i === sceneIndex ? 1.1 : 1,
+                color: i === sceneIndex ? "#18181B" : "#A1A1AA",
+              }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className={`text-sm whitespace-nowrap ${
+                i === sceneIndex ? "font-bold" : "font-normal"
+              }`}
+            >
+              {topic}
+            </motion.span>
+            {i === sceneIndex && (
+              <motion.div
+                layoutId="topicUnderline"
+                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              />
+            )}
+          </button>
+        ))}
+      </div>
+
       <div className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-[0_4px_32px_rgba(0,0,0,0.06)]">
         {/* Header */}
         <div className="px-5 py-3.5 border-b border-gray-100 flex items-center gap-3">
@@ -89,7 +127,7 @@ export default function ChatDemo() {
 
         {/* Messages */}
         <div className="px-6 py-8 min-h-[280px] flex flex-col justify-end gap-3">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="popLayout">
             {displayedUser && (
               <motion.div
                 key={`user-${sceneIndex}`}
@@ -168,18 +206,6 @@ export default function ChatDemo() {
             )}
           </AnimatePresence>
         </div>
-      </div>
-
-      {/* Dot indicator */}
-      <div className="flex items-center justify-center gap-1.5 mt-5">
-        {rawScenes.map((_, i) => (
-          <span
-            key={i}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              i === sceneIndex ? "w-5 bg-orange-500" : "w-1.5 bg-gray-200"
-            }`}
-          />
-        ))}
       </div>
     </div>
   );

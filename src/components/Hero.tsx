@@ -35,7 +35,7 @@ export default function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
-    <section ref={ref} className="min-h-screen flex flex-col items-center justify-center pt-14 pb-12 px-6 lg:px-8 bg-white relative">
+    <section ref={ref} className="min-h-screen flex flex-col px-6 lg:px-8 bg-white relative pt-32 lg:pt-40 pb-12">
       <motion.div style={{ y, opacity }} className="max-w-4xl mx-auto text-center">
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
@@ -43,7 +43,7 @@ export default function Hero() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-gray-900 leading-tight tracking-tight"
         >
-          {t("title")}
+          {renderHighlight(t.raw("title"))}
         </motion.h1>
 
         <motion.p
