@@ -3,12 +3,12 @@
     "home": "Home",
     "howItWorks": "How it Works",
     "features": "Features",
-    "joinWaitlist": "Join Waitlist"
+    "joinWaitlist": "Get Early Access"
   },
   "hero": {
     "title": "Find your people through <highlight>conversation</highlight>",
     "subtitle": "Tell AI <highlight>what you want to do</highlight> and <highlight>who you want to meet</highlight> — it connects you naturally.",
-    "cta": "Join Waitlist",
+    "cta": "Get Early Access",
     "seeHow": "See how it works →"
   },
   "problem": {
@@ -90,12 +90,25 @@
   "cta": {
     "title": "Ready to socialize differently?",
     "subtitle": "Join early adopters and be the first to experience AI-powered social.",
-    "button": "Join Waitlist"
+    "button": "Get Early Access"
   },
   "modal": {
-    "comingSoon": "Under Construction",
-    "comingSoonDesc": "We're working hard to bring this to you. Stay tuned!",
-    "close": "Got it"
+    "title": "Get Early Access",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "noteLabel": "Anything you'd like us to know? (optional)",
+    "notePlaceholder": "e.g. features you're excited about, how you heard about us...",
+    "submit": "Sign Me Up",
+    "submitting": "Submitting...",
+    "successTitle": "You're in!",
+    "successDesc": "We'll reach out when it's your turn. Thanks for your interest!",
+    "close": "Close",
+    "errorNameRequired": "Please enter your name.",
+    "errorEmailInvalid": "Please enter a valid email address.",
+    "errorAlreadyExists": "This email is already registered.",
+    "errorServer": "Something went wrong. Please try again later."
   },
   "footer": {
     "tagline": "Connecting people through conversation",

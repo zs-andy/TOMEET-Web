@@ -3,12 +3,12 @@
     "home": "首页",
     "howItWorks": "如何运作",
     "features": "特性",
-    "joinWaitlist": "加入等候名单"
+    "joinWaitlist": "成为早期用户"
   },
   "hero": {
     "title": "用<highlight>对话</highlight>，找到对的人",
     "subtitle": "告诉 AI 你想<highlight>做什么</highlight>、<highlight>想找谁</highlight>，它为你牵线搭桥。",
-    "cta": "加入等候名单",
+    "cta": "成为早期用户",
     "seeHow": "看看怎么用 →"
   },
   "problem": {
@@ -90,12 +90,25 @@
   "cta": {
     "title": "准备好用新方式社交了吗？",
     "subtitle": "加入早期用户，抢先体验 AI 驱动的社交方式。",
-    "button": "加入等候名单"
+    "button": "成为早期用户"
   },
   "modal": {
-    "comingSoon": "施工中",
-    "comingSoonDesc": "我们正在加紧建设中，敬请期待！",
-    "close": "知道了"
+    "title": "成为早期用户",
+    "nameLabel": "姓名",
+    "namePlaceholder": "你的名字",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "you@example.com",
+    "noteLabel": "有什么想告诉我们的吗？（可选）",
+    "notePlaceholder": "比如你期待的功能、怎么知道我们的……",
+    "submit": "提交",
+    "submitting": "提交中...",
+    "successTitle": "你已成为早期用户！",
+    "successDesc": "轮到你时我们会第一时间通知你，感谢关注！",
+    "close": "关闭",
+    "errorNameRequired": "请输入你的名字。",
+    "errorEmailInvalid": "请输入有效的邮箱地址。",
+    "errorAlreadyExists": "这个邮箱已经注册过了。",
+    "errorServer": "出了点问题，请稍后再试。"
   },
   "footer": {
     "tagline": "用对话，连接人与人",
