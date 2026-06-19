@@ -38,14 +38,14 @@
         "userMsg": "I want to find someone to go hiking this weekend, preferably experienced",
         "agentThink": "Searching for outdoor enthusiasts near you...",
         "agentReply": "Found 3 matches! Here's the best fit:",
-        "matchName": "Lin",
+        "matchName": "Yuki",
         "matchDesc": "Outdoor lover · Weekly hiker · 3 years experience"
       },
       {
         "userMsg": "Anyone going to the music festival next week? Looking for a buddy",
         "agentThink": "Searching for music festival goers near you...",
         "agentReply": "Found someone who's also going:",
-        "matchName": "Yuki",
+        "matchName": "Lin",
         "matchDesc": "Indie music lover · 5 festivals attended · Loves meeting people"
       },
       {

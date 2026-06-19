@@ -38,14 +38,14 @@
         "userMsg": "我想找人一起周末去爬山，最好是有经验的",
         "agentThink": "正在为你搜索附近喜欢户外运动的人...",
         "agentReply": "找到 3 位匹配的朋友！这是最适合你的：",
-        "matchName": "小林",
+        "matchName": "小鱼",
         "matchDesc": "户外爱好者 · 每周登山 · 3年经验"
       },
       {
         "userMsg": "下周音乐节有没有人一起去？想找个搭子",
         "agentThink": "正在搜索对音乐节感兴趣的人...",
         "agentReply": "找到一位也想去的朋友：",
-        "matchName": "小鱼",
+        "matchName": "小淋",
         "matchDesc": "独立音乐爱好者 · 去过 5 次音乐节 · 喜欢交朋友"
       },
       {
