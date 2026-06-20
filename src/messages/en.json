@@ -146,5 +146,23 @@
     "privacy": "Privacy",
     "terms": "Terms",
     "copyright": "© 2026 Rendez. All rights reserved."
+  },
+  "app": {
+    "newChat": "New Chat",
+    "conversations": "Conversations",
+    "noConversations": "No conversations yet",
+    "profileBuilding": "Build Your Profile",
+    "profileBuildingDesc": "Let me get to know you to find better matches",
+    "profileBuildingStart": "Start Chat",
+    "profileBuildingDismiss": "Maybe Later",
+    "profileBuildingSidebar": "Complete Profile",
+    "emptyStateTitle": "What are you looking for?",
+    "emptyStateSubtitle": "Tell me what you want to do or who you want to meet",
+    "inputPlaceholder": "Type a message...",
+    "send": "Send",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "earlier": "Earlier",
+    "signOut": "Sign Out"
   }
 }

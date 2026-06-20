@@ -146,5 +146,23 @@
     "privacy": "隐私政策",
     "terms": "服务条款",
     "copyright": "© 2026 Rendez. 保留所有权利。"
+  },
+  "app": {
+    "newChat": "新对话",
+    "conversations": "对话记录",
+    "noConversations": "还没有对话",
+    "profileBuilding": "建立你的画像",
+    "profileBuildingDesc": "让我了解你，帮你找到更合适的人",
+    "profileBuildingStart": "开始对话",
+    "profileBuildingDismiss": "稍后再说",
+    "profileBuildingSidebar": "完善画像",
+    "emptyStateTitle": "你想找什么？",
+    "emptyStateSubtitle": "告诉我你想做什么，或者想认识什么样的人",
+    "inputPlaceholder": "输入消息...",
+    "send": "发送",
+    "today": "今天",
+    "yesterday": "昨天",
+    "earlier": "更早",
+    "signOut": "退出登录"
   }
 }
