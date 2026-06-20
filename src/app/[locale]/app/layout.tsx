@@ -7,7 +7,7 @@ import { MobileDrawer } from "@/components/app/MobileDrawer";
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <ChatProvider>
-      <div className="flex h-screen overflow-hidden bg-gray-50">
+      <div className="flex h-screen overflow-hidden">
         {/* Desktop sidebar */}
         <div className="hidden md:flex">
           <AppSidebar />
@@ -15,7 +15,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         {/* Mobile drawer */}
         <MobileDrawer />
         {/* Main content */}
-        <main className="flex flex-1 flex-col overflow-hidden">
+        <main className="flex flex-1 flex-col overflow-hidden bg-white">
           {children}
         </main>
       </div>

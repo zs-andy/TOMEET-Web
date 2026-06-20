@@ -8,7 +8,6 @@ export function ConversationList() {
   const t = useTranslations("app");
   const { state } = useChatContext();
 
-  const now = Date.now();
   const todayStart = new Date().setHours(0, 0, 0, 0);
   const yesterdayStart = todayStart - 86400000;
 
@@ -23,13 +22,13 @@ export function ConversationList() {
   if (state.conversations.length === 0) {
     return (
       <div className="flex flex-1 items-center justify-center p-4">
-        <p className="text-sm text-gray-400">{t("noConversations")}</p>
+        <p className="text-xs text-gray-400">{t("noConversations")}</p>
       </div>
     );
   }
 
   return (
-    <div className="flex-1 overflow-y-auto px-2 py-2">
+    <nav className="flex-1 overflow-y-auto px-2 py-1">
       {today.length > 0 && (
         <ConversationGroup label={t("today")} conversations={today} />
       )}
@@ -39,7 +38,7 @@ export function ConversationList() {
       {earlier.length > 0 && (
         <ConversationGroup label={t("earlier")} conversations={earlier} />
       )}
-    </div>
+    </nav>
   );
 }
 
@@ -51,11 +50,15 @@ function ConversationGroup({
   conversations: { id: string; title: string; type: string }[];
 }) {
   return (
-    <div className="mb-3">
-      <p className="mb-1 px-2 text-xs font-medium text-gray-400">{label}</p>
-      {conversations.map((conv) => (
-        <ConversationItem key={conv.id} conversation={conv} />
-      ))}
+    <div className="mb-2">
+      <p className="mb-1 px-3 pt-3 text-xs font-medium text-gray-400 uppercase tracking-wider">
+        {label}
+      </p>
+      <div className="space-y-0.5">
+        {conversations.map((conv) => (
+          <ConversationItem key={conv.id} conversation={conv} />
+        ))}
+      </div>
     </div>
   );
 }

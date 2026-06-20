@@ -6,7 +6,7 @@ import { UserMenu } from "./UserMenu";
 
 export function AppSidebar() {
   return (
-    <aside className="flex h-full w-72 flex-col border-r border-gray-200 bg-white">
+    <aside className="flex h-full w-64 flex-col bg-gray-50 border-r border-gray-200/80">
       <SidebarHeader />
       <ConversationList />
       <UserMenu />

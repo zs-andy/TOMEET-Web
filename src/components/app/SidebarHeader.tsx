@@ -9,13 +9,13 @@ export function SidebarHeader() {
   const { state, createChat } = useChatContext();
 
   return (
-    <div className="flex flex-col gap-2 border-b border-gray-100 p-4">
+    <div className="flex flex-col gap-3 p-4">
       <div className="flex items-center justify-between">
-        <span className="text-lg font-semibold text-gray-900">Rendez</span>
+        <span className="text-base font-semibold text-gray-900">Rendez</span>
       </div>
       <button
         onClick={() => createChat("matching")}
-        className="flex w-full items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50"
+        className="flex w-full items-center gap-2 rounded-lg border border-gray-300/80 bg-white px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100"
       >
         <Plus className="h-4 w-4" />
         {t("newChat")}
@@ -23,7 +23,7 @@ export function SidebarHeader() {
       {!state.hasCompletedProfile && state.profileBuildingDismissed && (
         <button
           onClick={() => createChat("profile_building")}
-          className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-600 transition-colors hover:bg-gray-50"
+          className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-600 transition-colors hover:bg-gray-100"
         >
           <User className="h-4 w-4" />
           {t("profileBuildingSidebar")}

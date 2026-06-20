@@ -23,7 +23,7 @@ export function MobileDrawer() {
         <Menu className="h-5 w-5 text-gray-700" />
       </button>
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="left" className="w-72 p-0">
+        <SheetContent side="left" className="w-64 p-0">
           <SheetTitle className="sr-only">Navigation</SheetTitle>
           <AppSidebar />
         </SheetContent>

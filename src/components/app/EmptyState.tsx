@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageSquare, Compass, Users } from "lucide-react";
+import { Compass, Users, MessageSquare, Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useChatContext } from "@/lib/chat/chat-context";
 
@@ -9,34 +9,35 @@ export function EmptyState() {
   const { createChat } = useChatContext();
 
   const suggestions = [
-    { icon: Compass, text: "我想找人一起周末去爬山", type: "matching" as const },
-    { icon: Users, text: "帮我找一个对 AI 感兴趣的设计师", type: "matching" as const },
-    { icon: MessageSquare, text: "有没有人想一起组队黑客松", type: "matching" as const },
+    { icon: Compass, text: "我想找人一起周末去爬山" },
+    { icon: Users, text: "帮我找一个对 AI 感兴趣的设计师" },
+    { icon: MessageSquare, text: "有没有人想一起组队黑客松" },
+    { icon: Sparkles, text: "推荐周五晚上适合小聚的地方" },
   ];
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center px-4">
-      <div className="mx-auto max-w-md text-center">
-        <div className="mb-6 flex justify-center">
-          <div className="rounded-full bg-gray-100 p-4">
-            <MessageSquare className="h-8 w-8 text-gray-600" />
-          </div>
+    <div className="flex h-full flex-col items-center justify-center bg-white px-4">
+      <div className="w-full max-w-2xl">
+        {/* Greeting */}
+        <div className="mb-10 text-center">
+          <h1 className="text-2xl font-semibold text-gray-900 mb-2">
+            {t("emptyStateTitle")}
+          </h1>
+          <p className="text-sm text-gray-500">
+            {t("emptyStateSubtitle")}
+          </p>
         </div>
-        <h2 className="mb-2 text-xl font-semibold text-gray-900">
-          {t("emptyStateTitle")}
-        </h2>
-        <p className="mb-8 text-sm text-gray-500">{t("emptyStateSubtitle")}</p>
-        <div className="space-y-2">
+
+        {/* Suggestion grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {suggestions.map((s, i) => (
             <button
               key={i}
-              onClick={() => {
-                createChat(s.type, s.text.slice(0, 20));
-              }}
-              className="flex w-full items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 text-left text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:border-gray-300"
+              onClick={() => createChat("matching", s.text.slice(0, 20))}
+              className="group flex items-start gap-3 rounded-xl border border-gray-200 bg-gray-50/50 p-4 text-left transition-all hover:bg-gray-50 hover:border-gray-300"
             >
-              <s.icon className="h-4 w-4 shrink-0 text-gray-400" />
-              {s.text}
+              <s.icon className="h-5 w-5 shrink-0 text-gray-400 mt-0.5 group-hover:text-gray-600 transition-colors" />
+              <span className="text-sm text-gray-700 leading-relaxed">{s.text}</span>
             </button>
           ))}
         </div>
