@@ -61,7 +61,7 @@ export function ChatInput() {
             <button
               type="submit"
               disabled={!value.trim() || state.isAgentTyping}
-              className="flex h-7 w-7 items-center justify-center rounded-lg bg-gray-900 text-white transition-colors hover:bg-gray-800 disabled:bg-gray-200 disabled:text-gray-400"
+              className="flex h-7 w-7 items-center justify-center rounded-lg bg-orange-500 text-white transition-colors hover:bg-orange-600 disabled:bg-gray-200 disabled:text-gray-400"
               aria-label={t("send")}
             >
               <ArrowUp className="h-3.5 w-3.5" />

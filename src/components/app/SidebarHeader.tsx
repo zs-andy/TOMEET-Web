@@ -10,7 +10,7 @@ export function SidebarHeader() {
 
   return (
     <div className="flex items-center justify-between p-4">
-      <span className="text-sm font-semibold text-gray-900">Rendez</span>
+      <span className="text-sm font-semibold text-orange-500">Rendez</span>
       <button
         onClick={() => createChat("matching")}
         className="flex h-7 w-7 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-gray-200/60"
