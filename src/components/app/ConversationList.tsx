@@ -20,15 +20,11 @@ export function ConversationList() {
   );
 
   if (state.conversations.length === 0) {
-    return (
-      <div className="flex flex-1 items-center justify-center p-4">
-        <p className="text-xs text-gray-400">{t("noConversations")}</p>
-      </div>
-    );
+    return null;
   }
 
   return (
-    <nav className="flex-1 overflow-y-auto px-2 py-1">
+    <nav className="flex-1 overflow-y-auto px-2">
       {today.length > 0 && (
         <ConversationGroup label={t("today")} conversations={today} />
       )}
@@ -50,8 +46,8 @@ function ConversationGroup({
   conversations: { id: string; title: string; type: string }[];
 }) {
   return (
-    <div className="mb-2">
-      <p className="mb-1 px-3 pt-3 text-xs font-medium text-gray-400 uppercase tracking-wider">
+    <div className="mb-1">
+      <p className="px-3 pt-4 pb-1 text-xs text-gray-400">
         {label}
       </p>
       <div className="space-y-0.5">

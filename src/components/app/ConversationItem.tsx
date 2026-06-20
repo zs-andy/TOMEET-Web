@@ -18,15 +18,10 @@ export function ConversationItem({ conversation }: Props) {
       className={cn(
         "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm transition-colors",
         isActive
-          ? "bg-white text-gray-900 shadow-sm"
-          : "text-gray-600 hover:bg-gray-100"
+          ? "bg-gray-200/60 text-gray-900"
+          : "text-gray-600 hover:bg-gray-200/40"
       )}
     >
-      {conversation.type === "profile_building" ? (
-        <User className="h-4 w-4 shrink-0 text-gray-400" />
-      ) : (
-        <MessageSquare className="h-4 w-4 shrink-0 text-gray-400" />
-      )}
       <span className="truncate">{conversation.title}</span>
     </button>
   );

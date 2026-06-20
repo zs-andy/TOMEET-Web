@@ -17,19 +17,11 @@ export function ChatArea() {
   }
 
   return (
-    <div className="flex h-full flex-col bg-white">
-      {/* Conversation header */}
-      <div className="flex items-center border-b border-gray-100 px-6 py-3">
-        <h2 className="text-sm font-medium text-gray-700 truncate">
-          {conversation.title}
-        </h2>
-      </div>
-      {/* Messages */}
+    <div className="flex h-full flex-col">
       <MessageList
         messages={conversation.messages}
         isAgentTyping={state.isAgentTyping}
       />
-      {/* Input */}
       <ChatInput />
     </div>
   );

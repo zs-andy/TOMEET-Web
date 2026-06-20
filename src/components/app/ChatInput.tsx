@@ -38,11 +38,11 @@ export function ChatInput() {
   };
 
   return (
-    <div className="bg-gray-50 px-4 pb-4 pt-2">
-      <div className="mx-auto max-w-3xl md:px-4">
+    <div className="px-5 pb-5 pt-2 md:px-6">
+      <div className="mx-auto max-w-3xl">
         <form
           onSubmit={handleSubmit}
-          className="relative flex items-end rounded-2xl border border-gray-200 bg-white shadow-sm transition-shadow focus-within:shadow-md focus-within:border-gray-300"
+          className="relative flex items-end rounded-2xl border border-gray-200 bg-white"
         >
           <textarea
             ref={textareaRef}
@@ -61,16 +61,13 @@ export function ChatInput() {
             <button
               type="submit"
               disabled={!value.trim() || state.isAgentTyping}
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-500 text-white transition-all hover:bg-orange-600 disabled:bg-gray-200 disabled:text-gray-400"
+              className="flex h-7 w-7 items-center justify-center rounded-lg bg-gray-900 text-white transition-colors hover:bg-gray-800 disabled:bg-gray-200 disabled:text-gray-400"
               aria-label={t("send")}
             >
-              <ArrowUp className="h-4 w-4" />
+              <ArrowUp className="h-3.5 w-3.5" />
             </button>
           </div>
         </form>
-        <p className="mt-2 text-center text-xs text-gray-400">
-          Rendez Agent · 帮你找到对的人
-        </p>
       </div>
     </div>
   );
