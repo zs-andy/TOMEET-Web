@@ -137,10 +137,10 @@ export default function ChatDemo() {
                 transition={{ duration: 0.3 }}
                 className="self-end max-w-[80%]"
               >
-                <div className="bg-orange-400 text-white px-4 py-2.5 rounded-2xl rounded-br-sm text-sm leading-relaxed">
+                <div className="bg-orange-300/40 text-gray-900 px-4 py-2.5 rounded-2xl rounded-br-sm text-sm leading-relaxed">
                   {displayedUser}
                   {phase === "typing" && (
-                    <span className="inline-block w-[2px] h-3.5 bg-white/70 ml-0.5 animate-pulse" />
+                    <span className="inline-block w-[2px] h-3.5 bg-gray-900/50 ml-0.5 animate-pulse" />
                   )}
                 </div>
               </motion.div>
