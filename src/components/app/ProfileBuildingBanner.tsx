@@ -16,8 +16,8 @@ export function ProfileBuildingBanner() {
     <div className="flex flex-1 flex-col items-center justify-center px-4">
       <div className="mx-auto max-w-sm text-center">
         <div className="mb-6 flex justify-center">
-          <div className="rounded-full bg-orange-100 p-4">
-            <Sparkles className="h-8 w-8 text-orange-500" />
+          <div className="rounded-full bg-gray-100 p-4">
+            <Sparkles className="h-8 w-8 text-gray-700" />
           </div>
         </div>
         <h2 className="mb-2 text-xl font-semibold text-gray-900">

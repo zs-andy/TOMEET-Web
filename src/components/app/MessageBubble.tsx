@@ -18,8 +18,8 @@ export function MessageBubble({ message }: Props) {
         className={cn(
           "max-w-[85%] rounded-2xl px-4 py-2.5",
           isUser
-            ? "bg-orange-500 text-white"
-            : "bg-white text-gray-800 border border-gray-100"
+            ? "bg-gray-900 text-white"
+            : "bg-gray-50 text-gray-800"
         )}
       >
         {isUser ? (

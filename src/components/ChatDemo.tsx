@@ -137,7 +137,7 @@ export default function ChatDemo() {
                 transition={{ duration: 0.3 }}
                 className="self-end max-w-[80%]"
               >
-                <div className="bg-orange-500 text-white px-4 py-2.5 rounded-2xl rounded-br-sm text-sm leading-relaxed">
+                <div className="bg-gray-900 text-white px-4 py-2.5 rounded-2xl rounded-br-sm text-sm leading-relaxed">
                   {displayedUser}
                   {phase === "typing" && (
                     <span className="inline-block w-[2px] h-3.5 bg-white/70 ml-0.5 animate-pulse" />
@@ -193,8 +193,8 @@ export default function ChatDemo() {
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className="self-start max-w-[80%]"
               >
-                <div className="bg-orange-50 px-4 py-3 rounded-2xl flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-orange-500 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+                <div className="bg-gray-50 px-4 py-3 rounded-2xl flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-gray-900 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
                     {scene.matchName[0]}
                   </div>
                   <div>

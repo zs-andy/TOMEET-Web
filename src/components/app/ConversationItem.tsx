@@ -18,7 +18,7 @@ export function ConversationItem({ conversation }: Props) {
       className={cn(
         "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors",
         isActive
-          ? "bg-orange-50 text-orange-700"
+          ? "bg-gray-100 text-gray-900"
           : "text-gray-700 hover:bg-gray-50"
       )}
     >

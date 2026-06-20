@@ -8,8 +8,8 @@ type Props = {
 
 export function MatchCard({ match }: Props) {
   return (
-    <div className="flex items-center gap-3 rounded-xl bg-orange-50 p-3 border border-orange-100">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-500 text-white font-medium">
+    <div className="flex items-center gap-3 rounded-xl bg-gray-50 p-3 border border-gray-200">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-900 text-white font-medium">
         {match.avatarInitial}
       </div>
       <div className="min-w-0">

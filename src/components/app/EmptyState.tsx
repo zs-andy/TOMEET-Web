@@ -18,8 +18,8 @@ export function EmptyState() {
     <div className="flex flex-1 flex-col items-center justify-center px-4">
       <div className="mx-auto max-w-md text-center">
         <div className="mb-6 flex justify-center">
-          <div className="rounded-full bg-orange-100 p-4">
-            <MessageSquare className="h-8 w-8 text-orange-500" />
+          <div className="rounded-full bg-gray-100 p-4">
+            <MessageSquare className="h-8 w-8 text-gray-600" />
           </div>
         </div>
         <h2 className="mb-2 text-xl font-semibold text-gray-900">
@@ -33,7 +33,7 @@ export function EmptyState() {
               onClick={() => {
                 createChat(s.type, s.text.slice(0, 20));
               }}
-              className="flex w-full items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 text-left text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:border-orange-200"
+              className="flex w-full items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 text-left text-sm text-gray-700 transition-colors hover:bg-gray-50 hover:border-gray-300"
             >
               <s.icon className="h-4 w-4 shrink-0 text-gray-400" />
               {s.text}
