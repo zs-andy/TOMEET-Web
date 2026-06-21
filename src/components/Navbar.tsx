@@ -26,7 +26,7 @@ export default function Navbar() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-14">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-lg font-bold text-gray-900 tracking-tight">Rendez</span>
+              <span className="text-lg font-bold text-orange-500 tracking-tight">Rendez</span>
             </Link>
 
             <div className="flex items-center gap-5">
