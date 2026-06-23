@@ -2,13 +2,13 @@
 
 import { Sparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useChatContext } from "@/lib/chat/chat-context";
+import { useChatStore } from "@/lib/chat/chat-context";
 
 export function ProfileBuildingBanner() {
   const t = useTranslations("app");
-  const { state, dispatch, createChat } = useChatContext();
+  const { hasCompletedProfile, profileBuildingDismissed, createChat, dismissProfileBuilding } = useChatStore();
 
-  if (state.hasCompletedProfile || state.profileBuildingDismissed) {
+  if (hasCompletedProfile || profileBuildingDismissed) {
     return null;
   }
 
@@ -34,7 +34,7 @@ export function ProfileBuildingBanner() {
             {t("profileBuildingStart")}
           </button>
           <button
-            onClick={() => dispatch({ type: "DISMISS_PROFILE_BUILDING" })}
+            onClick={() => dismissProfileBuilding()}
             className="w-full rounded-xl px-6 py-3 text-sm text-gray-500 transition-colors hover:text-gray-700"
           >
             {t("profileBuildingDismiss")}

@@ -1,25 +1,25 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useChatContext } from "@/lib/chat/chat-context";
+import { useChatStore } from "@/lib/chat/chat-context";
 import { ConversationItem } from "./ConversationItem";
 
 export function ConversationList() {
   const t = useTranslations("app");
-  const { state } = useChatContext();
+  const conversations = useChatStore((s) => s.conversations);
 
   const todayStart = new Date().setHours(0, 0, 0, 0);
   const yesterdayStart = todayStart - 86400000;
 
-  const today = state.conversations.filter((c) => c.updatedAt >= todayStart);
-  const yesterday = state.conversations.filter(
+  const today = conversations.filter((c) => c.updatedAt >= todayStart);
+  const yesterday = conversations.filter(
     (c) => c.updatedAt >= yesterdayStart && c.updatedAt < todayStart
   );
-  const earlier = state.conversations.filter(
+  const earlier = conversations.filter(
     (c) => c.updatedAt < yesterdayStart
   );
 
-  if (state.conversations.length === 0) {
+  if (conversations.length === 0) {
     return null;
   }
 

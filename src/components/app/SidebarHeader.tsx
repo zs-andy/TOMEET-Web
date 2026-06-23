@@ -2,11 +2,11 @@
 
 import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useChatContext } from "@/lib/chat/chat-context";
+import { useChatStore } from "@/lib/chat/chat-context";
 
 export function SidebarHeader() {
   const t = useTranslations("app");
-  const { createChat } = useChatContext();
+  const createChat = useChatStore((s) => s.createChat);
 
   return (
     <div className="flex items-center justify-between p-4">

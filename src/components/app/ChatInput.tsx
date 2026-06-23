@@ -3,18 +3,19 @@
 import { useState, useRef, type FormEvent } from "react";
 import { ArrowUp } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useChatContext } from "@/lib/chat/chat-context";
+import { useChatStore } from "@/lib/chat/chat-context";
 
 export function ChatInput() {
   const t = useTranslations("app");
   const [value, setValue] = useState("");
-  const { state, sendMessage } = useChatContext();
+  const isAgentTyping = useChatStore((s) => s.isAgentTyping);
+  const sendMessage = useChatStore((s) => s.sendMessage);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const trimmed = value.trim();
-    if (!trimmed || state.isAgentTyping) return;
+    if (!trimmed || isAgentTyping) return;
     sendMessage(trimmed);
     setValue("");
     if (textareaRef.current) {
@@ -60,7 +61,7 @@ export function ChatInput() {
           <div className="p-2">
             <button
               type="submit"
-              disabled={!value.trim() || state.isAgentTyping}
+              disabled={!value.trim() || isAgentTyping}
               className="flex h-7 w-7 items-center justify-center rounded-lg bg-orange-500 text-white transition-colors hover:bg-orange-600 disabled:bg-gray-200 disabled:text-gray-400"
               aria-label={t("send")}
             >

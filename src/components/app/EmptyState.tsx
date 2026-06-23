@@ -1,13 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useChatContext } from "@/lib/chat/chat-context";
+import { useChatStore } from "@/lib/chat/chat-context";
 import { ArrowUp } from "lucide-react";
 import { useState, useRef, type FormEvent } from "react";
 
 export function EmptyState() {
   const t = useTranslations("app");
-  const { createChat, sendMessage, state } = useChatContext();
+  const { createChat } = useChatStore();
   const [value, setValue] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 

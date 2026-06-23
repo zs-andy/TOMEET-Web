@@ -1,7 +1,7 @@
 "use client";
 
 import { MessageSquare, User } from "lucide-react";
-import { useChatContext } from "@/lib/chat/chat-context";
+import { useChatStore } from "@/lib/chat/chat-context";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -9,8 +9,8 @@ type Props = {
 };
 
 export function ConversationItem({ conversation }: Props) {
-  const { state, setActiveConversation } = useChatContext();
-  const isActive = state.activeConversationId === conversation.id;
+  const { activeConversationId, setActiveConversation } = useChatStore();
+  const isActive = activeConversationId === conversation.id;
 
   return (
     <button
