@@ -1,31 +1,50 @@
 {
+  "banner": {
+    "text": "A new AI-native way to meet people is now in early access"
+  },
   "nav": {
     "home": "Home",
     "howItWorks": "How it Works",
     "features": "Features",
-    "joinWaitlist": "Get Early Access"
+    "joinWaitlist": "Log In"
   },
   "hero": {
-    "title": "Find your people through <highlight>conversation</highlight>",
-    "subtitle": "Tell AI <highlight>what you want to do</highlight> and <highlight>who you want to meet</highlight> — it connects you naturally.",
-    "cta": "Get Early Access",
-    "seeHow": "See how it works →"
+    "title": "Find <highlight>the right</highlight> people through <highlight>conversation</highlight>",
+    "subtitle": "Building an AI Native platform for meeting new people.",
+    "cta": "Log in for access",
+    "seeHow": "See how it works",
+    "tag": "meet",
+    "matchTag": "understand",
+    "assignTitle": "Picked for you"
+  },
+  "trust": {
+    "label": "3,000+ people on the waitlist",
+    "items": ["HIKING", "LIVEHOUSE", "HACKATHON", "BADMINTON", "CRAFT BEER", "BOARD GAMES", "COFFEE", "CAMPING"]
+  },
+  "manifesto": {
+    "p1": "Social connection is one of the most essential parts of life. It helps people <pill>connect</pill>, communicate, and <sticker-yellow>find those who truly fit</sticker-yellow>.",
+    "p2": "Yet these precious connections are being replaced by <sticker-orange>labels and algorithms</sticker-orange>, plus the constant stream of notifications on a screen.",
+    "p3": "From the <em>PC</em> forum era to <em>Mobile</em> swipe-based social, platforms have spent decades building complex matching and recommendation systems. But people have not become closer; instead, they feel <var>farther apart</var>.",
+    "p4": "Because meeting should happen at the right time, in the <pill>right setting</pill>, and with the <sticker-orange>right person</sticker-orange>.",
+    "transition": "It's time to enter AI Native",
+    "transitionHl": "AI Native",
+    "subtitle": ""
   },
   "problem": {
     "title": "Social shouldn't be this hard",
     "oldWay": "The Old Way",
-    "oldWayItems": ["Endless swiping through profiles", "Judging by photos in seconds", "Awkward ice-breakers", "Searching for common interests blindly"],
-    "newWay": "The Rendez Way",
-    "newWayItems": ["Chat with AI about what you want to do", "Deep matching based on interests", "Natural conversation opens for you", "Precise recommendations of like-minded people"]
+    "oldWayItems": ["Endless profile browsing", "Judging by looks in seconds", "Awkward icebreakers", "Searching blindly for people who fit"],
+    "newWay": "The TOMEET Way",
+    "newWayItems": ["Tell AI what you want to do", "Match through deeper interests and context", "Let the conversation open naturally", "Meet people who genuinely fit"]
   },
   "howItWorks": {
-    "title": "Three steps to your people",
-    "step1Title": "Converse",
-    "step1Desc": "Tell the Agent <highlight>what you want to do</highlight> and <highlight>who you're looking for</highlight>, just like chatting with a friend.",
-    "step2Title": "Understand",
-    "step2Desc": "The Agent grasps your <highlight>real needs</highlight> and <highlight>preferences</highlight>, not just surface-level info.",
-    "step3Title": "Match",
-    "step3Desc": "Get precise recommendations of <highlight>people or events</highlight> that fit, with conversation starters ready."
+    "title": "How it works",
+    "step1Title": "Understand",
+    "step1Desc": "Tell AI who you are, what you enjoy, what you like doing, and who you want to meet.",
+    "step2Title": "Match",
+    "step2Desc": "Get matched with people who fit, then let AI help start the conversation and arrange activities that suit you both.",
+    "step3Title": "Meet",
+    "step3Desc": "Meet through an activity you choose together or one the system recommends."
   },
   "demo": {
     "title": "See the Agent in action",
@@ -79,42 +98,24 @@
     ]
   },
   "features": {
-    "title": "Why Rendez",
-    "feature1Title": "Conversation is Social",
-    "feature1Desc": "The Agent builds your profile — music taste, personality, hobbies, photos and more. Show your true self naturally through conversation.",
-    "feature2Title": "Deep Understanding",
-    "feature2Desc": "The Agent reads context and latent needs — beyond tag-based matching.",
-    "feature3Title": "Intent-Driven",
-    "feature3Desc": "Precisely matched based on needs and context understood through conversation."
+    "title": "Why TOMEET",
+    "feature1Title": "Profile Understanding",
+    "feature1Desc": "AI builds your profile through conversation, discovering latent preferences and needs.",
+    "feature2Title": "Vibe Matching",
+    "feature2Desc": "A non-tag-based way to match by feel: Vibe Matching.",
+    "feature3Title": "Time and Setting",
+    "feature3Desc": "At the right time and in the right setting, connections can happen naturally."
   },
   "cta": {
-    "title": "Ready to socialize differently?",
-    "subtitle": "Join early adopters and be the first to experience AI-powered social.",
-    "button": "Get Early Access"
-  },
-  "modal": {
-    "title": "Get Early Access",
-    "nameLabel": "Name",
-    "namePlaceholder": "Your name",
-    "emailLabel": "Email",
-    "emailPlaceholder": "you@example.com",
-    "noteLabel": "Anything you'd like us to know? (optional)",
-    "notePlaceholder": "e.g. features you're excited about, how you heard about us...",
-    "submit": "Sign Me Up",
-    "submitting": "Submitting...",
-    "successTitle": "You're in!",
-    "successDesc": "We'll reach out when it's your turn. Thanks for your interest!",
-    "close": "Close",
-    "errorNameRequired": "Please enter your name.",
-    "errorEmailInvalid": "Please enter a valid email address.",
-    "errorAlreadyExists": "This email is already registered.",
-    "errorServer": "Something went wrong. Please try again later."
+    "title": "Log in to get <highlight>early access</highlight>",
+    "subtitle": "No waitlist form. Create an account or log in, and early access will be enabled automatically.",
+    "button": "Log in for access"
   },
   "auth": {
     "loginTitle": "Log In",
-    "loginSubtitle": "Sign in to your Rendez account",
+    "loginSubtitle": "Sign in to your TOMEET account",
     "signupTitle": "Sign Up",
-    "signupSubtitle": "Create your Rendez account",
+    "signupSubtitle": "Create your TOMEET account",
     "continueWithGoogle": "Continue with Google",
     "or": "or",
     "emailPlaceholder": "Email address",
@@ -145,24 +146,6 @@
     "careers": "Careers",
     "privacy": "Privacy",
     "terms": "Terms",
-    "copyright": "© 2026 Rendez. All rights reserved."
-  },
-  "app": {
-    "newChat": "New Chat",
-    "conversations": "Conversations",
-    "noConversations": "No conversations yet",
-    "profileBuilding": "Build Your Profile",
-    "profileBuildingDesc": "Let me get to know you to find better matches",
-    "profileBuildingStart": "Start Chat",
-    "profileBuildingDismiss": "Maybe Later",
-    "profileBuildingSidebar": "Complete Profile",
-    "emptyStateTitle": "What are you looking for?",
-    "emptyStateSubtitle": "Tell me what you want to do or who you want to meet",
-    "inputPlaceholder": "Type a message...",
-    "send": "Send",
-    "today": "Today",
-    "yesterday": "Yesterday",
-    "earlier": "Earlier",
-    "signOut": "Sign Out"
+    "copyright": "© 2026 TOMEET. All rights reserved."
   }
 }

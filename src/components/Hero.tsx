@@ -1,31 +1,15 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import ChatDemo from "./ChatDemo";
-
-function renderHighlight(text: string) {
-  const parts = text.split(/(<highlight>.*?<\/highlight>)/g);
-  return parts.map((part, i) => {
-    const match = part.match(/^<highlight>(.*?)<\/highlight>$/);
-    if (match) {
-      return (
-        <span
-          key={i}
-          className="relative inline-block"
-        >
-          <span className="relative z-10">{match[1]}</span>
-          <span className="absolute inset-x-0 bottom-0 h-[40%] bg-orange-300/40 -z-0 rounded-sm" />
-        </span>
-      );
-    }
-    return <span key={i}>{part}</span>;
-  });
-}
+import Link from "next/link";
+import { renderHighlight } from "./Highlight";
 
 export default function Hero() {
   const t = useTranslations("hero");
+  const tTrust = useTranslations("trust");
+  const locale = useLocale();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -34,36 +18,83 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
+  const interests = tTrust.raw("items") as string[];
+
   return (
-    <section ref={ref} className="min-h-screen flex flex-col px-6 lg:px-8 bg-white relative pt-32 lg:pt-40 pb-12">
-      <motion.div style={{ y, opacity }} className="max-w-4xl mx-auto text-center">
+    <section
+      ref={ref}
+      className="flex min-h-screen flex-col px-6 lg:px-8 bg-parchment relative pt-[112px] lg:pt-[140px] pb-16 overflow-hidden"
+    >
+      <motion.div
+        style={{ y, opacity }}
+        className="max-w-[1200px] mx-auto text-center relative w-full"
+      >
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-gray-900 leading-tight tracking-tight"
+          className="mx-auto max-w-[980px] text-[44px] sm:text-[72px] lg:text-[96px] font-bold text-india-ink leading-[1.18] tracking-[0]"
         >
-          {renderHighlight(t.raw("title"))}
+          {renderHighlight(
+            t.raw("title"),
+            locale === "zh" ? ["orange", "yellow"] : ["yellow", "orange"],
+            { yellow: t("tag"), orange: t("matchTag") }
+          )}
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-5 text-lg text-gray-500 max-w-xl mx-auto leading-relaxed"
+          className="mt-8 text-[18px] sm:text-[20px] leading-[1.35] text-graphite-warm max-w-2xl mx-auto font-medium"
         >
-          {renderHighlight(t.raw("subtitle"))}
+          {t("subtitle")}
         </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10 flex items-center justify-center gap-7"
+        >
+          <Link
+            href="/login"
+            className="h-10 px-5 bg-india-ink text-bone-white text-[13px] font-semibold rounded-full border border-india-ink hover:bg-charcoal-warm transition-colors inline-flex items-center gap-2"
+          >
+            {t("cta")}
+            <span aria-hidden>→</span>
+          </Link>
+          <a
+            href="#how"
+            className="text-[13px] font-semibold text-graphite-warm inline-flex items-center gap-1.5 group"
+          >
+            {t("seeHow")}
+            <span
+              aria-hidden
+              className="text-linen group-hover:translate-x-0.5 transition-transform"
+            >
+              →
+            </span>
+          </a>
+        </motion.div>
       </motion.div>
 
-      {/* Demo immediately visible below headline */}
       <motion.div
-        initial={{ opacity: 0, y: 32 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="mt-12 w-full max-w-5xl mx-auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="mt-auto pt-16 max-w-[1200px] mx-auto w-full"
       >
-        <ChatDemo />
+        <div className="flex items-center justify-center gap-x-12 gap-y-4 flex-wrap">
+          {interests.map((it) => (
+            <span
+              key={it}
+              className="text-[17px] font-bold uppercase tracking-[0] text-graphite-warm"
+            >
+              {it}
+            </span>
+          ))}
+        </div>
       </motion.div>
     </section>
   );

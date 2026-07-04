@@ -1,31 +1,50 @@
 {
+  "banner": {
+    "text": "AI Agent 驱动的全新社交方式，现已开放早期体验"
+  },
   "nav": {
     "home": "首页",
     "howItWorks": "如何运作",
     "features": "特性",
-    "joinWaitlist": "成为早期用户"
+    "joinWaitlist": "登录"
   },
   "hero": {
-    "title": "用<highlight>对话</highlight>，找到对的人",
-    "subtitle": "告诉 AI 你想<highlight>做什么</highlight>、<highlight>想找谁</highlight>，它为你牵线搭桥。",
-    "cta": "成为早期用户",
-    "seeHow": "看看怎么用 →"
+    "title": "用<highlight>对话</highlight>，<br/>找到<highlight>对</highlight>的人",
+    "subtitle": "构建 AI Native 的交友平台。",
+    "cta": "登录获取资格",
+    "seeHow": "看看怎么用",
+    "tag": "相遇",
+    "matchTag": "理解",
+    "assignTitle": "推荐给你"
+  },
+  "trust": {
+    "label": "3,000+ 人已加入等待名单",
+    "items": ["爬山", "LIVEHOUSE", "黑客松", "羽毛球", "精酿", "桌游", "咖啡", "露营"]
+  },
+  "manifesto": {
+    "p1": "社交是我们生活中尤为重要的活动——它让人们<pill>彼此连接</pill>、交流，<sticker-yellow>找到真正合拍的人</sticker-yellow>。",
+    "p2": "然而，这些珍贵的连接，正在被<sticker-orange>标签、算法</sticker-orange>，和屏幕上不停弹出的消息取代。",
+    "p3": "从 <em>PC</em> 的论坛时代，到 <em>Mobile</em> 的滑动社交，社交平台花了数十年构建起复杂的匹配、推荐系统。但人与人之间的关系并没有被拉近，反而<var>愈来愈远</var>。",
+    "p4": "因为，相遇应该在合适的时间、<pill>合适的场域</pill>，和<sticker-orange>合适的人</sticker-orange>发生。",
+    "transition": "是时候进入 AI Native 了",
+    "transitionHl": "AI Native",
+    "subtitle": ""
   },
   "problem": {
     "title": "社交不该这么累",
     "oldWay": "传统方式",
     "oldWayItems": ["无尽地刷资料卡", "靠颜值一秒判断", "尬聊破冰", "大海捞针找同好"],
-    "newWay": "Rendez 方式",
+    "newWay": "TOMEET 方式",
     "newWayItems": ["和 AI 聊你想做什么", "基于兴趣深度匹配", "自然对话替你开场", "精准推荐志同道合的人"]
   },
   "howItWorks": {
-    "title": "三步，遇见对的人",
-    "step1Title": "对话",
-    "step1Desc": "像聊天一样告诉 Agent 你想<highlight>做什么</highlight>、想找<highlight>什么样的人</highlight>。",
-    "step2Title": "理解",
-    "step2Desc": "Agent 理解你的<highlight>真实需求</highlight>和<highlight>偏好</highlight>，而不只是表面信息。",
-    "step3Title": "匹配",
-    "step3Desc": "为你精准推荐契合的<highlight>人或活动</highlight>，并帮你开启对话。"
+    "title": "如何运作",
+    "step1Title": "理解",
+    "step1Desc": "像聊天一样告诉 AI 你是谁，有什么爱好，喜欢做什么、想找什么样的人。",
+    "step2Title": "匹配",
+    "step2Desc": "为你推荐契合的人，并帮你开启对话和安排适合你们的活动。",
+    "step3Title": "相遇",
+    "step3Desc": "去往你们挑选或系统推荐的活动中见面。"
   },
   "demo": {
     "title": "看看 Agent 怎么帮你",
@@ -79,42 +98,24 @@
     ]
   },
   "features": {
-    "title": "为什么选择 Rendez",
-    "feature1Title": "对话即社交",
-    "feature1Desc": "Agent 帮你建立个人画像——音乐品味、性格、爱好、照片等，对话中自然展现真实的你。",
-    "feature2Title": "深度理解",
-    "feature2Desc": "Agent 理解上下文和潜在需求，推荐不止于标签匹配。",
-    "feature3Title": "场景驱动",
-    "feature3Desc": "基于对话中理解的需求和场景精准匹配。"
+    "title": "为什么选择 TOMEET",
+    "feature1Title": "画像理解",
+    "feature1Desc": "AI 在对话中建立你的画像，发现潜在偏好和需求。",
+    "feature2Title": "Vibe Matching",
+    "feature2Desc": "非标签式的氛围匹配（Vibe Matching）。",
+    "feature3Title": "场域和时间",
+    "feature3Desc": "在合适的时间和合适的场域里，让连接自然发生。"
   },
   "cta": {
-    "title": "准备好用新方式社交了吗？",
-    "subtitle": "加入早期用户，抢先体验 AI 驱动的社交方式。",
-    "button": "成为早期用户"
-  },
-  "modal": {
-    "title": "成为早期用户",
-    "nameLabel": "姓名",
-    "namePlaceholder": "你的名字",
-    "emailLabel": "邮箱",
-    "emailPlaceholder": "you@example.com",
-    "noteLabel": "有什么想告诉我们的吗？（可选）",
-    "notePlaceholder": "比如你期待的功能、怎么知道我们的……",
-    "submit": "提交",
-    "submitting": "提交中...",
-    "successTitle": "你已成为早期用户！",
-    "successDesc": "轮到你时我们会第一时间通知你，感谢关注！",
-    "close": "关闭",
-    "errorNameRequired": "请输入你的名字。",
-    "errorEmailInvalid": "请输入有效的邮箱地址。",
-    "errorAlreadyExists": "这个邮箱已经注册过了。",
-    "errorServer": "出了点问题，请稍后再试。"
+    "title": "登录即可获取<highlight>体验资格</highlight>",
+    "subtitle": "无需排队表单。创建账号或登录后，系统会自动为你开通早期体验资格。",
+    "button": "登录获取资格"
   },
   "auth": {
     "loginTitle": "登录",
-    "loginSubtitle": "登录你的 Rendez 账号",
+    "loginSubtitle": "登录你的 TOMEET 账号",
     "signupTitle": "注册",
-    "signupSubtitle": "创建你的 Rendez 账号",
+    "signupSubtitle": "创建你的 TOMEET 账号",
     "continueWithGoogle": "使用 Google 登录",
     "or": "或",
     "emailPlaceholder": "邮箱地址",
@@ -145,24 +146,6 @@
     "careers": "加入我们",
     "privacy": "隐私政策",
     "terms": "服务条款",
-    "copyright": "© 2026 Rendez. 保留所有权利。"
-  },
-  "app": {
-    "newChat": "新对话",
-    "conversations": "对话记录",
-    "noConversations": "还没有对话",
-    "profileBuilding": "建立你的画像",
-    "profileBuildingDesc": "让我了解你，帮你找到更合适的人",
-    "profileBuildingStart": "开始对话",
-    "profileBuildingDismiss": "稍后再说",
-    "profileBuildingSidebar": "完善画像",
-    "emptyStateTitle": "你想找什么？",
-    "emptyStateSubtitle": "告诉我你想做什么，或者想认识什么样的人",
-    "inputPlaceholder": "输入消息...",
-    "send": "发送",
-    "today": "今天",
-    "yesterday": "昨天",
-    "earlier": "更早",
-    "signOut": "退出登录"
+    "copyright": "© 2026 TOMEET. 保留所有权利。"
   }
 }

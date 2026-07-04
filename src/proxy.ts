@@ -5,12 +5,10 @@ import { updateSession } from "./lib/supabase/middleware";
 
 const intlMiddleware = createIntlMiddleware(routing);
 
-// Routes that require authentication (locale-stripped paths)
-const protectedPaths = ["/app"];
 // Routes that authed users should be redirected away from
 const authPaths = ["/login", "/signup"];
 
-export default async function middleware(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Strip locale prefix for path matching
@@ -23,22 +21,12 @@ export default async function middleware(request: NextRequest) {
   // Refresh Supabase session (updates cookies)
   const { user } = await updateSession(request, response);
 
-  // Protect app routes — redirect to login if not authenticated
-  if (protectedPaths.some((p) => pathnameWithoutLocale.startsWith(p))) {
-    if (!user) {
-      const locale = pathname.match(/^\/(en|zh)/)?.[1] || routing.defaultLocale;
-      const url = request.nextUrl.clone();
-      url.pathname = `/${locale}/login`;
-      return NextResponse.redirect(url);
-    }
-  }
-
   // Redirect authed users away from login/signup
   if (authPaths.some((p) => pathnameWithoutLocale.startsWith(p))) {
     if (user) {
       const locale = pathname.match(/^\/(en|zh)/)?.[1] || routing.defaultLocale;
       const url = request.nextUrl.clone();
-      url.pathname = `/${locale}/app`;
+      url.pathname = `/${locale}`;
       return NextResponse.redirect(url);
     }
   }

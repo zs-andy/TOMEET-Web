@@ -5,17 +5,58 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-orange-500: #E8630A;
-  --color-orange-400: #F97316;
-  --color-orange-200: #FDDCB5;
-  --color-orange-100: #FFF3E8;
-  --color-gray-50: #FAFAFA;
-  --color-gray-900: #18181B;
-  --color-gray-500: #71717A;
-  --color-zinc-950: #09090B;
-  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
+  /* ── Ditto palette ─────────────────────────────── */
+  --color-parchment: #f7f5f3;
+  --color-india-ink: #000000;
+  --color-charcoal-warm: #222222;
+  --color-graphite-warm: #6a6559;
+  --color-bone-white: #ffffff;
+  --color-smoke: #e2e2e2;
+  --color-linen: #dcd8cf;
+  --color-highlight-green: #3e6b15;
+  --color-marker-yellow: #ffdd33;
+  --color-edit-orange: #ff6137;
+  --color-markup-purple: #b26dc2;
+  --color-comment-blue: #0097e6;
+  --color-sticky-pink: #f5c4cc;
+  --color-olive-gold: #aa7e2e;
+  --color-mustard: #bbb809;
+
+  /* ── Typography ────────────────────────────────── */
+  --font-sans: var(--font-geist-sans), "Geist", "Geist Fallback", ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
   --font-heading: var(--font-sans);
+
+  --text-caption: 13px;
+  --text-caption--line-height: 1.43;
+  --text-caption--letter-spacing: 0.1px;
+  --text-body-sm: 16px;
+  --text-body-sm--line-height: 1.43;
+  --text-body-sm--letter-spacing: 0;
+  --text-body: 18px;
+  --text-body--line-height: 1.43;
+  --text-body--letter-spacing: 0;
+  --text-subheading: 26px;
+  --text-subheading--line-height: 1.2;
+  --text-subheading--letter-spacing: 0;
+  --text-heading-sm: 35px;
+  --text-heading-sm--line-height: 1.2;
+  --text-heading-sm--letter-spacing: 0;
+  --text-heading: 43px;
+  --text-heading--line-height: 1.05;
+  --text-heading--letter-spacing: 0;
+  --text-heading-lg: 72px;
+  --text-heading-lg--line-height: 1;
+  --text-heading-lg--letter-spacing: 0;
+  --text-display: 108px;
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: 0;
+
+  /* ── Radii — pills everywhere, 12px cards, 28px inputs ── */
+  --radius-cards: 12px;
+  --radius-inputs: 28px;
+
+  /* ── shadcn plumbing (kept, remapped to warm palette) ── */
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -50,86 +91,55 @@
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-xl: 12px;
   --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-3xl: 28px;
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 body {
-  background: var(--color-gray-50);
-  color: var(--color-gray-900);
-  font-family: var(--font-sans), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
-  line-height: 1.75;
+  background: var(--color-parchment);
+  color: var(--color-india-ink);
+  font-family: var(--font-geist-sans), "Geist", "Geist Fallback", ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  line-height: 1.43;
+  font-feature-settings: "ss07" on;
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --font-sans: var(--font-geist-sans), "Geist", "Geist Fallback", ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
+  --background: #f7f5f3;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #f7f5f3;
+  --secondary: #e2e2e2;
+  --secondary-foreground: #000000;
+  --muted: #e2e2e2;
+  --muted-foreground: #6a6559;
+  --accent: #e2e2e2;
+  --accent-foreground: #000000;
+  --destructive: #ff6137;
+  --border: #dcd8cf;
+  --input: #dcd8cf;
+  --ring: #000000;
+  --chart-1: #3e6b15;
+  --chart-2: #ffdd33;
+  --chart-3: #ff6137;
+  --chart-4: #b26dc2;
+  --chart-5: #0097e6;
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar: #f7f5f3;
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #000000;
+  --sidebar-primary-foreground: #f7f5f3;
+  --sidebar-accent: #e2e2e2;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #dcd8cf;
+  --sidebar-ring: #000000;
 }
 
 @layer base {
@@ -137,9 +147,89 @@ body {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-parchment text-india-ink;
   }
   html {
     @apply font-sans;
+  }
+}
+
+/* ── Annotation highlighter ─────────────────────────
+   A hand-drawn marker stroke behind a word: slightly
+   irregular corners, extends past cap height/baseline,
+   never a clean rectangle. One color per word, ever. */
+@layer components {
+  .highlighter {
+    --tag-space: 0px;
+    position: relative;
+    display: inline-block;
+    padding-top: var(--tag-space);
+    margin-inline: 0.04em;
+    line-height: 0.98;
+    white-space: nowrap;
+  }
+  .highlighter[data-has-tag="true"] {
+    --tag-space: 20px;
+  }
+  .highlighter > .highlighter-text {
+    position: relative;
+    z-index: 1;
+    color: var(--color-india-ink);
+    font-weight: 700;
+  }
+  .highlight-tag {
+    position: absolute;
+    top: 0;
+    left: 0.08em;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+  .highlighter::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: calc(var(--tag-space) - 2px);
+    right: -0.08em;
+    bottom: -0.04em;
+    left: -0.08em;
+    background: var(--hl, var(--color-marker-yellow));
+    border-radius: 0;
+    transform: rotate(-0.4deg) skewX(-1deg);
+  }
+  .highlighter[data-hl="yellow"] { --hl: var(--color-marker-yellow); }
+  .highlighter[data-hl="orange"] { --hl: var(--color-edit-orange); }
+  .highlighter[data-hl="purple"] { --hl: var(--color-markup-purple); }
+  .highlighter[data-hl="blue"] { --hl: var(--color-comment-blue); }
+  .highlighter[data-hl="pink"] { --hl: var(--color-sticky-pink); }
+  .highlighter[data-hl="mustard"] { --hl: var(--color-mustard); }
+  .highlighter[data-hl="green"] { --hl: var(--color-highlight-green); }
+  .highlighter[data-hl="orange"] > .highlighter-text,
+  .highlighter[data-hl="green"] > .highlighter-text,
+  .highlighter[data-hl="blue"] > .highlighter-text {
+    color: var(--color-bone-white);
+  }
+
+  /* Rotated pill sticker floating over a word — "CONVERT" style */
+  .pill-sticker {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-weight: 900;
+    font-stretch: condensed;
+    letter-spacing: 0.02em;
+    color: var(--color-bone-white);
+    transform: rotate(-3deg);
   }
 }

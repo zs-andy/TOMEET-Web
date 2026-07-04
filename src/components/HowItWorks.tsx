@@ -42,11 +42,11 @@ export default function HowItWorks() {
                 onClick={() => setActive(i)}
                 className={`text-left px-4 py-3 rounded-lg transition-all cursor-pointer w-full ${
                   active === i
-                    ? "bg-orange-50 border-l-[3px] border-orange-500"
+                    ? "bg-gray-100 border-l-[3px] border-gray-900"
                     : "border-l-[3px] border-transparent hover:bg-gray-50"
                 }`}
               >
-                <span className={`text-xs font-medium ${active === i ? "text-orange-500" : "text-gray-400"}`}>
+                <span className={`text-xs font-medium ${active === i ? "text-gray-900" : "text-gray-400"}`}>
                   {step.num}
                 </span>
                 <p className={`text-sm font-semibold mt-0.5 ${active === i ? "text-gray-900" : "text-gray-500"}`}>

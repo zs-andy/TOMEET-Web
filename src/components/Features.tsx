@@ -33,10 +33,10 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.06 }}
-            className="bg-white rounded-2xl p-8 border border-gray-200 hover:border-orange-300 transition-colors"
+            className="bg-white rounded-2xl p-8 border border-gray-200 hover:border-gray-400 transition-colors"
           >
-            <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center mb-5">
-              <span className="text-orange-500 font-bold text-sm">{String(i + 1).padStart(2, "0")}</span>
+            <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mb-5">
+              <span className="text-gray-900 font-bold text-sm">{String(i + 1).padStart(2, "0")}</span>
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               {t(`${f.key}Title`)}
