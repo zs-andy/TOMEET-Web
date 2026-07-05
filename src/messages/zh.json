@@ -10,7 +10,7 @@
   },
   "hero": {
     "title": "用<highlight>对话</highlight>，<br/>找到<highlight>对</highlight>的人",
-    "subtitle": "构建 AI Native 的交友平台。",
+    "subtitle": "构建 AI Native 的交友平台。\n实现相似气质（Vibe Matching）的用户连接，创造相遇的更多可能。",
     "cta": "登录获取资格",
     "seeHow": "看看怎么用",
     "tag": "相遇",
@@ -19,7 +19,7 @@
   },
   "trust": {
     "label": "3,000+ 人已加入等待名单",
-    "items": ["爬山", "LIVEHOUSE", "黑客松", "羽毛球", "精酿", "桌游", "咖啡", "露营"]
+    "items": ["交友", "约会", "黑客松组队", "同好聚会", "Coffee Chat"]
   },
   "manifesto": {
     "p1": "社交是我们生活中尤为重要的活动——它让人们<pill>彼此连接</pill>、交流，<sticker-yellow>找到真正合拍的人</sticker-yellow>。",
@@ -51,49 +51,42 @@
     "thinking": "正在思考..."
   },
   "chat": {
-    "topics": ["周末爬山", "音乐节搭子", "AI 设计师", "周五喝酒", "羽毛球球友", "黑客松组队"],
+    "topics": ["交友", "约会", "黑客松组队", "同好聚会", "Coffee Chat"],
     "scenes": [
       {
-        "userMsg": "我想找人一起周末去爬山，最好是有经验的",
-        "agentThink": "正在为你搜索附近喜欢户外运动的人...",
-        "agentReply": "找到 3 位匹配的朋友！这是最适合你的：",
-        "matchName": "小鱼",
-        "matchDesc": "户外爱好者 · 每周登山 · 3年经验"
+        "userMsg": "我想认识一些新朋友，最好周末可以一起逛展或吃饭",
+        "agentThink": "正在根据你的兴趣和空闲时间匹配新朋友...",
+        "agentReply": "找到一位也想拓展社交圈的人：",
+        "matchName": "小乔",
+        "matchDesc": "刚搬来这座城市 · 喜欢看展和探店 · 周末有空"
       },
       {
-        "userMsg": "下周音乐节有没有人一起去？想找个搭子",
-        "agentThink": "正在搜索对音乐节感兴趣的人...",
-        "agentReply": "找到一位也想去的朋友：",
-        "matchName": "小淋",
-        "matchDesc": "独立音乐爱好者 · 去过 5 次音乐节 · 喜欢交朋友"
+        "userMsg": "想找一个认真约会的人，先从轻松的晚餐开始",
+        "agentThink": "正在匹配约会意向和生活节奏契合的人...",
+        "agentReply": "这位和你的期待很接近：",
+        "matchName": "林夏",
+        "matchDesc": "喜欢慢节奏约会 · 周末晚餐 · 重视真诚沟通"
       },
       {
-        "userMsg": "帮我找一个对 AI 感兴趣的设计师聊聊",
-        "agentThink": "正在匹配 AI + 设计领域的人...",
-        "agentReply": "太好了！这位应该很聊得来：",
-        "matchName": "Alex",
-        "matchDesc": "UI/UX 设计师 · AI 产品设计 · 热爱创客文化"
-      },
-      {
-        "userMsg": "周五晚上想找人一起喝酒，顺便推荐个合适的酒吧",
-        "agentThink": "正在搜索你附近本周五的酒吧和想喝酒的人...",
-        "agentReply": "找到一位也想周五小酌的朋友，还有个好去处：",
-        "matchName": "子墨",
-        "matchDesc": "精酿爱好者 · 常去望京 Hops 精酿 · 周五有空"
-      },
-      {
-        "userMsg": "我刚搬到北京，想认识一些喜欢打羽毛球的朋友",
-        "agentThink": "正在为你匹配北京的羽毛球爱好者...",
-        "agentReply": "欢迎来到北京！推荐这位球友：",
-        "matchName": "陈宇",
-        "matchDesc": "羽毛球 5 年 · 每周三约球 · 朝阳区"
-      },
-      {
-        "userMsg": "有没有人想一起组队参加黑客松？",
-        "agentThink": "正在寻找对黑客松感兴趣的开发者...",
-        "agentReply": "找到一位正在组队的伙伴：",
+        "userMsg": "有没有人想一起组队参加黑客松？我负责产品和前端",
+        "agentThink": "正在寻找互补技能的黑客松队友...",
+        "agentReply": "找到一位正在找队友的伙伴：",
         "matchName": "Mia",
-        "matchDesc": "全栈工程师 · 3次黑客松经验 · 擅长 AI 应用"
+        "matchDesc": "全栈工程师 · 3 次黑客松经验 · 擅长 AI 应用"
+      },
+      {
+        "userMsg": "我想找喜欢独立电影的人，周末一起组织小聚",
+        "agentThink": "正在搜索附近有相同兴趣的人...",
+        "agentReply": "找到一位也想参加同好聚会的人：",
+        "matchName": "阿澈",
+        "matchDesc": "独立电影爱好者 · 常办观影局 · 周末可约"
+      },
+      {
+        "userMsg": "想约一位做 AI 产品的人 Coffee Chat，聊聊职业和项目",
+        "agentThink": "正在匹配适合一对一交流的人...",
+        "agentReply": "这位很适合和你喝杯咖啡聊聊：",
+        "matchName": "Alex",
+        "matchDesc": "AI 产品经理 · 关注创业和增长 · 工作日下午方便"
       }
     ]
   },

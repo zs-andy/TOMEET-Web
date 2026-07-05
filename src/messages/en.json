@@ -10,7 +10,7 @@
   },
   "hero": {
     "title": "Find <highlight>the right</highlight> people through <highlight>conversation</highlight>",
-    "subtitle": "Building an AI Native platform for meeting new people.",
+    "subtitle": "Building an AI Native platform for meeting new people.\nWe connect people through vibe matching, creating more possibilities to meet.",
     "cta": "Log in for access",
     "seeHow": "See how it works",
     "tag": "meet",
@@ -19,7 +19,7 @@
   },
   "trust": {
     "label": "3,000+ people on the waitlist",
-    "items": ["HIKING", "LIVEHOUSE", "HACKATHON", "BADMINTON", "CRAFT BEER", "BOARD GAMES", "COFFEE", "CAMPING"]
+    "items": ["Making Friends", "Dating", "Hackathon Team-Up", "Interest Meetup", "Coffee Chat"]
   },
   "manifesto": {
     "p1": "Social connection is one of the most essential parts of life. It helps people <pill>connect</pill>, communicate, and <sticker-yellow>find those who truly fit</sticker-yellow>.",
@@ -51,49 +51,42 @@
     "thinking": "Thinking..."
   },
   "chat": {
-    "topics": ["Weekend Hike", "Music Fest Buddy", "AI Designer", "Friday Drinks", "Badminton", "Hackathon Team"],
+    "topics": ["Making Friends", "Dating", "Hackathon Team-Up", "Interest Meetup", "Coffee Chat"],
     "scenes": [
       {
-        "userMsg": "I want to find someone to go hiking this weekend, preferably experienced",
-        "agentThink": "Searching for outdoor enthusiasts near you...",
-        "agentReply": "Found 3 matches! Here's the best fit:",
-        "matchName": "Yuki",
-        "matchDesc": "Outdoor lover · Weekly hiker · 3 years experience"
+        "userMsg": "I want to meet new friends, ideally someone free for galleries or dinner this weekend",
+        "agentThink": "Matching people with similar interests and availability...",
+        "agentReply": "Found someone who's also expanding their social circle:",
+        "matchName": "Jo",
+        "matchDesc": "New in town · Galleries and food spots · Free weekends"
       },
       {
-        "userMsg": "Anyone going to the music festival next week? Looking for a buddy",
-        "agentThink": "Searching for music festival goers near you...",
-        "agentReply": "Found someone who's also going:",
-        "matchName": "Lin",
-        "matchDesc": "Indie music lover · 5 festivals attended · Loves meeting people"
+        "userMsg": "I'd like to meet someone for intentional dating, starting with a relaxed dinner",
+        "agentThink": "Matching dating intent, pace, and availability...",
+        "agentReply": "This person is close to what you're looking for:",
+        "matchName": "Lina",
+        "matchDesc": "Slow-dating mindset · Weekend dinners · Values honest conversation"
       },
       {
-        "userMsg": "Help me find a designer interested in AI to chat with",
-        "agentThink": "Matching people in AI + Design...",
-        "agentReply": "Great match found! You'll get along well:",
-        "matchName": "Alex",
-        "matchDesc": "UI/UX Designer · AI Product Design · Maker Culture"
-      },
-      {
-        "userMsg": "Looking for someone to grab drinks with Friday night, any good bar recs?",
-        "agentThink": "Finding people free Friday and nearby bars...",
-        "agentReply": "Found a drinking buddy and a great spot:",
-        "matchName": "Marco",
-        "matchDesc": "Craft beer lover · Regulars at The Hop House · Free Fridays"
-      },
-      {
-        "userMsg": "I just moved here, want to find people who play badminton",
-        "agentThink": "Matching badminton players in your area...",
-        "agentReply": "Welcome! Here's someone you'll enjoy playing with:",
-        "matchName": "Chris",
-        "matchDesc": "Badminton 5 yrs · Plays every Wednesday · Midtown"
-      },
-      {
-        "userMsg": "Anyone want to team up for a hackathon?",
-        "agentThink": "Finding developers interested in hackathons...",
+        "userMsg": "Anyone want to team up for a hackathon? I can handle product and frontend",
+        "agentThink": "Finding hackathon teammates with complementary skills...",
         "agentReply": "Found someone also looking for a team:",
         "matchName": "Mia",
         "matchDesc": "Full-stack engineer · 3x hackathon vet · AI apps"
+      },
+      {
+        "userMsg": "I want to meet people into indie films and put together a small weekend meetup",
+        "agentThink": "Searching for people nearby with the same interest...",
+        "agentReply": "Found someone who'd join that interest meetup:",
+        "matchName": "Archer",
+        "matchDesc": "Indie film fan · Hosts screening nights · Free weekends"
+      },
+      {
+        "userMsg": "Help me find someone in AI product for a coffee chat about careers and projects",
+        "agentThink": "Matching people suited for a focused one-on-one chat...",
+        "agentReply": "This person would be a strong coffee chat match:",
+        "matchName": "Alex",
+        "matchDesc": "AI product manager · Startups and growth · Free weekday afternoons"
       }
     ]
   },
