@@ -21,21 +21,66 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
+const metadataBase = new URL("https://www.tomeet.chat");
+
 export async function generateMetadata({ params }: Pick<Props, "params">): Promise<Metadata> {
   const { locale } = await params;
-
-  if (locale === "en") {
-    return {
-      title: "TOMEET - Find the right people through conversation",
-      description:
-        "An AI-native social platform that helps you meet people and discover activities through conversation.",
-    };
-  }
+  const isEnglish = locale === "en";
+  const title = isEnglish
+    ? "TOMEET - Find the right people through conversation"
+    : "TOMEET — 用对话，找到对的人";
+  const description = isEnglish
+    ? "An AI-native social platform that helps you meet people and discover activities through conversation."
+    : "AI agent 驱动的社交平台。通过对话找到志同道合的人和有趣的活动。";
+  const canonicalPath = isEnglish ? "/en" : "/";
 
   return {
-    title: "TOMEET — 用对话，找到对的人",
-    description:
-      "AI agent 驱动的社交平台。通过对话找到志同道合的人和有趣的活动。",
+    metadataBase,
+    title,
+    description,
+    applicationName: "TOMEET",
+    alternates: {
+      canonical: canonicalPath,
+      languages: {
+        "zh-CN": "/",
+        en: "/en",
+        "x-default": "/",
+      },
+    },
+    openGraph: {
+      type: "website",
+      url: canonicalPath,
+      title,
+      description,
+      siteName: "TOMEET",
+      locale: isEnglish ? "en_US" : "zh_CN",
+      alternateLocale: isEnglish ? ["zh_CN"] : ["en_US"],
+      images: [
+        {
+          url: "/opengraph-image.png",
+          width: 1200,
+          height: 630,
+          alt: "TOMEET",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/opengraph-image.png"],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
   };
 }
 
