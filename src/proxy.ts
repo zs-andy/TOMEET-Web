@@ -18,17 +18,23 @@ export default async function proxy(request: NextRequest) {
   const intlResponse = intlMiddleware(request);
   const response = intlResponse || NextResponse.next();
 
-  // Refresh Supabase session (updates cookies)
-  const { user } = await updateSession(request, response);
-
   // Redirect authed users away from login/signup
   if (authPaths.some((p) => pathnameWithoutLocale.startsWith(p))) {
+    const { user } = await updateSession(request, response);
+
     if (user) {
       const locale = pathname.match(/^\/(en|zh)/)?.[1] || routing.defaultLocale;
       const url = request.nextUrl.clone();
       url.pathname = `/${locale}`;
       return NextResponse.redirect(url);
     }
+  }
+
+  if (pathnameWithoutLocale === "/") {
+    response.headers.set(
+      "Cache-Control",
+      "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400"
+    );
   }
 
   return response;

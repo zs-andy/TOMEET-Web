@@ -61,6 +61,7 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
           width: 1200,
           height: 630,
           alt: "TOMEET",
+          type: "image/png",
         },
       ],
     },
