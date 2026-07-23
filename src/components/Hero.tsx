@@ -1,101 +1,128 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 import Link from "next/link";
-import { renderHighlight } from "./Highlight";
+import { useLocale, useTranslations } from "next-intl";
+import ImagePlaceholder from "./ImagePlaceholder";
+
+function localizedHref(locale: string, path: string) {
+  return locale === "zh" ? `/zh${path}` : path;
+}
 
 export default function Hero() {
-  const t = useTranslations("hero");
-  const tTrust = useTranslations("trust");
+  const landing = useTranslations("landing");
+  const hero = useTranslations("hero");
   const locale = useLocale();
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
-  const interests = tTrust.raw("items") as string[];
+  const isChinese = locale === "zh";
+  const socialPhrase = landing("heroSocial");
+  const socialLastSpace = socialPhrase.lastIndexOf(" ");
+  const socialPhraseBeforeImage = socialPhrase.slice(0, socialLastSpace);
+  const socialPhraseAfterImage = socialPhrase.slice(socialLastSpace + 1);
 
   return (
-    <section
-      ref={ref}
-      className="flex min-h-screen flex-col px-6 lg:px-8 bg-parchment relative pt-[112px] lg:pt-[140px] pb-16 overflow-hidden"
-    >
-      <motion.div
-        style={{ y, opacity }}
-        className="max-w-[1200px] mx-auto text-center relative w-full"
-      >
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto max-w-[980px] text-[44px] sm:text-[72px] lg:text-[96px] font-bold text-india-ink leading-[1.18] tracking-[0]"
-        >
-          {renderHighlight(
-            t.raw("title"),
-            locale === "zh" ? ["orange", "yellow"] : ["yellow", "orange"],
-            { yellow: t("tag"), orange: t("matchTag") }
-          )}
-        </motion.h1>
+    <section className="hero-section" aria-labelledby="hero-title">
+      <div className="hero-grid page-grid">
+        <h1 id="hero-title" className="sr-only">
+          {landing("heroUnderstand")} {landing("heroYou")} {landing("heroAre")} {landing("heroThen")} {landing("heroSocial")}
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 whitespace-pre-line text-[18px] sm:text-[20px] leading-[1.35] text-graphite-warm max-w-2xl mx-auto font-medium"
-        >
-          {t("subtitle")}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 flex items-center justify-center gap-7"
-        >
-          <Link
-            href="/login"
-            className="h-10 px-5 bg-india-ink text-bone-white text-[13px] font-semibold rounded-full border border-india-ink hover:bg-charcoal-warm transition-colors inline-flex items-center gap-2"
+        {isChinese ? (
+          <p
+            className="hero-word hero-word-zh-understand"
+            aria-hidden="true"
           >
-            {t("cta")}
-            <span aria-hidden>→</span>
-          </Link>
-          <a
-            href="#how"
-            className="text-[13px] font-semibold text-graphite-warm inline-flex items-center gap-1.5 group"
-          >
-            {t("seeHow")}
-            <span
-              aria-hidden
-              className="text-linen group-hover:translate-x-0.5 transition-transform"
-            >
-              →
-            </span>
-          </a>
-        </motion.div>
-      </motion.div>
+            <span>{landing("heroUnderstand")}</span>
+            <span>{landing("heroAre")}</span>
+          </p>
+        ) : (
+          <>
+            <p className="hero-word hero-word-learns" aria-hidden="true">
+              {landing("heroUnderstand")}
+            </p>
+            <div className="hero-word hero-word-identity" aria-hidden="true">
+              <span>{landing("heroYou")}</span>
+              <div className="hero-image-slot hero-image-slot--portrait">
+                {"("}
+                <span className="hero-image-slot-gap" />
+                {")"}
+                <ImagePlaceholder
+                  index="01"
+                  ratio="landscape"
+                  label={landing("heroPortrait")}
+                  className="hero-figure hero-image-slot-visual"
+                />
+              </div>
+              <span>{landing("heroAre")}</span>
+            </div>
+          </>
+        )}
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        className="mt-auto pt-16 max-w-[1200px] mx-auto w-full"
-      >
-        <div className="flex items-center justify-center gap-x-12 gap-y-4 flex-wrap">
-          {interests.map((it) => (
-            <span
-              key={it}
-              className="text-[17px] font-bold uppercase tracking-[0] text-graphite-warm"
+        {isChinese && (
+          <div className="hero-figure-group hero-portrait">
+            <span className="hero-figure-parenthesis" aria-hidden="true">(</span>
+            <ImagePlaceholder
+              index="01"
+              ratio="landscape"
+              label={landing("heroPortrait")}
+              className="hero-figure"
+            />
+            <span className="hero-figure-parenthesis" aria-hidden="true">)</span>
+          </div>
+        )}
+
+        <div className="hero-core">
+          <p className="hero-core-title">
+            {landing("heroBridgeBefore")}
+            <span className="soft-highlight">{landing("heroBridgeHighlight")}</span>
+            {landing("heroBridgeAfter")}
+          </p>
+          <div className="hero-actions">
+            <Link
+              href={localizedHref(locale, "/login")}
+              className="primary-button"
             >
-              {it}
-            </span>
-          ))}
+              {hero("cta")}
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </div>
-      </motion.div>
+
+        {isChinese ? (
+          <>
+            <div className="hero-figure-group hero-agent">
+              <span className="hero-figure-parenthesis" aria-hidden="true">(</span>
+              <ImagePlaceholder
+                index="02"
+                ratio="landscape"
+                label={landing("heroAgent")}
+                className="hero-figure"
+              />
+              <span className="hero-figure-parenthesis" aria-hidden="true">)</span>
+            </div>
+            <p className="hero-word hero-word-zh-connect" aria-hidden="true">
+              {landing("heroThen")}{landing("heroSocial")}
+            </p>
+          </>
+        ) : (
+          <div className="hero-word hero-word-connect" aria-hidden="true">
+            <span className="hero-connect-line">{landing("heroThen")}</span>
+            <div className="hero-connect-line hero-connect-line--with-figure">
+              <span>{socialPhraseBeforeImage}</span>
+              <div className="hero-image-slot hero-image-slot--agent">
+                {"("}
+                <span className="hero-image-slot-gap" />
+                {")"}
+                <ImagePlaceholder
+                  index="02"
+                  ratio="landscape"
+                  label={landing("heroAgent")}
+                  className="hero-figure hero-image-slot-visual"
+                />
+              </div>
+              <span>{socialPhraseAfterImage}</span>
+            </div>
+          </div>
+        )}
+      </div>
     </section>
   );
 }

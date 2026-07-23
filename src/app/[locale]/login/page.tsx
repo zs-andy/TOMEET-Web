@@ -35,7 +35,7 @@ export default function LoginPage() {
       setError(t("errorInvalidCredentials"));
       setLoading(false);
     } else {
-      window.location.href = `/${locale}`;
+      window.location.href = locale === "zh" ? "/zh" : "/";
     }
   };
 
@@ -129,7 +129,7 @@ export default function LoginPage() {
 
         <p className="mt-6 text-center text-sm text-gray-500">
           {t("noAccount")}{" "}
-          <Link href="/signup" className="text-gray-900 hover:text-gray-600 font-medium">
+          <Link href={locale === "zh" ? "/zh/signup" : "/signup"} className="text-gray-900 hover:text-gray-600 font-medium">
             {t("signUpLink")}
           </Link>
         </p>

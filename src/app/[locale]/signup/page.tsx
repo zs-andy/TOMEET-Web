@@ -51,7 +51,7 @@ export default function SignupPage() {
     if (error) {
       setError(t("errorServer"));
     } else {
-      window.location.href = `/${locale}`;
+      window.location.href = locale === "zh" ? "/zh" : "/";
     }
   };
 
@@ -154,7 +154,7 @@ export default function SignupPage() {
 
         <p className="mt-6 text-center text-sm text-gray-500">
           {t("hasAccount")}{" "}
-          <Link href="/login" className="text-gray-900 hover:text-gray-600 font-medium">
+          <Link href={locale === "zh" ? "/zh/login" : "/login"} className="text-gray-900 hover:text-gray-600 font-medium">
             {t("loginLink")}
           </Link>
         </p>

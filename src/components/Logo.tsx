@@ -1,13 +1,26 @@
-export default function Logo({ size = 30 }: { size?: number }) {
+import type { CSSProperties } from "react";
+
+export default function Logo({
+  size = 32,
+  inverse = false,
+}: {
+  size?: number;
+  inverse?: boolean;
+}) {
   return (
     <span
       aria-label="TOMEET"
-      className="inline-flex items-baseline font-black uppercase leading-none tracking-[0]"
-      style={{ fontSize: `${Math.round(size * 0.82)}px` }}
+      className={`brand-wordmark${inverse ? " brand-wordmark--inverse" : ""}`}
+      style={{ "--logo-size": `${size}px` } as CSSProperties}
     >
-      <span className="text-edit-orange">T</span>
-      <span className="text-india-ink">OMEE</span>
-      <span className="text-edit-orange">T</span>
+      <span className="brand-word" aria-hidden="true">
+        <span className="brand-letter--accent">T</span>
+        <span>O</span>
+        <span>M</span>
+        <span>E</span>
+        <span>E</span>
+        <span className="brand-letter--accent">T</span>
+      </span>
     </span>
   );
 }

@@ -1,20 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import "@fontsource/zcool-xiaowei/chinese-simplified-400.css";
 import "../globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 type Props = {
   children: React.ReactNode;
@@ -36,7 +26,7 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
   const description = isEnglish
     ? "An AI-native social platform that helps you meet people and discover activities through conversation."
     : "AI agent 驱动的社交平台。通过对话找到志同道合的人和有趣的活动。";
-  const canonicalPath = isEnglish ? "/en" : "/";
+  const canonicalPath = isEnglish ? "/" : "/zh";
 
   return {
     metadataBase,
@@ -46,8 +36,8 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
     alternates: {
       canonical: canonicalPath,
       languages: {
-        "zh-CN": "/",
-        en: "/en",
+        "zh-CN": "/zh",
+        en: "/",
         "x-default": "/",
       },
     },
@@ -110,7 +100,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   };
 
   return (
-    <html lang={locale}>
+    <html lang={locale} data-scroll-behavior="smooth">
       <head>
         <script
           type="application/ld+json"
@@ -119,7 +109,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           }}
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className="antialiased">
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
