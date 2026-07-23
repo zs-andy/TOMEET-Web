@@ -3,7 +3,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import "@fontsource/zcool-xiaowei/chinese-simplified-400.css";
 import "../globals.css";
 
 type Props = {
@@ -18,15 +17,10 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Pick<Props, "params">): Promise<Metadata> {
-  const { locale } = await params;
-  const isEnglish = locale === "en";
-  const title = isEnglish
-    ? "TOMEET - Find the right people through conversation"
-    : "TOMEET — 用对话，找到对的人";
-  const description = isEnglish
-    ? "An AI-native social platform that helps you meet people and discover activities through conversation."
-    : "AI agent 驱动的社交平台。通过对话找到志同道合的人和有趣的活动。";
-  const canonicalPath = isEnglish ? "/" : "/zh";
+  await params;
+  const title = "TOMEET - Find the right people through conversation";
+  const description =
+    "An AI-native social platform that helps you meet people and discover activities through conversation.";
 
   return {
     metadataBase,
@@ -34,21 +28,15 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
     description,
     applicationName: "TOMEET",
     alternates: {
-      canonical: canonicalPath,
-      languages: {
-        "zh-CN": "/zh",
-        en: "/",
-        "x-default": "/",
-      },
+      canonical: "/",
     },
     openGraph: {
       type: "website",
-      url: canonicalPath,
+      url: "/",
       title,
       description,
       siteName: "TOMEET",
-      locale: isEnglish ? "en_US" : "zh_CN",
-      alternateLocale: isEnglish ? ["zh_CN"] : ["en_US"],
+      locale: "en_US",
       images: [
         {
           url: "/opengraph-image.png",
@@ -82,7 +70,7 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
-  if (!routing.locales.includes(locale as "en" | "zh")) {
+  if (!routing.locales.includes(locale as "en")) {
     notFound();
   }
 
@@ -94,9 +82,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     name: "TOMEET",
     url: "https://www.tomeet.chat/",
     description:
-      locale === "en"
-        ? "An AI-native social platform that helps you meet the right people through conversation."
-        : "AI Agent 驱动的社交平台，通过对话找到对的人。",
+      "An AI-native social platform that helps you meet the right people through conversation.",
   };
 
   return (

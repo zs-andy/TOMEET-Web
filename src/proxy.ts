@@ -11,8 +11,16 @@ const authPaths = ["/login", "/signup"];
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // The public experience is English-only. Preserve old links without serving
+  // a second localized version of the interface.
+  if (/^\/zh(?:\/|$)/.test(pathname)) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.replace(/^\/zh(?=\/|$)/, "") || "/";
+    return NextResponse.redirect(url, 308);
+  }
+
   // Strip locale prefix for path matching
-  const pathnameWithoutLocale = pathname.replace(/^\/(en|zh)/, "") || "/";
+  const pathnameWithoutLocale = pathname.replace(/^\/en(?=\/|$)/, "") || "/";
 
   // Run intl middleware first (handles locale detection/redirect)
   const intlResponse = intlMiddleware(request);
@@ -23,9 +31,8 @@ export default async function proxy(request: NextRequest) {
     const { user } = await updateSession(request, response);
 
     if (user) {
-      const locale = pathname.match(/^\/(en|zh)/)?.[1] || routing.defaultLocale;
       const url = request.nextUrl.clone();
-      url.pathname = `/${locale}`;
+      url.pathname = "/";
       return NextResponse.redirect(url);
     }
   }

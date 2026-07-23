@@ -1979,3 +1979,128 @@ html[lang="zh"] .hero-core-title {
     transform: none;
   }
 }
+
+/* Mobile hero: preserve the editorial poster, but fit its four-line sentence
+   and primary action within a single phone viewport. */
+@media (max-width: 47.999rem) {
+  :root {
+    --page-pad: clamp(1rem, 4.5vw, 1.25rem);
+  }
+
+  .announcement-bar {
+    min-height: 43px;
+    gap: 0.5rem;
+    padding: 0.4rem var(--page-pad);
+    font-size: 0.7rem;
+    line-height: 1.25;
+  }
+
+  .announcement-dot {
+    width: 0.6rem;
+    height: 0.6rem;
+  }
+
+  .site-nav {
+    min-height: 64px;
+  }
+
+  .brand-home,
+  .nav-actions,
+  .login-button {
+    min-height: 44px;
+  }
+
+  .login-button {
+    padding-inline: 0.85rem;
+    font-size: 0.8125rem;
+  }
+
+  .hero-grid {
+    height: calc(100svh - 6.6875rem);
+    min-height: min(34rem, calc(100svh - 6.6875rem));
+    max-height: 46rem;
+  }
+
+  .hero-word {
+    font-size: clamp(2.65rem, 12vw, 3.4rem);
+    line-height: 0.92;
+    letter-spacing: -0.052em;
+  }
+
+  .hero-word-learns {
+    top: 4%;
+  }
+
+  .hero-word-identity {
+    top: 14%;
+    gap: 0.02em;
+  }
+
+  .hero-image-slot--portrait {
+    --hero-slot-image-width: clamp(68px, 19vw, 84px);
+  }
+
+  .hero-core {
+    top: 45%;
+    width: min(calc(100% - (2 * var(--page-pad))), 22rem);
+  }
+
+  .hero-core-title {
+    font-size: clamp(1rem, 4.5vw, 1.125rem);
+    line-height: 1.35;
+  }
+
+  .hero-actions {
+    margin-top: 0.9rem;
+  }
+
+  .hero-actions .primary-button {
+    min-height: 48px;
+    padding-inline: 1rem;
+  }
+
+  .hero-word-connect {
+    right: var(--page-pad);
+    bottom: 4%;
+    width: calc(100% - (2 * var(--page-pad)));
+    font-size: clamp(2.45rem, 11.2vw, 3.15rem);
+    line-height: 0.9;
+  }
+
+  .hero-connect-line {
+    max-width: 100%;
+  }
+
+  .hero-connect-line--with-figure {
+    gap: 0.035em;
+    font-size: 0.88em;
+  }
+
+  .hero-image-slot--agent {
+    --hero-slot-image-width: clamp(54px, 15.5vw, 68px);
+  }
+
+  .manifesto-intro {
+    padding-top: 4.5rem;
+    padding-bottom: 4rem;
+  }
+
+  .manifesto-heading {
+    font-size: clamp(2.7rem, 12vw, 3.4rem);
+    line-height: 1.04;
+  }
+}
+
+@media (max-width: 22.5rem) {
+  .announcement-bar {
+    font-size: 0.675rem;
+  }
+
+  .hero-word-connect {
+    font-size: 2.35rem;
+  }
+
+  .hero-core-title {
+    font-size: 0.98rem;
+  }
+}
