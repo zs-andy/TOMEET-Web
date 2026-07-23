@@ -2065,6 +2065,7 @@ html[lang="zh"] .hero-core-title {
     width: calc(100% - (2 * var(--page-pad)));
     font-size: clamp(2.45rem, 11.2vw, 3.15rem);
     line-height: 0.9;
+    row-gap: clamp(1.25rem, 8vw, 2rem);
   }
 
   .hero-connect-line {
