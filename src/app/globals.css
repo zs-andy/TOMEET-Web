@@ -402,7 +402,6 @@ a {
 
 .brand-wordmark .brand-word > span {
   color: var(--accent-strong);
-  transition: color 500ms ease;
 }
 
 .brand-wordmark--inverse .brand-word > span {
