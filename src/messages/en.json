@@ -149,9 +149,9 @@
   },
   "auth": {
     "loginTitle": "Log In",
-    "loginSubtitle": "Sign in to your TOMEET account",
+    "loginSubtitle": "Sign in to your <brand>TOMEET</brand> account",
     "signupTitle": "Sign Up",
-    "signupSubtitle": "Create your TOMEET account",
+    "signupSubtitle": "Create your <brand>TOMEET</brand> account",
     "continueWithGoogle": "Continue with Google",
     "or": "or",
     "emailPlaceholder": "Email address",

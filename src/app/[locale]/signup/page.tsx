@@ -74,7 +74,11 @@ export default function SignupPage() {
     <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
       <div className="w-full max-w-sm">
         <h1 className="text-2xl font-bold text-gray-900 text-center">{t("signupTitle")}</h1>
-        <p className="mt-2 text-sm text-gray-500 text-center">{t("signupSubtitle")}</p>
+        <p className="mt-2 text-sm text-gray-500 text-center">
+          {t.rich("signupSubtitle", {
+            brand: (chunks) => <span className="brand-cycle-text">{chunks}</span>,
+          })}
+        </p>
 
         <div className="mt-8 space-y-4">
           <button

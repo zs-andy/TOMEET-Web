@@ -168,6 +168,11 @@ body {
   animation: tomeet-accent-cycle 20s linear infinite;
 }
 
+/* The client clock becomes the single source of truth after hydration. */
+html.theme-cycle-synced body {
+  animation: none;
+}
+
 @keyframes tomeet-accent-cycle {
   0%, 22% {
     --accent-soft: #c9c5ff;
@@ -400,9 +405,20 @@ a {
   letter-spacing: -0.045em;
 }
 
-.brand-wordmark .brand-word > span {
+.brand-wordmark .brand-word > span,
+.brand-cycle-text {
   color: #4a36d2;
   animation: tomeet-logo-cycle 20s linear infinite;
+}
+
+html.theme-cycle-synced .brand-wordmark .brand-word > span,
+html.theme-cycle-synced .brand-cycle-text {
+  color: var(--brand-accent, #4a36d2);
+  animation: none;
+}
+
+.brand-cycle-text {
+  font-weight: 650;
 }
 
 .brand-wordmark--inverse .brand-word > span {
@@ -429,7 +445,8 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .brand-wordmark .brand-word > span {
+  .brand-wordmark .brand-word > span,
+  .brand-cycle-text {
     animation: none;
   }
 }

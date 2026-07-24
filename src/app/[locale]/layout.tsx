@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import ThemeCycleSync from "@/components/ThemeCycleSync";
 import "../globals.css";
 
 type Props = {
@@ -96,6 +97,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         />
       </head>
       <body className="antialiased">
+        <ThemeCycleSync />
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
