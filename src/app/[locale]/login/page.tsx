@@ -9,12 +9,12 @@ import Link from "next/link";
 export default function LoginPage() {
   const t = useTranslations("auth");
   const locale = useLocale();
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleEmailLogin = async (e: React.FormEvent) => {
+  const handlePasswordLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
@@ -23,10 +23,12 @@ export default function LoginPage() {
 
     try {
       const supabase = createClient();
-      ({ error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      }));
+      const normalizedIdentifier = identifier.trim();
+      const credentials = normalizedIdentifier.includes("@")
+        ? { email: normalizedIdentifier, password }
+        : { phone: normalizedIdentifier, password };
+
+      ({ error } = await supabase.auth.signInWithPassword(credentials));
     } catch {
       error = { message: "Auth client unavailable" };
     }
@@ -100,12 +102,15 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <form onSubmit={handleEmailLogin} className="space-y-3">
+          <form onSubmit={handlePasswordLogin} className="space-y-3">
             <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder={t("emailPlaceholder")}
+              type="text"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
+              placeholder={t("loginIdentifierPlaceholder")}
+              autoComplete="username"
+              autoCapitalize="none"
+              spellCheck={false}
               required
               disabled={loading}
               className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 transition-colors disabled:opacity-50"

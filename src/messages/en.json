@@ -154,6 +154,7 @@
     "signupSubtitle": "Create your <brand>TOMEET</brand> account",
     "continueWithGoogle": "Continue with Google",
     "or": "or",
+    "loginIdentifierPlaceholder": "Email or phone number",
     "emailPlaceholder": "Email address",
     "passwordPlaceholder": "Password",
     "confirmPasswordPlaceholder": "Confirm password",
@@ -167,7 +168,7 @@
     "loginLink": "Log in",
     "checkEmail": "Check your email",
     "checkEmailDesc": "We've sent a verification link to your email. Click it to complete registration.",
-    "errorInvalidCredentials": "Invalid email or password.",
+    "errorInvalidCredentials": "Invalid email, phone number, or password.",
     "errorPasswordTooShort": "Password must be at least 6 characters.",
     "errorPasswordMismatch": "Passwords don't match.",
     "errorServer": "Something went wrong. Please try again."
