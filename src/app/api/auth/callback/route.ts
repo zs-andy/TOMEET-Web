@@ -1,42 +1,38 @@
 import { NextResponse } from "next/server";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createClient } from "@/lib/supabase/server";
+
+function redirectToLogin(origin: string, loginPath: string, next: string) {
+  const url = new URL(loginPath, origin);
+  url.searchParams.set("authError", "oauth");
+  url.searchParams.set("next", next);
+  return NextResponse.redirect(url, 303);
+}
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
   const requestedPath = searchParams.get("next");
   const next =
-    requestedPath?.startsWith("/") && !requestedPath.startsWith("//")
+    requestedPath?.startsWith("/") &&
+    !requestedPath.startsWith("//") &&
+    !requestedPath.includes("\\")
       ? requestedPath
       : "/agent";
-  const loginPath = next.startsWith("/zh/") ? "/zh/login" : "/login";
+  const loginPath = next === "/en" || next.startsWith("/en/")
+    ? "/en/login"
+    : "/login";
 
   if (code) {
-    const cookieStore = await cookies();
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll();
-          },
-          setAll(cookiesToSet) {
-            cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
-            );
-          },
-        },
+    try {
+      const supabase = await createClient();
+      const { error } = await supabase.auth.exchangeCodeForSession(code);
+      if (!error) {
+        return NextResponse.redirect(new URL(next, origin), 303);
       }
-    );
-
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
-    if (!error) {
-      return NextResponse.redirect(`${origin}${next}`);
+    } catch {
+      return redirectToLogin(origin, loginPath, next);
     }
   }
 
-  // Auth error — redirect to login
-  return NextResponse.redirect(`${origin}${loginPath}`);
+  return redirectToLogin(origin, loginPath, next);
 }

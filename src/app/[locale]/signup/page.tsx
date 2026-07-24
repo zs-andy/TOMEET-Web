@@ -3,21 +3,58 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
-import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
+import { toSupabaseAuthIdentifier } from "@/lib/auth-identifier";
+import { createClient } from "@/lib/supabase/client";
+
+type LoadingAction = "signup" | "google" | null;
 
 export default function SignupPage() {
   const t = useTranslations("auth");
   const locale = useLocale();
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loadingAction, setLoadingAction] = useState<LoadingAction>(null);
+  const fallbackNext = locale === "en" ? "/en/agent" : "/agent";
+
+  const getNext = () => {
+    if (typeof window === "undefined") return fallbackNext;
+    const requestedPath = new URL(window.location.href).searchParams.get("next");
+    return requestedPath?.startsWith("/") &&
+      !requestedPath.startsWith("//") &&
+      !requestedPath.includes("\\")
+      ? requestedPath
+      : fallbackNext;
+  };
+
+  const getSignupError = (code?: string) => {
+    switch (code) {
+      case "email_exists":
+      case "user_already_exists":
+        return t("errorIdentifierExists");
+      case "email_address_invalid":
+      case "validation_failed":
+        return t("errorInvalidIdentifier");
+      case "weak_password":
+        return t("errorPasswordWeak");
+      case "over_email_send_rate_limit":
+      case "over_request_rate_limit":
+        return t("errorRateLimited");
+      default:
+        return t("errorServer");
+    }
+  };
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    if (!identifier.trim()) {
+      setError(t("errorInvalidIdentifier"));
+      return;
+    }
 
     if (password.length < 6) {
       setError(t("errorPasswordTooShort"));
@@ -29,46 +66,62 @@ export default function SignupPage() {
       return;
     }
 
-    setLoading(true);
-
-    let error: { message: string } | null = null;
+    setLoadingAction("signup");
+    const next = getNext();
 
     try {
+      const authIdentifier = await toSupabaseAuthIdentifier(identifier);
       const supabase = createClient();
-      const next = locale === "en" ? "/en/agent" : "/agent";
-      ({ error } = await supabase.auth.signUp({
-        email,
+      const { data, error: authError } = await supabase.auth.signUp({
+        email: authIdentifier.email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/api/auth/callback?next=${encodeURIComponent(next)}`,
+          data: {
+            login_identifier: authIdentifier.original,
+            login_identifier_kind: authIdentifier.kind,
+          },
         },
-      }));
+      });
+
+      if (authError) {
+        setError(getSignupError(authError.code));
+        return;
+      }
+
+      if (!data.session) {
+        setError(t("errorServer"));
+        return;
+      }
+
+      window.location.replace(next);
     } catch {
-      error = { message: "Auth client unavailable" };
-    }
-
-    setLoading(false);
-
-    if (error) {
       setError(t("errorServer"));
-    } else {
-      window.location.href = locale === "en" ? "/en" : "/";
+    } finally {
+      setLoadingAction(null);
     }
   };
 
   const handleGoogleLogin = async () => {
+    setError("");
+    setLoadingAction("google");
+
     try {
       const supabase = createClient();
-      const next = locale === "en" ? "/en/agent" : "/agent";
-      const { error } = await supabase.auth.signInWithOAuth({
+      const next = getNext();
+      const { error: authError } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
           redirectTo: `${window.location.origin}/api/auth/callback?next=${encodeURIComponent(next)}`,
         },
       });
-      if (error) setError(t("errorServer"));
+
+      if (authError) {
+        setError(t("errorOAuth"));
+        setLoadingAction(null);
+      }
     } catch {
-      setError(t("errorServer"));
+      setError(t("errorOAuth"));
+      setLoadingAction(null);
     }
   };
 
@@ -84,7 +137,9 @@ export default function SignupPage() {
 
         <div className="mt-8 space-y-4">
           <button
+            type="button"
             onClick={handleGoogleLogin}
+            disabled={loadingAction !== null}
             className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -119,12 +174,15 @@ export default function SignupPage() {
 
           <form onSubmit={handleSignup} className="space-y-3">
             <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder={t("emailPlaceholder")}
+              type="text"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
+              placeholder={t("signupIdentifierPlaceholder")}
+              autoComplete="username"
+              autoCapitalize="none"
+              spellCheck={false}
               required
-              disabled={loading}
+              disabled={loadingAction !== null}
               className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 transition-colors disabled:opacity-50"
             />
             <input
@@ -132,8 +190,9 @@ export default function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder={t("passwordPlaceholder")}
+              autoComplete="new-password"
               required
-              disabled={loading}
+              disabled={loadingAction !== null}
               className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 transition-colors disabled:opacity-50"
             />
             <input
@@ -141,19 +200,24 @@ export default function SignupPage() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder={t("confirmPasswordPlaceholder")}
+              autoComplete="new-password"
               required
-              disabled={loading}
+              disabled={loadingAction !== null}
               className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 transition-colors disabled:opacity-50"
             />
 
-            {error && <p className="text-sm font-medium text-gray-700">{error}</p>}
+            {error && (
+              <p className="text-sm font-medium text-gray-700" aria-live="polite">
+                {error}
+              </p>
+            )}
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={loadingAction !== null}
               className="w-full py-3 bg-gray-950 text-white font-medium rounded-full hover:bg-gray-800 transition-colors text-sm cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {loading ? t("signingUp") : t("signup")}
+              {loadingAction === "signup" ? t("signingUp") : t("signup")}
             </button>
           </form>
         </div>

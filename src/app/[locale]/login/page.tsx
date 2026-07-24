@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
-import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
+import { toSupabaseAuthIdentifier } from "@/lib/auth-identifier";
+import { createClient } from "@/lib/supabase/client";
+
+type LoadingAction = "password" | "google" | null;
 
 export default function LoginPage() {
   const t = useTranslations("auth");
@@ -12,48 +15,83 @@ export default function LoginPage() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loadingAction, setLoadingAction] = useState<LoadingAction>(null);
+  const fallbackNext = locale === "en" ? "/en/agent" : "/agent";
+
+  const getNext = () => {
+    if (typeof window === "undefined") return fallbackNext;
+    const requestedPath = new URL(window.location.href).searchParams.get("next");
+    return requestedPath?.startsWith("/") &&
+      !requestedPath.startsWith("//") &&
+      !requestedPath.includes("\\")
+      ? requestedPath
+      : fallbackNext;
+  };
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has("authError")) return;
+
+    const timer = window.setTimeout(() => setError(t("errorOAuth")), 0);
+    url.searchParams.delete("authError");
+    window.history.replaceState(window.history.state, "", url);
+    return () => window.clearTimeout(timer);
+  }, [t]);
 
   const handlePasswordLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    setLoading(true);
 
-    let error: { message: string } | null = null;
-
-    try {
-      const supabase = createClient();
-      const normalizedIdentifier = identifier.trim();
-      const credentials = normalizedIdentifier.includes("@")
-        ? { email: normalizedIdentifier, password }
-        : { phone: normalizedIdentifier, password };
-
-      ({ error } = await supabase.auth.signInWithPassword(credentials));
-    } catch {
-      error = { message: "Auth client unavailable" };
+    if (!identifier.trim()) {
+      setError(t("errorInvalidCredentials"));
+      return;
     }
 
-    if (error) {
-      setError(t("errorInvalidCredentials"));
-      setLoading(false);
-    } else {
-      window.location.replace(locale === "en" ? "/en/agent" : "/agent");
+    setLoadingAction("password");
+    const next = getNext();
+
+    try {
+      const authIdentifier = await toSupabaseAuthIdentifier(identifier);
+      const supabase = createClient();
+      const { error: authError } = await supabase.auth.signInWithPassword({
+        email: authIdentifier.email,
+        password,
+      });
+
+      if (authError) {
+        setError(t("errorInvalidCredentials"));
+        return;
+      }
+
+      window.location.replace(next);
+    } catch {
+      setError(t("errorServer"));
+    } finally {
+      setLoadingAction(null);
     }
   };
 
   const handleGoogleLogin = async () => {
+    setError("");
+    setLoadingAction("google");
+
     try {
       const supabase = createClient();
-      const next = locale === "en" ? "/en/agent" : "/agent";
-      const { error } = await supabase.auth.signInWithOAuth({
+      const next = getNext();
+      const { error: authError } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
           redirectTo: `${window.location.origin}/api/auth/callback?next=${encodeURIComponent(next)}`,
         },
       });
-      if (error) setError(t("errorServer"));
+
+      if (authError) {
+        setError(t("errorOAuth"));
+        setLoadingAction(null);
+      }
     } catch {
-      setError(t("errorServer"));
+      setError(t("errorOAuth"));
+      setLoadingAction(null);
     }
   };
 
@@ -69,7 +107,9 @@ export default function LoginPage() {
 
         <div className="mt-8 space-y-4">
           <button
+            type="button"
             onClick={handleGoogleLogin}
+            disabled={loadingAction !== null}
             className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -112,7 +152,7 @@ export default function LoginPage() {
               autoCapitalize="none"
               spellCheck={false}
               required
-              disabled={loading}
+              disabled={loadingAction !== null}
               className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 transition-colors disabled:opacity-50"
             />
             <input
@@ -120,19 +160,24 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder={t("passwordPlaceholder")}
+              autoComplete="current-password"
               required
-              disabled={loading}
+              disabled={loadingAction !== null}
               className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 transition-colors disabled:opacity-50"
             />
 
-            {error && <p className="text-sm font-medium text-gray-700">{error}</p>}
+            {error && (
+              <p className="text-sm font-medium text-gray-700" aria-live="polite">
+                {error}
+              </p>
+            )}
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={loadingAction !== null}
               className="w-full py-3 bg-gray-950 text-white font-medium rounded-full hover:bg-gray-800 transition-colors text-sm cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {loading ? t("loggingIn") : t("login")}
+              {loadingAction === "password" ? t("loggingIn") : t("login")}
             </button>
           </form>
         </div>

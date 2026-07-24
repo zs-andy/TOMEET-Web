@@ -34,7 +34,8 @@ function getViewerLabel(
   metadata: Record<string, unknown>,
   email?: string
 ) {
-  const value = metadata.full_name ?? metadata.name;
+  const value =
+    metadata.full_name ?? metadata.name ?? metadata.login_identifier;
   return typeof value === "string" && value.trim()
     ? value.trim()
     : email || "You";
