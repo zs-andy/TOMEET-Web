@@ -35,7 +35,6 @@
     "verifying": "确认中…",
     "retry": "重新生成",
     "rescan": "本次连接未完成，请扫描上方的新二维码",
-    "rapidRefresh": "实时刷新",
     "rapidRefreshOn": "实时刷新已开启",
     "rapidRefreshOff": "实时刷新已关闭",
     "status": {

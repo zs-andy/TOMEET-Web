@@ -3163,57 +3163,40 @@ html[lang="zh"] .wechat-entry-status strong {
 }
 
 .wechat-access-rapid-toggle {
-  margin-top: 0.6rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.3rem 0.55rem;
-  border: 1px solid var(--stroke-soft);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--background-card) 92%, transparent);
-  color: var(--text-secondary);
-  font: inherit;
-  font-size: 0.68rem;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.wechat-access-rapid-track {
-  width: 1.65rem;
-  height: 0.95rem;
-  padding: 0.12rem;
-  display: flex;
-  align-items: center;
-  border-radius: 999px;
-  background: var(--placeholder);
-  transition: background-color 160ms ease;
-}
-
-.wechat-access-rapid-track > span {
-  width: 0.71rem;
-  height: 0.71rem;
+  position: absolute;
+  right: -0.82rem;
+  bottom: -0.82rem;
+  z-index: 5;
+  width: 1rem;
+  height: 1rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
   border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 1px 3px #1c1b1b30;
-  transition: transform 160ms ease;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.22;
+  transition: opacity 160ms ease;
 }
 
+.wechat-access-rapid-toggle > span {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: #858585;
+  box-shadow: 0 0 0 1px #ffffffb3;
+}
+
+.wechat-access-rapid-toggle:hover,
+.wechat-access-rapid-toggle:focus-visible,
 .wechat-access-rapid-toggle[aria-checked="true"] {
-  color: var(--accent-ink);
-  border-color: color-mix(in srgb, var(--accent-strong) 38%, var(--stroke-soft));
-}
-
-.wechat-access-rapid-toggle[aria-checked="true"] .wechat-access-rapid-track {
-  background: var(--accent-strong);
-}
-
-.wechat-access-rapid-toggle[aria-checked="true"] .wechat-access-rapid-track > span {
-  transform: translateX(0.7rem);
+  opacity: 0.62;
 }
 
 .wechat-access-rapid-toggle:focus-visible {
-  outline: 2px solid var(--accent-strong);
-  outline-offset: 2px;
+  outline: 1px solid #858585;
+  outline-offset: 1px;
 }
 
 .wechat-access-notice--success {

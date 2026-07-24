@@ -483,27 +483,25 @@ export default function WechatQrEntry({
             <RefreshCw aria-hidden="true" />
           </button>
         ) : null}
-      </div>
 
-      {rapidRotationAvailable ? (
-        <button
-          className="wechat-access-rapid-toggle"
-          type="button"
-          role="switch"
-          aria-checked={rapidRotation}
-          aria-label={
-            rapidRotation
-              ? t("rapidRefreshOn")
-              : t("rapidRefreshOff")
-          }
-          onClick={() => setRapidRotationEnabled((enabled) => !enabled)}
-        >
-          <span className="wechat-access-rapid-track" aria-hidden="true">
-            <span />
-          </span>
-          <span>{t("rapidRefresh")}</span>
-        </button>
-      ) : null}
+        {rapidRotationAvailable ? (
+          <button
+            className="wechat-access-rapid-toggle"
+            type="button"
+            role="switch"
+            aria-checked={rapidRotation}
+            aria-label={
+              rapidRotation
+                ? t("rapidRefreshOn")
+                : t("rapidRefreshOff")
+            }
+            title={rapidRotation ? t("rapidRefreshOn") : undefined}
+            onClick={() => setRapidRotationEnabled((enabled) => !enabled)}
+          >
+            <span aria-hidden="true" />
+          </button>
+        ) : null}
+      </div>
 
       {visibleMessage ? (
         <p
