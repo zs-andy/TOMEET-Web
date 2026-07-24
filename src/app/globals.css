@@ -145,8 +145,8 @@
 }
 
 html[lang="zh"] {
-  --font-editorial-zh: var(--font-taisho-katsuji-landing), "ZCOOL XiaoWei",
-    "Songti SC", STSong, serif;
+  --font-editorial-zh: var(--font-taisho-katsuji-landing),
+    var(--font-zcool-xiaowei-landing-fallback), "Songti SC", STSong, serif;
 }
 
 html[lang="zh"] .landing-main {

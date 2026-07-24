@@ -23,6 +23,16 @@ const taishoKatsujiLanding = localFont({
   fallback: ["Songti SC", "STSong", "serif"],
   adjustFontFallback: false,
 });
+const zcoolXiaoweiLandingFallback = localFont({
+  src: "../fonts/zcool-xiaowei-landing-fallback.woff2",
+  variable: "--font-zcool-xiaowei-landing-fallback",
+  weight: "400",
+  style: "normal",
+  display: "swap",
+  preload: false,
+  fallback: ["Songti SC", "STSong", "serif"],
+  adjustFontFallback: false,
+});
 const taishoKatsujiAgent = localFont({
   src: "../fonts/taisho-katsuji.woff2",
   variable: "--font-taisho-katsuji-agent",
@@ -122,7 +132,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html
       lang={locale}
-      className={`${taishoKatsujiLanding.variable} ${taishoKatsujiAgent.variable}`}
+      className={`${taishoKatsujiLanding.variable} ${zcoolXiaoweiLandingFallback.variable} ${taishoKatsujiAgent.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>
