@@ -637,6 +637,10 @@ html.theme-cycle-synced .brand-cycle-text {
   white-space: pre-wrap;
 }
 
+.chat-message--pending {
+  opacity: 0.58;
+}
+
 .chat-message--agent {
   display: grid;
   grid-template-columns: 0.65rem minmax(0, 1fr);
@@ -681,6 +685,24 @@ html[lang="zh"] .chat-message--agent {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-strong) 10%, transparent);
 }
 
+.agent-status {
+  max-width: 30rem;
+  grid-template-columns: 0.45rem minmax(0, 1fr);
+  gap: 0.6rem;
+  color: var(--text-tertiary);
+  font-family: var(--font-geist-sans), "Geist", ui-sans-serif, system-ui,
+    sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.agent-status .agent-message-mark {
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-top: 0.48em;
+  animation: agent-pulse 1.2s ease-in-out infinite;
+}
+
 .chat-message--user {
   align-self: flex-end;
   display: flex;
@@ -714,6 +736,30 @@ html[lang="zh"] .chat-message--agent {
 
 .agent-composer-wrap {
   padding: 0.75rem 1rem max(1rem, env(safe-area-inset-bottom));
+}
+
+.agent-error {
+  width: min(100%, 44rem);
+  margin: 0 auto 0.6rem;
+  padding: 0 0.45rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: var(--destructive);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.agent-error button {
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 
 .agent-composer {
@@ -752,6 +798,13 @@ html[lang="zh"] .chat-message--agent {
 .agent-photo:hover {
   background: var(--background-secondary);
   color: var(--text-primary);
+}
+
+.agent-photo:disabled,
+.agent-attachment-remove:disabled,
+.agent-input:disabled {
+  cursor: default;
+  opacity: 0.45;
 }
 
 .agent-photo svg {
@@ -870,6 +923,18 @@ html[lang="zh"] .chat-message--agent {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes agent-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.84);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 

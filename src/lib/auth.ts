@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 export type AuthViewer = {
+  id: string;
   avatarUrl: string | null;
   label: string;
 };
@@ -44,6 +45,7 @@ export const getAuthenticatedViewer = cache(async (): Promise<AuthViewer> => {
   const metadata = (user.user_metadata ?? {}) as Record<string, unknown>;
 
   return {
+    id: user.id,
     avatarUrl: getAvatarUrl(metadata),
     label: getViewerLabel(metadata, user.email),
   };
