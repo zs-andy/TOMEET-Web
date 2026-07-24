@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "@fontsource/zcool-xiaowei/chinese-simplified.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -144,7 +145,8 @@
 }
 
 html[lang="zh"] {
-  --font-editorial-zh: var(--font-taisho-katsuji), "Songti SC", STSong, serif;
+  --font-editorial-zh: var(--font-taisho-katsuji-landing), "ZCOOL XiaoWei",
+    "Songti SC", STSong, serif;
 }
 
 html[lang="zh"] .landing-main {
@@ -659,7 +661,8 @@ html.theme-cycle-synced .brand-cycle-text {
 }
 
 html[lang="zh"] .chat-message--agent {
-  font-family: var(--font-editorial-zh);
+  font-family: var(--font-taisho-katsuji-agent), "ZCOOL XiaoWei", "Songti SC",
+    STSong, serif;
 }
 
 .agent-message-mark {

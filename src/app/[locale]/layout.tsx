@@ -13,9 +13,19 @@ type Props = {
 };
 
 const metadataBase = new URL("https://www.tomeet.chat");
-const taishoKatsuji = localFont({
+const taishoKatsujiLanding = localFont({
+  src: "../fonts/taisho-katsuji-landing.woff2",
+  variable: "--font-taisho-katsuji-landing",
+  weight: "400",
+  style: "normal",
+  display: "swap",
+  preload: false,
+  fallback: ["Songti SC", "STSong", "serif"],
+  adjustFontFallback: false,
+});
+const taishoKatsujiAgent = localFont({
   src: "../fonts/taisho-katsuji.woff2",
-  variable: "--font-taisho-katsuji",
+  variable: "--font-taisho-katsuji-agent",
   weight: "400",
   style: "normal",
   display: "swap",
@@ -112,7 +122,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html
       lang={locale}
-      className={taishoKatsuji.variable}
+      className={`${taishoKatsujiLanding.variable} ${taishoKatsujiAgent.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>
