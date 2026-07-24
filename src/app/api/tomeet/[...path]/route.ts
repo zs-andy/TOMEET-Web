@@ -22,6 +22,11 @@ function isAllowedRoute(method: string, path: string[]) {
         path[0] === "wechat" &&
         path[1] === "connect" &&
         path[2] === "sessions") ||
+      (path.length === 4 &&
+        path[0] === "wechat" &&
+        path[1] === "connect" &&
+        path[2] === "sessions" &&
+        path[3] === "demo") ||
       (path.length === 5 &&
         path[0] === "wechat" &&
         path[1] === "connect" &&
@@ -64,10 +69,10 @@ function isWechatConnectRoute(path: string[]) {
 function isWechatSessionCreation(method: string, path: string[]) {
   return (
     method === "POST" &&
-    path.length === 3 &&
     path[0] === "wechat" &&
     path[1] === "connect" &&
-    path[2] === "sessions"
+    path[2] === "sessions" &&
+    (path.length === 3 || (path.length === 4 && path[3] === "demo"))
   );
 }
 

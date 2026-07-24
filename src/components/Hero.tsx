@@ -11,8 +11,10 @@ function localizedHref(locale: string, path: string) {
 
 export default function Hero({
   initialWechatSession,
+  rapidQrRotation,
 }: {
   initialWechatSession: CreatedWechatConnectSession | null;
+  rapidQrRotation: boolean;
 }) {
   const landing = useTranslations("landing");
   const access = useTranslations("access");
@@ -48,7 +50,10 @@ export default function Hero({
 
         <div className="hero-core">
           <div className="hero-access-choices" aria-label={access("wechatKicker")}>
-            <WechatQrEntry initialSession={initialWechatSession} />
+            <WechatQrEntry
+              initialSession={initialWechatSession}
+              rapidRotation={rapidQrRotation}
+            />
           </div>
           <p className="hero-core-title">
             {landing("heroBridgeBefore")}

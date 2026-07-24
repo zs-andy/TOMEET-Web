@@ -15,6 +15,7 @@ import {
 } from "@/lib/wechat-connect";
 
 const EARLY_REFRESH_MS = 30_000;
+const RAPID_ROTATION_MS = 250;
 const STREAM_RECONNECT_MS = 1_500;
 const NOTICE_DISPLAY_MS = 8_000;
 
@@ -69,8 +70,10 @@ function sameSessionState(
 
 export default function WechatQrEntry({
   initialSession,
+  rapidRotation,
 }: {
   initialSession: CreatedWechatConnectSession | null;
+  rapidRotation: boolean;
 }) {
   const t = useTranslations("access");
   const [sessions, setSessions] = useState<LiveWechatSession[]>(
@@ -92,6 +95,8 @@ export default function WechatQrEntry({
   );
   const [notice, setNotice] = useState<SessionNotice | null>(null);
   const sessionControllersRef = useRef(new Map<string, AbortController>());
+  const standbySessionRef = useRef<LiveWechatSession | null>(null);
+  const isCreatingRef = useRef(!initialSession);
   const replacementRequestedRef = useRef(new Set<string>());
   const claimedSessionIdsRef = useRef(new Set<string>());
   const handledTerminalIdsRef = useRef(new Set<string>());
@@ -118,29 +123,33 @@ export default function WechatQrEntry({
   const replaceDisplayedSession = useCallback((sessionId: string) => {
     if (replacementRequestedRef.current.has(sessionId)) return;
     replacementRequestedRef.current.add(sessionId);
+    const standby = standbySessionRef.current;
 
     if (
-      standbySession?.status === "pending" &&
-      Date.parse(standbySession.expiresAt) > Date.now()
+      standby?.status === "pending" &&
+      Date.parse(standby.expiresAt) > Date.now()
     ) {
-      displaySessionIdRef.current = standbySession.sessionId;
-      setDisplaySessionId(standbySession.sessionId);
+      standbySessionRef.current = null;
+      displaySessionIdRef.current = standby.sessionId;
+      setDisplaySessionId(standby.sessionId);
       setStandbySessionId(null);
       setIsReplacingDisplay(false);
       setCreateError(null);
       return;
     }
 
-    if (standbySession) {
+    if (standby) {
+      standbySessionRef.current = null;
       setSessions((current) =>
-        current.filter((session) => session.sessionId !== standbySession.sessionId)
+        current.filter((session) => session.sessionId !== standby.sessionId)
       );
       setStandbySessionId(null);
     }
     promoteNextCreatedRef.current = true;
     setIsReplacingDisplay(true);
+    if (isCreatingRef.current) return;
     requestNewSession();
-  }, [requestNewSession, standbySession]);
+  }, [requestNewSession]);
 
   const updateSession = useCallback((next: WechatConnectSession) => {
     if (next.status === "scanned" || next.status === "verification_required") {
@@ -180,12 +189,16 @@ export default function WechatQrEntry({
     let cancelled = false;
 
     const create = async () => {
+      isCreatingRef.current = true;
       setIsCreating(true);
       setCreateError(null);
       setNextCreateRetryAt(null);
 
       try {
-        const created = await createWechatConnectSession(controller.signal);
+        const created = await createWechatConnectSession(
+          controller.signal,
+          rapidRotation
+        );
         if (cancelled) return;
         setSessions((current) => [
           ...current.filter((session) => !isTerminalStatus(session.status)),
@@ -197,6 +210,7 @@ export default function WechatQrEntry({
           setDisplaySessionId(created.sessionId);
           setIsReplacingDisplay(false);
         } else {
+          standbySessionRef.current = created;
           setStandbySessionId(created.sessionId);
         }
       } catch (error) {
@@ -212,7 +226,10 @@ export default function WechatQrEntry({
         );
         setNextCreateRetryAt(Date.now() + delay);
       } finally {
-        if (!cancelled) setIsCreating(false);
+        if (!cancelled) {
+          isCreatingRef.current = false;
+          setIsCreating(false);
+        }
       }
     };
 
@@ -221,7 +238,7 @@ export default function WechatQrEntry({
       cancelled = true;
       controller.abort();
     };
-  }, [sessionGeneration, t]);
+  }, [rapidRotation, sessionGeneration, t]);
 
   useEffect(() => {
     if (nextCreateRetryAt === null) return;
@@ -324,8 +341,11 @@ export default function WechatQrEntry({
     }
 
     if (displaySession.status === "pending") {
-      const delay =
+      const earlyExpiryDelay =
         Date.parse(displaySession.expiresAt) - Date.now() - EARLY_REFRESH_MS;
+      const delay = rapidRotation
+        ? Math.min(RAPID_ROTATION_MS, earlyExpiryDelay)
+        : earlyExpiryDelay;
       if (delay > 0) {
         const timer = setTimeout(() => {
           replaceDisplayedSession(displaySession.sessionId);
@@ -339,7 +359,7 @@ export default function WechatQrEntry({
       0
     );
     return () => clearTimeout(timer);
-  }, [displaySession, replaceDisplayedSession]);
+  }, [displaySession, rapidRotation, replaceDisplayedSession]);
 
   useEffect(() => {
     if (
@@ -370,6 +390,9 @@ export default function WechatQrEntry({
       Date.parse(standbySession.expiresAt) - Date.now() - EARLY_REFRESH_MS
     );
     const timer = setTimeout(() => {
+      if (standbySessionRef.current?.sessionId === standbySession.sessionId) {
+        standbySessionRef.current = null;
+      }
       setStandbySessionId(null);
       setSessions((current) =>
         current.filter((session) => session.sessionId !== standbySession.sessionId)

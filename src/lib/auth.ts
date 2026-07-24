@@ -10,6 +10,12 @@ export type AuthViewer = {
   label: string;
 };
 
+export type CurrentAuthUser = {
+  id: string;
+  email: string | null;
+  metadata: Record<string, unknown>;
+};
+
 function getAvatarUrl(metadata: Record<string, unknown>) {
   const value = metadata.avatar_url ?? metadata.picture;
   if (typeof value !== "string") return null;
@@ -34,19 +40,31 @@ function getViewerLabel(
     : email || "You";
 }
 
-export const getAuthenticatedViewer = cache(async (): Promise<AuthViewer> => {
+export const getCurrentAuthUser = cache(async (): Promise<CurrentAuthUser | null> => {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) redirect("/login");
+  if (!user) return null;
 
   const metadata = (user.user_metadata ?? {}) as Record<string, unknown>;
 
   return {
     id: user.id,
-    avatarUrl: getAvatarUrl(metadata),
-    label: getViewerLabel(metadata, user.email),
+    email: user.email ?? null,
+    metadata,
+  };
+});
+
+export const getAuthenticatedViewer = cache(async (): Promise<AuthViewer> => {
+  const user = await getCurrentAuthUser();
+
+  if (!user) redirect("/login");
+
+  return {
+    id: user.id,
+    avatarUrl: getAvatarUrl(user.metadata),
+    label: getViewerLabel(user.metadata, user.email ?? undefined),
   };
 });

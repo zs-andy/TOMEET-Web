@@ -1,4 +1,12 @@
+import { createClient } from "@/lib/supabase/client";
+
 const API_BASE_URL = "/api/tomeet";
+let browserClient: ReturnType<typeof createClient> | undefined;
+
+function getSupabase() {
+  browserClient ??= createClient();
+  return browserClient;
+}
 
 export type WechatConnectStatus =
   | "pending"
@@ -73,12 +81,35 @@ async function wechatRequest<T>(path: string, init: RequestInit) {
   return body as T;
 }
 
-export function createWechatConnectSession(signal?: AbortSignal) {
+export async function createWechatConnectSession(
+  signal?: AbortSignal,
+  rapidRotation = false
+) {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+  let path = "/wechat/connect/sessions";
+
+  if (rapidRotation) {
+    const {
+      data: { session },
+    } = await getSupabase().auth.getSession();
+    if (!session?.access_token) {
+      throw new WechatConnectError(
+        401,
+        "wechat_rapid_rotation_unauthenticated",
+        "路演二维码模式需要先登录"
+      );
+    }
+    headers.Authorization = `Bearer ${session.access_token}`;
+    path = "/wechat/connect/sessions/demo";
+  }
+
   return wechatRequest<CreatedWechatConnectSession>(
-    "/wechat/connect/sessions",
+    path,
     {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers,
       body: "{}",
       signal,
     }
