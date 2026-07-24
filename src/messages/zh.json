@@ -172,6 +172,21 @@
     "errorPasswordMismatch": "两次密码输入不一致。",
     "errorServer": "出了点问题，请稍后再试。"
   },
+  "agent": {
+    "welcome": "通过文字或照片，告诉我任何关于你的事。",
+    "placeholder": "开始对话……",
+    "inputLabel": "给 TOMEET Agent 发消息",
+    "send": "发送消息",
+    "addPhoto": "添加照片",
+    "removePhoto": "移除照片",
+    "photoMessage": "照片消息",
+    "openProfile": "打开个人资料",
+    "you": "你"
+  },
+  "profile": {
+    "title": "个人资料",
+    "backToAgent": "返回 Agent"
+  },
   "footer": {
     "tagline": "用对话，连接人与人",
     "product": "产品",

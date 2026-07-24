@@ -7,6 +7,7 @@ const intlMiddleware = createIntlMiddleware(routing);
 
 // Routes that authed users should be redirected away from
 const authPaths = ["/login", "/signup"];
+const protectedPaths = ["/agent", "/profile"];
 
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -26,13 +27,26 @@ export default async function proxy(request: NextRequest) {
   const intlResponse = intlMiddleware(request);
   const response = intlResponse || NextResponse.next();
 
-  // Redirect authed users away from login/signup
-  if (authPaths.some((p) => pathnameWithoutLocale.startsWith(p))) {
+  const isAuthPath = authPaths.some((path) =>
+    pathnameWithoutLocale.startsWith(path)
+  );
+  const isProtectedPath = protectedPaths.some((path) =>
+    pathnameWithoutLocale.startsWith(path)
+  );
+
+  if (isAuthPath || isProtectedPath) {
     const { user } = await updateSession(request, response);
 
-    if (user) {
+    if (isAuthPath && user) {
       const url = request.nextUrl.clone();
-      url.pathname = "/";
+      url.pathname = "/agent";
+      return NextResponse.redirect(url);
+    }
+
+    if (isProtectedPath && !user) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      url.searchParams.set("next", pathnameWithoutLocale);
       return NextResponse.redirect(url);
     }
   }

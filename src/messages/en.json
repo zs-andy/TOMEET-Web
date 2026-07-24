@@ -172,6 +172,21 @@
     "errorPasswordMismatch": "Passwords don't match.",
     "errorServer": "Something went wrong. Please try again."
   },
+  "agent": {
+    "welcome": "Tell me anything about you, through text or photos.",
+    "placeholder": "Start a conversation...",
+    "inputLabel": "Message TOMEET Agent",
+    "send": "Send message",
+    "addPhoto": "Add a photo",
+    "removePhoto": "Remove photo",
+    "photoMessage": "Photo message",
+    "openProfile": "Open profile",
+    "you": "You"
+  },
+  "profile": {
+    "title": "Profile",
+    "backToAgent": "Back to Agent"
+  },
   "footer": {
     "tagline": "Connecting people through conversation",
     "product": "Product",

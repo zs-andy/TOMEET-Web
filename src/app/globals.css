@@ -219,7 +219,7 @@ a {
   color: var(--text-primary);
 }
 
-:focus-visible {
+:focus-visible:not(input):not(textarea):not(select) {
   outline: 2px solid var(--text-primary);
   outline-offset: 3px;
 }
@@ -401,11 +401,37 @@ a {
 }
 
 .brand-wordmark .brand-word > span {
-  color: var(--accent-strong);
+  color: #4a36d2;
+  animation: tomeet-logo-cycle 20s linear infinite;
 }
 
 .brand-wordmark--inverse .brand-word > span {
   color: inherit;
+  animation: none;
+}
+
+@keyframes tomeet-logo-cycle {
+  0%, 22% {
+    color: #4a36d2;
+  }
+  25%, 47% {
+    color: #2b73d2;
+  }
+  50%, 72% {
+    color: #d55b2f;
+  }
+  75%, 97% {
+    color: #d93db7;
+  }
+  100% {
+    color: #4a36d2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-wordmark .brand-word > span {
+    animation: none;
+  }
 }
 
 /* Shared editorial UI */
@@ -486,6 +512,362 @@ a {
   color: var(--accent-ink);
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
+}
+
+/* Agent conversation */
+.agent-shell,
+.profile-shell {
+  min-height: 100svh;
+  background:
+    radial-gradient(
+      circle at 50% 100%,
+      color-mix(in srgb, var(--accent-soft) 16%, transparent),
+      transparent 32rem
+    ),
+    var(--background-primary);
+}
+
+.agent-shell {
+  height: 100svh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+}
+
+.agent-header {
+  width: min(100%, 82rem);
+  min-height: 72px;
+  margin-inline: auto;
+  padding: 0.75rem clamp(1rem, 3vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.agent-brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.user-avatar {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  transition: transform 180ms ease;
+}
+
+.user-avatar:hover {
+  transform: translateY(-1px);
+}
+
+.user-avatar-image {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: inherit;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-size: 0.8rem;
+  font-weight: 650;
+  background-position: center;
+  background-size: cover;
+}
+
+.user-avatar-image.has-image {
+  background-color: var(--background-secondary);
+}
+
+.agent-conversation {
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--stroke-soft) transparent;
+}
+
+.agent-message-list {
+  width: min(100%, 44rem);
+  min-height: 100%;
+  margin-inline: auto;
+  padding: clamp(4rem, 12vh, 8rem) 1rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1.2rem;
+}
+
+.chat-message {
+  max-width: min(88%, 34rem);
+  animation: message-in 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.chat-message p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.chat-message--agent {
+  display: grid;
+  grid-template-columns: 0.65rem minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: start;
+  color: var(--text-secondary);
+  font-family: var(--font-editorial);
+  font-size: clamp(1.35rem, 2.8vw, 1.8rem);
+  line-height: 1.4;
+  transition: color 260ms ease, font-size 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chat-message--agent.chat-message--compact {
+  max-width: 30rem;
+  grid-template-columns: 0.45rem minmax(0, 1fr);
+  gap: 0.6rem;
+  color: var(--text-tertiary);
+  font-family: var(--font-geist-sans), "Geist", ui-sans-serif, system-ui,
+    sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.agent-message-mark {
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: 0.6em;
+  border-radius: 50%;
+  background: var(--accent-strong);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-strong) 12%, transparent);
+}
+
+.chat-message--compact .agent-message-mark {
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-top: 0.48em;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-strong) 10%, transparent);
+}
+
+.chat-message--user {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.8rem 1rem;
+  border-radius: 22px 22px 7px 22px;
+  background: var(--text-primary);
+  color: var(--text-reversed);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.chat-message--user.has-image {
+  padding: 0.35rem;
+}
+
+.chat-message--user.has-image p {
+  padding: 0 0.65rem 0.45rem;
+}
+
+.chat-message-image {
+  width: min(16rem, 65vw);
+  aspect-ratio: 4 / 3;
+  display: block;
+  border-radius: 18px 18px 5px 18px;
+  background-color: var(--background-secondary);
+  background-position: center;
+  background-size: cover;
+}
+
+.agent-composer-wrap {
+  padding: 0.75rem 1rem max(1rem, env(safe-area-inset-bottom));
+}
+
+.agent-composer {
+  width: min(100%, 44rem);
+  min-height: 58px;
+  margin-inline: auto;
+  padding: 0.45rem 0.5rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  border: 0;
+  border-radius: 30px;
+  background: var(--background-secondary);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--text-primary) 6%, transparent);
+  transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.agent-photo,
+.agent-attachment {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+}
+
+.agent-photo {
+  display: inline-grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.agent-photo:hover {
+  background: var(--background-secondary);
+  color: var(--text-primary);
+}
+
+.agent-photo svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.agent-attachment {
+  position: relative;
+  display: block;
+}
+
+.agent-attachment-image {
+  width: 42px;
+  height: 42px;
+  display: block;
+  border-radius: 14px;
+  background-color: var(--background-secondary);
+  background-position: center;
+  background-size: cover;
+}
+
+.agent-attachment-remove {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 2px solid var(--background-card);
+  border-radius: 50%;
+  background: var(--text-primary);
+  color: var(--text-reversed);
+  font-size: 0.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.agent-composer:focus-within {
+  background: var(--background-card);
+  box-shadow: 0 12px 34px color-mix(in srgb, var(--text-primary) 8%, transparent);
+}
+
+.agent-input {
+  min-width: 0;
+  max-height: 8rem;
+  flex: 1;
+  resize: none;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  padding: 0.55rem 0;
+}
+
+.agent-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.agent-send {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--text-primary);
+  color: var(--text-reversed);
+  cursor: pointer;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.agent-send:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.agent-send:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+.agent-send svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.profile-shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.profile-empty {
+  min-height: 0;
+}
+
+@keyframes message-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 34rem) {
+  .agent-header {
+    min-height: 64px;
+  }
+
+  .agent-message-list {
+    padding-top: 2.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .chat-message--agent {
+    font-size: 1.35rem;
+  }
+
+  .agent-composer-wrap {
+    padding-inline: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chat-message {
+    animation: none;
+  }
+
 }
 
 /* Image placeholders */
