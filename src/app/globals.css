@@ -664,7 +664,8 @@ html.theme-cycle-synced .brand-cycle-text {
   line-height: 1.5;
 }
 
-html[lang="zh"] .chat-message--agent {
+html[lang="zh"]
+  .chat-message--agent:not(.chat-message--compact):not(.agent-status) {
   font-family: var(--font-xiangcui-dengcusong-agent), "Songti SC", STSong,
     serif;
 }

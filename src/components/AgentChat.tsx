@@ -454,7 +454,7 @@ export default function AgentChat({ viewer }: { viewer: AuthViewer }) {
             <article
               key={message.id}
               className={`chat-message chat-message--${message.role}${
-                message.id === "welcome" && hasStarted
+                message.role === "agent" && hasStarted
                   ? " chat-message--compact"
                   : ""
               }${message.imageUrl ? " has-image" : ""}${
