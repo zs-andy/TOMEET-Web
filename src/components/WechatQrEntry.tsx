@@ -70,12 +70,14 @@ function sameSessionState(
 
 export default function WechatQrEntry({
   initialSession,
-  rapidRotation,
+  rapidRotationAvailable,
 }: {
   initialSession: CreatedWechatConnectSession | null;
-  rapidRotation: boolean;
+  rapidRotationAvailable: boolean;
 }) {
   const t = useTranslations("access");
+  const [rapidRotationEnabled, setRapidRotationEnabled] = useState(false);
+  const rapidRotation = rapidRotationAvailable && rapidRotationEnabled;
   const [sessions, setSessions] = useState<LiveWechatSession[]>(
     initialSession ? [initialSession] : []
   );
@@ -97,11 +99,16 @@ export default function WechatQrEntry({
   const sessionControllersRef = useRef(new Map<string, AbortController>());
   const standbySessionRef = useRef<LiveWechatSession | null>(null);
   const isCreatingRef = useRef(!initialSession);
+  const rapidRotationRef = useRef(rapidRotation);
   const replacementRequestedRef = useRef(new Set<string>());
   const claimedSessionIdsRef = useRef(new Set<string>());
   const handledTerminalIdsRef = useRef(new Set<string>());
   const displaySessionIdRef = useRef<string | null>(initialSession?.sessionId ?? null);
   const promoteNextCreatedRef = useRef(!initialSession);
+
+  useEffect(() => {
+    rapidRotationRef.current = rapidRotation;
+  }, [rapidRotation]);
 
   const displaySession = useMemo(
     () => sessions.find((session) => session.sessionId === displaySessionId) ?? null,
@@ -197,7 +204,7 @@ export default function WechatQrEntry({
       try {
         const created = await createWechatConnectSession(
           controller.signal,
-          rapidRotation
+          rapidRotationRef.current
         );
         if (cancelled) return;
         setSessions((current) => [
@@ -238,7 +245,7 @@ export default function WechatQrEntry({
       cancelled = true;
       controller.abort();
     };
-  }, [rapidRotation, sessionGeneration, t]);
+  }, [sessionGeneration, t]);
 
   useEffect(() => {
     if (nextCreateRetryAt === null) return;
@@ -442,10 +449,6 @@ export default function WechatQrEntry({
     : status
       ? t(`status.${status}.detail`)
       : t("status.loading.detail");
-  const shouldMaskDisplayedQr = Boolean(
-    displaySession && displaySession.status !== "pending" && displaySession.status !== "active"
-  );
-
   return (
     <div className="wechat-access-tile">
       <div className="wechat-access-frame">
@@ -469,18 +472,6 @@ export default function WechatQrEntry({
           </div>
         ) : null}
 
-        {shouldMaskDisplayedQr ? (
-          <div className="wechat-access-claimed" aria-label={t("refreshing")}>
-            <RefreshCw aria-hidden="true" />
-          </div>
-        ) : null}
-
-        {isCreating && isReplacingDisplay && displaySession?.qrCodeDataUrl ? (
-          <span className="wechat-access-refreshing" aria-label={t("refreshing")}>
-            <RefreshCw aria-hidden="true" />
-          </span>
-        ) : null}
-
         {createError && !isCreating ? (
           <button
             className={`wechat-access-retry${displaySession?.qrCodeDataUrl ? " wechat-access-retry--corner" : ""}`}
@@ -493,6 +484,26 @@ export default function WechatQrEntry({
           </button>
         ) : null}
       </div>
+
+      {rapidRotationAvailable ? (
+        <button
+          className="wechat-access-rapid-toggle"
+          type="button"
+          role="switch"
+          aria-checked={rapidRotation}
+          aria-label={
+            rapidRotation
+              ? t("rapidRefreshOn")
+              : t("rapidRefreshOff")
+          }
+          onClick={() => setRapidRotationEnabled((enabled) => !enabled)}
+        >
+          <span className="wechat-access-rapid-track" aria-hidden="true">
+            <span />
+          </span>
+          <span>{t("rapidRefresh")}</span>
+        </button>
+      ) : null}
 
       {visibleMessage ? (
         <p

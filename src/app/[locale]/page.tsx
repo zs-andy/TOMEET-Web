@@ -16,7 +16,7 @@ export default async function HomePage() {
   const rapidQrEmail = (
     process.env.WECHAT_RAPID_QR_EMAIL ?? DEFAULT_RAPID_QR_EMAIL
   ).toLowerCase();
-  const rapidQrRotation = currentUser?.email?.toLowerCase() === rapidQrEmail;
+  const rapidQrAvailable = currentUser?.email?.toLowerCase() === rapidQrEmail;
 
   return (
     <>
@@ -24,7 +24,7 @@ export default async function HomePage() {
       <main className="landing-main">
         <Hero
           initialWechatSession={initialWechatSession}
-          rapidQrRotation={rapidQrRotation}
+          rapidQrAvailable={rapidQrAvailable}
         />
         <Manifesto />
       </main>

@@ -35,6 +35,9 @@
     "verifying": "Confirming…",
     "retry": "Generate again",
     "rescan": "This connection did not complete. Scan the new QR code above",
+    "rapidRefresh": "Live refresh",
+    "rapidRefreshOn": "Live refresh is on",
+    "rapidRefreshOff": "Live refresh is off",
     "status": {
       "loading": {
         "title": "Creating QR code",
