@@ -37,14 +37,14 @@ export default function LoginPage() {
       setError(t("errorInvalidCredentials"));
       setLoading(false);
     } else {
-      window.location.replace(locale === "zh" ? "/zh/agent" : "/agent");
+      window.location.replace(locale === "en" ? "/en/agent" : "/agent");
     }
   };
 
   const handleGoogleLogin = async () => {
     try {
       const supabase = createClient();
-      const next = locale === "zh" ? "/zh/agent" : "/agent";
+      const next = locale === "en" ? "/en/agent" : "/agent";
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
@@ -139,7 +139,7 @@ export default function LoginPage() {
 
         <p className="mt-6 text-center text-sm text-gray-500">
           {t("noAccount")}{" "}
-          <Link href={locale === "zh" ? "/zh/signup" : "/signup"} className="text-gray-900 hover:text-gray-600 font-medium">
+          <Link href={locale === "en" ? "/en/signup" : "/signup"} className="text-gray-900 hover:text-gray-600 font-medium">
             {t("signUpLink")}
           </Link>
         </p>

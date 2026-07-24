@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Logo from "./Logo";
 
 function localizedHref(locale: string, path: string) {
-  return locale === "zh" ? `/zh${path === "/" ? "" : path}` : path;
+  return locale === "en" ? `/en${path === "/" ? "" : path}` : path;
 }
 
 export default function Footer() {

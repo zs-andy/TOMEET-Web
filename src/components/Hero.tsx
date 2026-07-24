@@ -2,14 +2,20 @@
 
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
+import WechatQrEntry from "@/components/WechatQrEntry";
+import type { CreatedWechatConnectSession } from "@/lib/wechat-connect";
 
 function localizedHref(locale: string, path: string) {
-  return locale === "zh" ? `/zh${path}` : path;
+  return locale === "en" ? `/en${path}` : path;
 }
 
-export default function Hero() {
+export default function Hero({
+  initialWechatSession,
+}: {
+  initialWechatSession: CreatedWechatConnectSession | null;
+}) {
   const landing = useTranslations("landing");
-  const hero = useTranslations("hero");
+  const access = useTranslations("access");
   const locale = useLocale();
   const isChinese = locale === "zh";
 
@@ -41,18 +47,31 @@ export default function Hero() {
         )}
 
         <div className="hero-core">
+          <div className="hero-access-choices" aria-label={access("wechatKicker")}>
+            <WechatQrEntry initialSession={initialWechatSession} />
+          </div>
           <p className="hero-core-title">
             {landing("heroBridgeBefore")}
-            <span className="soft-highlight">{landing("heroBridgeHighlight")}</span>
+            <span className="hero-ai-native-anchor">
+              {isChinese ? (
+                <strong className="hero-ai-native-arrow hero-ai-native-arrow--before" aria-hidden="true">↑</strong>
+              ) : null}
+              <span className="soft-highlight">{landing("heroBridgeHighlight")}</span>
+              {!isChinese ? (
+                <>
+                  {" "}
+                  <strong className="hero-ai-native-arrow hero-ai-native-arrow--after" aria-hidden="true">↑</strong>
+                </>
+              ) : null}
+            </span>
             {landing("heroBridgeAfter")}
           </p>
           <div className="hero-actions">
             <Link
               href={localizedHref(locale, "/login")}
-              className="primary-button"
+              className="primary-button web-access-button"
             >
-              {hero("cta")}
-              <span aria-hidden="true">→</span>
+              {access("webCta")}
             </Link>
           </div>
         </div>

@@ -17,6 +17,55 @@
     "matchTag": "understand",
     "assignTitle": "Picked for you"
   },
+  "access": {
+    "label": "Choose how to enter TOMEET",
+    "webKicker": "WEB",
+    "webTitle": "Web app",
+    "webDescription": "The full TOMEET experience",
+    "webCta": "Try Now",
+    "wechatKicker": "WECHAT BOT",
+    "qrAlt": "QR code for connecting to the TOMEET WeChat Bot",
+    "refreshing": "Refreshing the QR code",
+    "unavailable": "The WeChat entry is temporarily unavailable",
+    "pollError": "The connection is unstable. Retrying now",
+    "verifyError": "The verification code could not be submitted",
+    "verificationLabel": "WeChat verification code",
+    "verificationPlaceholder": "Enter code",
+    "verify": "Confirm",
+    "verifying": "Confirming…",
+    "retry": "Generate again",
+    "rescan": "This connection did not complete. Scan the new QR code above",
+    "status": {
+      "loading": {
+        "title": "Creating QR code",
+        "detail": "It will be ready in a moment"
+      },
+      "pending": {
+        "title": "Scan with WeChat",
+        "detail": "Start talking to TOMEET instantly"
+      },
+      "scanned": {
+        "title": "Code scanned",
+        "detail": "Confirm the connection in WeChat"
+      },
+      "verification_required": {
+        "title": "Code required",
+        "detail": "Enter the digits shown in WeChat"
+      },
+      "active": {
+        "title": "Connected",
+        "detail": "You can now message TOMEET in WeChat"
+      },
+      "expired": {
+        "title": "QR code expired",
+        "detail": "A fresh one is being created"
+      },
+      "failed": {
+        "title": "Connection incomplete",
+        "detail": "A new code is being created"
+      }
+    }
+  },
   "trust": {
     "label": "3,000+ people on the waitlist",
     "items": ["Making Friends", "Dating", "Hackathon Team-Up", "Interest Meetup", "Coffee Chat"]

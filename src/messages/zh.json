@@ -17,17 +17,66 @@
     "matchTag": "理解",
     "assignTitle": "推荐给你"
   },
+  "access": {
+    "label": "选择进入 TOMEET 的方式",
+    "webKicker": "WEB",
+    "webTitle": "网页端",
+    "webDescription": "完整体验 TOMEET",
+    "webCta": "Try Now",
+    "wechatKicker": "微信 BOT",
+    "qrAlt": "用于连接 TOMEET 微信 Bot 的二维码",
+    "refreshing": "正在刷新二维码",
+    "unavailable": "微信入口暂时不可用",
+    "pollError": "连接有些不稳定，正在重试",
+    "verifyError": "验证码提交失败，请重试",
+    "verificationLabel": "微信验证码",
+    "verificationPlaceholder": "输入验证码",
+    "verify": "确认",
+    "verifying": "确认中…",
+    "retry": "重新生成",
+    "rescan": "本次连接未完成，请扫描上方的新二维码",
+    "status": {
+      "loading": {
+        "title": "正在生成二维码",
+        "detail": "马上就好"
+      },
+      "pending": {
+        "title": "微信扫码",
+        "detail": "立即开始和 TOMEET 对话"
+      },
+      "scanned": {
+        "title": "已扫码",
+        "detail": "请在微信中确认"
+      },
+      "verification_required": {
+        "title": "需要验证码",
+        "detail": "输入微信显示的数字"
+      },
+      "active": {
+        "title": "连接成功",
+        "detail": "现在可以在微信里发消息了"
+      },
+      "expired": {
+        "title": "二维码已过期",
+        "detail": "正在自动换一个新码"
+      },
+      "failed": {
+        "title": "连接未完成",
+        "detail": "正在自动重新生成"
+      }
+    }
+  },
   "trust": {
     "label": "3,000+ 人已加入等待名单",
     "items": ["交友", "约会", "黑客松组队", "同好聚会", "Coffee Chat"]
   },
   "landing": {
     "heroKicker": "AI Native 社交",
-    "heroUnderstand": "先懂你",
+    "heroUnderstand": "先懂",
     "heroYou": "",
-    "heroAre": "真实的样子",
-    "heroThen": "再让对的人",
-    "heroSocial": "彼此相遇",
+    "heroAre": "你是谁，",
+    "heroThen": "再帮你",
+    "heroSocial": "建立连接",
     "heroBridgeBefore": "一种更懂你的 ",
     "heroBridgeHighlight": "AI 社交",
     "heroBridgeAfter": "方式。",

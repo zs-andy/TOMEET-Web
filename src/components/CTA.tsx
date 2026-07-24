@@ -6,7 +6,7 @@ import { renderHighlight } from "./Highlight";
 import ImagePlaceholder from "./ImagePlaceholder";
 
 function localizedHref(locale: string, path: string) {
-  return locale === "zh" ? `/zh${path}` : path;
+  return locale === "en" ? `/en${path}` : path;
 }
 
 export default function CTA() {

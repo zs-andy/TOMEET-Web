@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
   const description = isChinese
     ? "一个通过自然对话理解你，并帮助你认识合拍的人、发现合适活动的 AI Native 社交平台。"
     : "An AI-native social platform that helps you meet people and discover activities through conversation.";
-  const canonical = isChinese ? "/zh" : "/";
+  const canonical = isChinese ? "/" : "/en";
 
   return {
     metadataBase,
@@ -57,8 +57,8 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
     alternates: {
       canonical,
       languages: {
-        en: "/",
-        zh: "/zh",
+        en: "/en",
+        zh: "/",
       },
     },
     openGraph: {
@@ -112,7 +112,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "TOMEET",
-    url: isChinese ? "https://www.tomeet.chat/zh" : "https://www.tomeet.chat/",
+    url: isChinese ? "https://www.tomeet.chat/" : "https://www.tomeet.chat/en",
     inLanguage: isChinese ? "zh-CN" : "en",
     description: isChinese
       ? "一个通过自然对话理解你，并帮助你认识合拍的人的 AI Native 社交平台。"

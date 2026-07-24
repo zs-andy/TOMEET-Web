@@ -12,7 +12,7 @@ const protectedPaths = ["/agent", "/profile"];
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const localeMatch = pathname.match(/^\/(en|zh)(?=\/|$)/);
-  const localePrefix = localeMatch?.[1] === "zh" ? "/zh" : "";
+  const localePrefix = localeMatch?.[1] === "en" ? "/en" : "";
   const pathnameWithoutLocale =
     pathname.replace(/^\/(?:en|zh)(?=\/|$)/, "") || "/";
 
@@ -47,7 +47,7 @@ export default async function proxy(request: NextRequest) {
   if (pathnameWithoutLocale === "/") {
     response.headers.set(
       "Cache-Control",
-      "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400"
+      "private, no-store, max-age=0"
     );
   }
 

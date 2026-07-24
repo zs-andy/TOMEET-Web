@@ -16,7 +16,7 @@ export default async function ProfilePage({
   await getAuthenticatedViewer();
   const { locale } = await params;
   const t = await getTranslations("profile");
-  const agentHref = locale === "zh" ? "/zh/agent" : "/agent";
+  const agentHref = locale === "en" ? "/en/agent" : "/agent";
 
   return (
     <main className="profile-shell">

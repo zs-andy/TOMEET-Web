@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Logo from "./Logo";
 
 function localizedHref(locale: string, path: string) {
-  return locale === "zh" ? `/zh${path === "/" ? "" : path}` : path;
+  return locale === "en" ? `/en${path === "/" ? "" : path}` : path;
 }
 
 export default function Navbar() {
@@ -59,7 +59,7 @@ export default function Navbar() {
             }}
           >
             <Link
-              href={locale === "zh" ? "/" : "/zh"}
+              href={locale === "zh" ? "/en" : "/"}
               hrefLang={locale === "zh" ? "en" : "zh"}
               className="locale-button"
               aria-label={locale === "zh" ? "Switch to English" : "切换到中文"}

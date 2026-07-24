@@ -58,7 +58,7 @@ const SUPPORTED_IMAGE_TYPES = new Set<ImageMimeType>([
 ]);
 
 function localizedHref(locale: string, path: string) {
-  return locale === "zh" ? `/zh${path}` : path;
+  return locale === "en" ? `/en${path}` : path;
 }
 
 function getInitial(label: string) {

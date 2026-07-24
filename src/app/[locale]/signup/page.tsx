@@ -35,7 +35,7 @@ export default function SignupPage() {
 
     try {
       const supabase = createClient();
-      const next = locale === "zh" ? "/zh/agent" : "/agent";
+      const next = locale === "en" ? "/en/agent" : "/agent";
       ({ error } = await supabase.auth.signUp({
         email,
         password,
@@ -52,14 +52,14 @@ export default function SignupPage() {
     if (error) {
       setError(t("errorServer"));
     } else {
-      window.location.href = locale === "zh" ? "/zh" : "/";
+      window.location.href = locale === "en" ? "/en" : "/";
     }
   };
 
   const handleGoogleLogin = async () => {
     try {
       const supabase = createClient();
-      const next = locale === "zh" ? "/zh/agent" : "/agent";
+      const next = locale === "en" ? "/en/agent" : "/agent";
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
@@ -160,7 +160,7 @@ export default function SignupPage() {
 
         <p className="mt-6 text-center text-sm text-gray-500">
           {t("hasAccount")}{" "}
-          <Link href={locale === "zh" ? "/zh/login" : "/login"} className="text-gray-900 hover:text-gray-600 font-medium">
+          <Link href={locale === "en" ? "/en/login" : "/login"} className="text-gray-900 hover:text-gray-600 font-medium">
             {t("loginLink")}
           </Link>
         </p>

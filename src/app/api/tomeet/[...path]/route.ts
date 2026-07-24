@@ -1,3 +1,7 @@
+import QRCode from "qrcode";
+
+export const maxDuration = 300;
+
 const UUID_PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const MAX_JSON_BODY_BYTES = 64 * 1024;
@@ -13,7 +17,17 @@ function isAllowedRoute(method: string, path: string[]) {
       (path.length === 2 &&
         path[0] === "agent" &&
         path[1] === "multimodal-inputs") ||
-      (path.length === 2 && path[0] === "uploads" && path[1] === "sign")
+      (path.length === 2 && path[0] === "uploads" && path[1] === "sign") ||
+      (path.length === 3 &&
+        path[0] === "wechat" &&
+        path[1] === "connect" &&
+        path[2] === "sessions") ||
+      (path.length === 5 &&
+        path[0] === "wechat" &&
+        path[1] === "connect" &&
+        path[2] === "sessions" &&
+        UUID_PATTERN.test(path[3]) &&
+        path[4] === "verify")
     );
   }
 
@@ -25,11 +39,48 @@ function isAllowedRoute(method: string, path: string[]) {
         UUID_PATTERN.test(path[2])) ||
       (path.length === 2 &&
         path[0] === "jobs" &&
-        UUID_PATTERN.test(path[1]))
+        UUID_PATTERN.test(path[1])) ||
+      (path.length === 4 &&
+        path[0] === "wechat" &&
+        path[1] === "connect" &&
+        path[2] === "sessions" &&
+        UUID_PATTERN.test(path[3])) ||
+      (path.length === 5 &&
+        path[0] === "wechat" &&
+        path[1] === "connect" &&
+        path[2] === "sessions" &&
+        UUID_PATTERN.test(path[3]) &&
+        path[4] === "events")
     );
   }
 
   return false;
+}
+
+function isWechatConnectRoute(path: string[]) {
+  return path[0] === "wechat" && path[1] === "connect";
+}
+
+function isWechatSessionCreation(method: string, path: string[]) {
+  return (
+    method === "POST" &&
+    path.length === 3 &&
+    path[0] === "wechat" &&
+    path[1] === "connect" &&
+    path[2] === "sessions"
+  );
+}
+
+function isWechatSessionEvents(method: string, path: string[]) {
+  return (
+    method === "GET" &&
+    path.length === 5 &&
+    path[0] === "wechat" &&
+    path[1] === "connect" &&
+    path[2] === "sessions" &&
+    UUID_PATTERN.test(path[3]) &&
+    path[4] === "events"
+  );
 }
 
 function jsonError(status: number, error: string, message: string) {
@@ -51,20 +102,17 @@ async function proxyToTomeet(
     return jsonError(404, "NOT_FOUND", "接口不存在");
   }
 
+  const isWechatConnect = isWechatConnectRoute(path);
+  const isWechatEvents = isWechatSessionEvents(request.method, path);
   const authorization = request.headers.get("authorization");
-  if (!authorization?.startsWith("Bearer ")) {
+  if (!isWechatConnect && !authorization?.startsWith("Bearer ")) {
     return jsonError(401, "UNAUTHENTICATED", "缺少 Bearer access token");
   }
 
   const configuredBaseUrl =
-    process.env.TOMEET_API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL;
-  if (!configuredBaseUrl) {
-    return jsonError(
-      503,
-      "API_NOT_CONFIGURED",
-      "TOMEET Agent service is not configured."
-    );
-  }
+    process.env.TOMEET_API_BASE_URL ??
+    process.env.NEXT_PUBLIC_API_BASE_URL ??
+    "https://api.tomeet.chat";
 
   let apiBaseUrl: URL;
   try {
@@ -93,9 +141,15 @@ async function proxyToTomeet(
   apiBaseUrl.hash = "";
   const upstreamUrl = apiBaseUrl;
   const upstreamHeaders = new Headers({
-    Accept: "application/json",
-    Authorization: authorization,
+    Accept: isWechatEvents ? "text/event-stream" : "application/json",
   });
+  if (authorization) upstreamHeaders.set("Authorization", authorization);
+  if (isWechatConnect) {
+    const sessionToken = request.headers.get("x-wechat-session-token");
+    if (sessionToken) {
+      upstreamHeaders.set("x-wechat-session-token", sessionToken);
+    }
+  }
   const requestId = request.headers.get("x-request-id");
   if (requestId) upstreamHeaders.set("x-request-id", requestId);
 
@@ -115,10 +169,16 @@ async function proxyToTomeet(
       body,
       cache: "no-store",
       redirect: "manual",
-      signal: AbortSignal.timeout(30_000),
+      signal: isWechatEvents
+        ? request.signal
+        : AbortSignal.timeout(
+            isWechatConnect && request.method === "GET" ? 65_000 : 30_000
+          ),
     });
     const responseHeaders = new Headers({
-      "Cache-Control": "no-store",
+      "Cache-Control": isWechatEvents
+        ? "no-cache, no-store, no-transform"
+        : "no-store",
       "Content-Type":
         upstreamResponse.headers.get("content-type") ??
         "application/json; charset=utf-8",
@@ -129,6 +189,31 @@ async function proxyToTomeet(
       responseHeaders.set("x-request-id", upstreamRequestId);
     }
     if (retryAfter) responseHeaders.set("retry-after", retryAfter);
+    if (isWechatEvents) responseHeaders.set("x-accel-buffering", "no");
+
+    if (
+      upstreamResponse.ok &&
+      isWechatSessionCreation(request.method, path)
+    ) {
+      const session = (await upstreamResponse.json()) as Record<string, unknown>;
+      if (typeof session.qrCodeContent === "string") {
+        const qrSvg = await QRCode.toString(session.qrCodeContent, {
+          type: "svg",
+          width: 320,
+          margin: 2,
+          errorCorrectionLevel: "M",
+          color: {
+            dark: "#1c1b1b",
+            light: "#ffffff",
+          },
+        });
+        session.qrCodeDataUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(qrSvg)}`;
+      }
+      return Response.json(session, {
+        status: upstreamResponse.status,
+        headers: responseHeaders,
+      });
+    }
 
     return new Response(upstreamResponse.body, {
       status: upstreamResponse.status,
