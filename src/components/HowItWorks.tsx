@@ -40,7 +40,7 @@ export default function HowItWorks() {
               <button
                 key={step.key}
                 onClick={() => setActive(i)}
-                className={`text-left px-4 py-3 rounded-lg transition-all cursor-pointer w-full ${
+                className={`w-full cursor-pointer rounded-full px-4 py-3 text-left transition-all ${
                   active === i
                     ? "bg-gray-100 border-l-[3px] border-gray-900"
                     : "border-l-[3px] border-transparent hover:bg-gray-50"

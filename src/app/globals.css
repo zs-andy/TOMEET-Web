@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource/zcool-xiaowei/chinese-simplified.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -145,8 +144,8 @@
 }
 
 html[lang="zh"] {
-  --font-editorial-zh: var(--font-taisho-katsuji-landing),
-    var(--font-zcool-xiaowei-landing-fallback), "Songti SC", STSong, serif;
+  --font-editorial-zh: var(--font-xiangcui-dengcusong-landing), "Songti SC",
+    STSong, serif;
 }
 
 html[lang="zh"] .landing-main {
@@ -339,7 +338,7 @@ a {
   min-height: 38px;
   align-items: center;
   padding: 0.55rem 0.9rem;
-  border-radius: 4px;
+  border-radius: 999px;
   font-size: 0.875rem;
   font-weight: 470;
   letter-spacing: 0.0175em;
@@ -364,7 +363,7 @@ a {
   align-items: center;
   justify-content: center;
   border: 0;
-  border-radius: 4px;
+  border-radius: 999px;
   padding: 0.55rem 0.8rem;
   font-size: 0.875rem;
   font-weight: 500;
@@ -493,12 +492,13 @@ html.theme-cycle-synced .brand-cycle-text {
 
 .primary-button,
 .secondary-button {
+  /* Match the full-pill treatment used by the authentication actions. */
   min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  border-radius: 6px;
+  border-radius: 999px;
   padding: 0.75rem;
   font-size: 1rem;
   font-weight: 500;
@@ -661,8 +661,8 @@ html.theme-cycle-synced .brand-cycle-text {
 }
 
 html[lang="zh"] .chat-message--agent {
-  font-family: var(--font-taisho-katsuji-agent), "ZCOOL XiaoWei", "Songti SC",
-    STSong, serif;
+  font-family: var(--font-xiangcui-dengcusong-agent), "Songti SC", STSong,
+    serif;
 }
 
 .agent-message-mark {
@@ -1956,7 +1956,8 @@ html[lang="zh"] .chat-message--agent {
   align-items: flex-end;
   text-align: right;
   font-size: clamp(4.25rem, 6.4vw, 7.2rem);
-  line-height: 0.88;
+  line-height: 0.93;
+  white-space: normal;
 }
 
 .hero-prompt {
@@ -2018,11 +2019,17 @@ html[lang="zh"] .hero-word-zh-connect {
 html[lang="zh"] .hero-word-zh-understand {
   top: 5.5%;
   left: var(--page-pad);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 html[lang="zh"] .hero-word-zh-connect {
   right: var(--page-pad);
   bottom: 3.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   text-align: right;
 }
 
@@ -2428,7 +2435,6 @@ html[lang="zh"] .hero-core-title {
   .hero-grid {
     height: calc(100svh - 6.6875rem);
     min-height: min(34rem, calc(100svh - 6.6875rem));
-    max-height: 46rem;
   }
 
   .hero-word {
@@ -2443,7 +2449,7 @@ html[lang="zh"] .hero-core-title {
 
   .hero-word-identity {
     top: 14%;
-    gap: 0.02em;
+    gap: 0.12em;
   }
 
   .hero-image-slot--portrait {
@@ -2474,21 +2480,13 @@ html[lang="zh"] .hero-core-title {
     bottom: 4%;
     width: calc(100% - (2 * var(--page-pad)));
     font-size: clamp(2.45rem, 11.2vw, 3.15rem);
-    line-height: 0.9;
-    row-gap: clamp(1.25rem, 8vw, 2rem);
+    line-height: 0.92;
+    /* Match the vertical step between the two opening headline rows. */
+    row-gap: max(1.25rem, calc(10svh - 0.66875rem - 0.92em));
   }
 
-  .hero-connect-line {
-    max-width: 100%;
-  }
-
-  .hero-connect-line--with-figure {
-    gap: 0.035em;
-    font-size: 0.88em;
-  }
-
-  .hero-image-slot--agent {
-    --hero-slot-image-width: clamp(54px, 15.5vw, 68px);
+  html[lang="zh"] .hero-grid {
+    min-height: min(34rem, calc(100svh - 6.6875rem));
   }
 
   .manifesto-intro {

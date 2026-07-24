@@ -26,12 +26,12 @@ export default function ChatDemo() {
           <button
             key={topic}
             onClick={() => setSceneIndex(i)}
-            className="relative cursor-pointer px-3 py-1"
+            className="relative cursor-pointer rounded-full px-3 py-1"
           >
             {i === sceneIndex && (
               <motion.div
                 layoutId="topicPill"
-                className="absolute inset-0 bg-highlight-green"
+                className="absolute inset-0 rounded-full bg-highlight-green"
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               />
             )}

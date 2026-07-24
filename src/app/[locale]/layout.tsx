@@ -13,9 +13,9 @@ type Props = {
 };
 
 const metadataBase = new URL("https://www.tomeet.chat");
-const taishoKatsujiLanding = localFont({
-  src: "../fonts/taisho-katsuji-landing.woff2",
-  variable: "--font-taisho-katsuji-landing",
+const xiangcuiDengcusongLanding = localFont({
+  src: "../fonts/xiangcui-dengcusong-landing.woff2",
+  variable: "--font-xiangcui-dengcusong-landing",
   weight: "400",
   style: "normal",
   display: "swap",
@@ -23,19 +23,9 @@ const taishoKatsujiLanding = localFont({
   fallback: ["Songti SC", "STSong", "serif"],
   adjustFontFallback: false,
 });
-const zcoolXiaoweiLandingFallback = localFont({
-  src: "../fonts/zcool-xiaowei-landing-fallback.woff2",
-  variable: "--font-zcool-xiaowei-landing-fallback",
-  weight: "400",
-  style: "normal",
-  display: "swap",
-  preload: false,
-  fallback: ["Songti SC", "STSong", "serif"],
-  adjustFontFallback: false,
-});
-const taishoKatsujiAgent = localFont({
-  src: "../fonts/taisho-katsuji.woff2",
-  variable: "--font-taisho-katsuji-agent",
+const xiangcuiDengcusongAgent = localFont({
+  src: "../fonts/xiangcui-dengcusong.woff2",
+  variable: "--font-xiangcui-dengcusong-agent",
   weight: "400",
   style: "normal",
   display: "swap",
@@ -132,7 +122,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html
       lang={locale}
-      className={`${taishoKatsujiLanding.variable} ${zcoolXiaoweiLandingFallback.variable} ${taishoKatsujiAgent.variable}`}
+      className={`${xiangcuiDengcusongLanding.variable} ${xiangcuiDengcusongAgent.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>
