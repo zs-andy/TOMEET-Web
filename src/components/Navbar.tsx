@@ -59,6 +59,14 @@ export default function Navbar() {
             }}
           >
             <Link
+              href={locale === "zh" ? "/" : "/zh"}
+              hrefLang={locale === "zh" ? "en" : "zh"}
+              className="locale-button"
+              aria-label={locale === "zh" ? "Switch to English" : "切换到中文"}
+            >
+              {locale === "zh" ? "EN" : "中文"}
+            </Link>
+            <Link
               href={localizedHref(locale, "/login")}
               className="login-button"
             >

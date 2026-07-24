@@ -11,17 +11,10 @@ const protectedPaths = ["/agent", "/profile"];
 
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  // The public experience is English-only. Preserve old links without serving
-  // a second localized version of the interface.
-  if (/^\/zh(?:\/|$)/.test(pathname)) {
-    const url = request.nextUrl.clone();
-    url.pathname = pathname.replace(/^\/zh(?=\/|$)/, "") || "/";
-    return NextResponse.redirect(url, 308);
-  }
-
-  // Strip locale prefix for path matching
-  const pathnameWithoutLocale = pathname.replace(/^\/en(?=\/|$)/, "") || "/";
+  const localeMatch = pathname.match(/^\/(en|zh)(?=\/|$)/);
+  const localePrefix = localeMatch?.[1] === "zh" ? "/zh" : "";
+  const pathnameWithoutLocale =
+    pathname.replace(/^\/(?:en|zh)(?=\/|$)/, "") || "/";
 
   // Run intl middleware first (handles locale detection/redirect)
   const intlResponse = intlMiddleware(request);
@@ -39,14 +32,14 @@ export default async function proxy(request: NextRequest) {
 
     if (isAuthPath && user) {
       const url = request.nextUrl.clone();
-      url.pathname = "/agent";
+      url.pathname = `${localePrefix}/agent`;
       return NextResponse.redirect(url);
     }
 
     if (isProtectedPath && !user) {
       const url = request.nextUrl.clone();
-      url.pathname = "/login";
-      url.searchParams.set("next", pathnameWithoutLocale);
+      url.pathname = `${localePrefix}/login`;
+      url.searchParams.set("next", `${localePrefix}${pathnameWithoutLocale}`);
       return NextResponse.redirect(url);
     }
   }

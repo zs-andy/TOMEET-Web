@@ -10,6 +10,7 @@ export async function GET(request: Request) {
     requestedPath?.startsWith("/") && !requestedPath.startsWith("//")
       ? requestedPath
       : "/agent";
+  const loginPath = next.startsWith("/zh/") ? "/zh/login" : "/login";
 
   if (code) {
     const cookieStore = await cookies();
@@ -37,5 +38,5 @@ export async function GET(request: Request) {
   }
 
   // Auth error — redirect to login
-  return NextResponse.redirect(`${origin}/login`);
+  return NextResponse.redirect(`${origin}${loginPath}`);
 }

@@ -35,11 +35,12 @@ export default function SignupPage() {
 
     try {
       const supabase = createClient();
+      const next = locale === "zh" ? "/zh/agent" : "/agent";
       ({ error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/api/auth/callback`,
+          emailRedirectTo: `${window.location.origin}/api/auth/callback?next=${encodeURIComponent(next)}`,
         },
       }));
     } catch {
@@ -58,10 +59,11 @@ export default function SignupPage() {
   const handleGoogleLogin = async () => {
     try {
       const supabase = createClient();
+      const next = locale === "zh" ? "/zh/agent" : "/agent";
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/api/auth/callback`,
+          redirectTo: `${window.location.origin}/api/auth/callback?next=${encodeURIComponent(next)}`,
         },
       });
       if (error) setError(t("errorServer"));

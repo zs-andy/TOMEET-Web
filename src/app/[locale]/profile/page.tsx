@@ -8,14 +8,20 @@ export const metadata: Metadata = {
   title: "Profile — TOMEET",
 };
 
-export default async function ProfilePage() {
+export default async function ProfilePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   await getAuthenticatedViewer();
+  const { locale } = await params;
   const t = await getTranslations("profile");
+  const agentHref = locale === "zh" ? "/zh/agent" : "/agent";
 
   return (
     <main className="profile-shell">
       <header className="agent-header">
-        <Link href="/agent" className="agent-brand" aria-label={t("backToAgent")}>
+        <Link href={agentHref} className="agent-brand" aria-label={t("backToAgent")}>
           <Logo size={29} />
         </Link>
       </header>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -12,16 +13,31 @@ type Props = {
 };
 
 const metadataBase = new URL("https://www.tomeet.chat");
+const taishoKatsuji = localFont({
+  src: "../fonts/taisho-katsuji.woff2",
+  variable: "--font-taisho-katsuji",
+  weight: "400",
+  style: "normal",
+  display: "swap",
+  preload: false,
+  fallback: ["Songti SC", "STSong", "serif"],
+  adjustFontFallback: false,
+});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata({ params }: Pick<Props, "params">): Promise<Metadata> {
-  await params;
-  const title = "TOMEET - Find the right people through conversation";
-  const description =
-    "An AI-native social platform that helps you meet people and discover activities through conversation.";
+  const { locale } = await params;
+  const isChinese = locale === "zh";
+  const title = isChinese
+    ? "TOMEET - 用对话，找到对的人"
+    : "TOMEET - Find the right people through conversation";
+  const description = isChinese
+    ? "一个通过自然对话理解你，并帮助你认识合拍的人、发现合适活动的 AI Native 社交平台。"
+    : "An AI-native social platform that helps you meet people and discover activities through conversation.";
+  const canonical = isChinese ? "/zh" : "/";
 
   return {
     metadataBase,
@@ -29,15 +45,19 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
     description,
     applicationName: "TOMEET",
     alternates: {
-      canonical: "/",
+      canonical,
+      languages: {
+        en: "/",
+        zh: "/zh",
+      },
     },
     openGraph: {
       type: "website",
-      url: "/",
+      url: canonical,
       title,
       description,
       siteName: "TOMEET",
-      locale: "en_US",
+      locale: isChinese ? "zh_CN" : "en_US",
       images: [
         {
           url: "/opengraph-image.png",
@@ -71,23 +91,30 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
-  if (!routing.locales.includes(locale as "en")) {
+  if (!routing.locales.includes(locale as "en" | "zh")) {
     notFound();
   }
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const isChinese = locale === "zh";
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "TOMEET",
-    url: "https://www.tomeet.chat/",
-    description:
-      "An AI-native social platform that helps you meet the right people through conversation.",
+    url: isChinese ? "https://www.tomeet.chat/zh" : "https://www.tomeet.chat/",
+    inLanguage: isChinese ? "zh-CN" : "en",
+    description: isChinese
+      ? "一个通过自然对话理解你，并帮助你认识合拍的人的 AI Native 社交平台。"
+      : "An AI-native social platform that helps you meet the right people through conversation.",
   };
 
   return (
-    <html lang={locale} data-scroll-behavior="smooth">
+    <html
+      lang={locale}
+      className={taishoKatsuji.variable}
+      data-scroll-behavior="smooth"
+    >
       <head>
         <script
           type="application/ld+json"
