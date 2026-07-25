@@ -1187,6 +1187,7 @@ html[lang="zh"]
   grid-column: 1 / -1;
   margin: 1.5rem 0 0;
   font-size: clamp(3rem, 8vw, 6rem);
+  white-space: pre-line;
 }
 
 .manifesto-copy {
