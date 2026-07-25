@@ -22,7 +22,7 @@
     "label": "选择进入 TOMEET 的方式",
     "wechatKicker": "微信 BOT",
     "qrAlt": "用于连接 TOMEET 微信 Bot 的二维码",
-    "startHint": "连接成功后，发送任意消息开始。",
+    "startHint": "扫码连接成功后发送任意消息开始",
     "refreshing": "正在刷新二维码",
     "unavailable": "微信入口暂时不可用",
     "pollError": "连接有些不稳定，正在重试",
