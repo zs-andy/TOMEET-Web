@@ -3301,3 +3301,746 @@ html[lang="zh"] .wechat-entry-status strong {
     display: none;
   }
 }
+
+/* Minimal profile and leaderboard surfaces */
+.home-foodies-link {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.55rem;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 560;
+  white-space: nowrap;
+}
+
+.home-foodies-link:hover {
+  color: var(--text-primary);
+}
+
+.simple-profile-shell,
+.simple-foodies-shell {
+  min-height: 100svh;
+  background: var(--background-primary);
+  color: var(--text-primary);
+}
+
+.simple-profile-header,
+.simple-foodies-header {
+  position: relative;
+  z-index: 10;
+  width: min(100%, 72rem);
+  min-height: 72px;
+  margin-inline: auto;
+  padding: 0.85rem clamp(1rem, 3vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.simple-profile-header > a,
+.simple-foodies-header > a:first-child {
+  display: inline-flex;
+}
+
+.simple-profile-scan {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--stroke-soft);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 580;
+  cursor: pointer;
+}
+
+.simple-profile-scan:hover {
+  border-color: var(--text-primary);
+}
+
+.simple-profile-scan svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.simple-profile-qr {
+  position: relative;
+  min-height: calc(100svh - 72px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem 6rem;
+  text-align: center;
+}
+
+.simple-profile-person {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.35rem;
+  text-align: left;
+}
+
+.simple-profile-person > span {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-size: 0.85rem;
+  font-weight: 680;
+}
+
+.simple-profile-person strong,
+.simple-profile-person small {
+  display: block;
+}
+
+.simple-profile-person strong {
+  max-width: 16rem;
+  overflow: hidden;
+  font-size: 0.88rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.simple-profile-person small {
+  margin-top: 0.08rem;
+  color: var(--text-tertiary);
+  font-family: var(--font-geist-mono);
+  font-size: 0.65rem;
+}
+
+.simple-profile-code {
+  width: min(72vw, 17.5rem);
+  aspect-ratio: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--stroke-soft);
+  border-radius: 1rem;
+  background: #fff;
+}
+
+.simple-profile-code img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.simple-profile-code-loading {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: #8a8a8a;
+}
+
+.simple-profile-code-loading svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  animation: connect-spin 1.2s linear infinite;
+}
+
+.simple-profile-qr > p {
+  margin: 1.1rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+}
+
+.simple-profile-scroll-hint {
+  position: absolute;
+  bottom: 1.4rem;
+  color: var(--text-tertiary);
+  font-size: 0.67rem;
+}
+
+.simple-credentials {
+  width: min(100%, 52rem);
+  margin-inline: auto;
+  padding: clamp(5rem, 10vw, 8rem) 1rem 8rem;
+  border-top: 1px solid var(--stroke-ghost);
+}
+
+.simple-credentials-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.simple-credentials-heading h1,
+.simple-foodies-title h1 {
+  margin: 0;
+  font-family: var(--font-geist-sans), "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 640;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.simple-credentials-heading > span {
+  color: var(--text-tertiary);
+  font-family: var(--font-geist-mono);
+  font-size: 0.78rem;
+}
+
+.simple-credentials-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.simple-credentials-meta > span {
+  color: var(--text-tertiary);
+  font-family: var(--font-geist-mono);
+  font-size: 0.78rem;
+}
+
+.simple-credentials-meta button {
+  padding: 0.35rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.68rem;
+  cursor: pointer;
+}
+
+.simple-credentials-meta button:disabled {
+  opacity: 0.5;
+}
+
+.simple-credentials-copy {
+  max-width: 34rem;
+  margin: 1rem 0 3rem;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.simple-credential-list {
+  border-top: 1px solid var(--stroke-soft);
+}
+
+.simple-request-list {
+  margin-bottom: 2.5rem;
+  border-top: 1px solid var(--stroke-soft);
+}
+
+.simple-request-row {
+  min-height: 5rem;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto auto;
+  gap: 0.75rem;
+  align-items: center;
+  border-bottom: 1px solid var(--stroke-ghost);
+}
+
+.simple-request-row strong,
+.simple-request-row small {
+  display: block;
+}
+
+.simple-request-row strong {
+  font-size: 0.8rem;
+}
+
+.simple-request-row small {
+  margin-top: 0.2rem;
+  color: var(--text-tertiary);
+  font-size: 0.65rem;
+}
+
+.simple-request-row button,
+.simple-credential-actions button {
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--stroke-soft);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.64rem;
+  cursor: pointer;
+}
+
+.simple-request-row button.is-primary {
+  border-color: var(--text-primary);
+  background: var(--text-primary);
+  color: var(--text-reversed);
+}
+
+.simple-credential-row {
+  min-height: 5.25rem;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(8rem, 1fr) auto auto;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid var(--stroke-ghost);
+}
+
+.simple-credential-avatar,
+.simple-connect-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--background-secondary);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 650;
+}
+
+.simple-credential-avatar.has-image,
+.simple-foodies-avatar.has-image,
+.simple-connect-avatar.has-image {
+  background-position: center;
+  background-size: cover;
+}
+
+.simple-credential-person strong,
+.simple-credential-person small {
+  display: block;
+}
+
+.simple-credential-person strong {
+  font-size: 0.82rem;
+}
+
+.simple-credential-person small {
+  margin-top: 0.18rem;
+  color: var(--text-tertiary);
+  font-size: 0.66rem;
+}
+
+.simple-credential-row code {
+  color: var(--text-tertiary);
+  font-size: 0.65rem;
+}
+
+.simple-credential-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #3e6b15;
+  font-size: 0.67rem;
+}
+
+.simple-credential-status svg {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.simple-credential-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.55rem;
+}
+
+.simple-credential-actions > button {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--text-tertiary);
+}
+
+.simple-credential-status {
+  text-decoration: none;
+}
+
+.simple-credential-status.is-chain_pending,
+.simple-credential-status.is-chain_failed,
+.simple-credential-status.is-revoke_pending,
+.simple-credential-status.is-revoked {
+  color: var(--text-tertiary);
+}
+
+.simple-credential-status.is-chain_pending svg,
+.simple-credential-status.is-revoke_pending svg {
+  animation: connect-spin 1.2s linear infinite;
+}
+
+.simple-credentials-state,
+.simple-foodies-state {
+  min-height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.simple-credentials-state svg,
+.simple-foodies-state svg {
+  width: 1rem;
+  height: 1rem;
+  animation: connect-spin 1.2s linear infinite;
+}
+
+.simple-scan-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: #1119;
+  backdrop-filter: blur(8px);
+}
+
+.simple-scan-modal {
+  position: relative;
+  width: min(100%, 25rem);
+  min-height: 30rem;
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  background: var(--background-primary);
+}
+
+.simple-scan-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 2;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--background-secondary);
+  cursor: pointer;
+}
+
+.simple-scan-close svg {
+  width: 0.95rem;
+}
+
+.simple-scan-modal > h2 {
+  margin: 0.35rem 3rem 1rem 0;
+  font-family: var(--font-geist-sans), "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem;
+}
+
+.simple-camera {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  border-radius: 0.9rem;
+  background: #171717;
+}
+
+.simple-camera video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.simple-camera > span {
+  position: absolute;
+  inset: 20%;
+  border: 1px solid #fff;
+  border-radius: 0.65rem;
+}
+
+.simple-scan-modal > p {
+  margin: 0.9rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  text-align: center;
+}
+
+.simple-connect-state {
+  min-height: 27.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.simple-connect-state .simple-connect-avatar,
+.simple-connect-success {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 1.25rem;
+}
+
+.simple-connect-state h2 {
+  margin: 0;
+  font-family: var(--font-geist-sans), "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.35rem;
+}
+
+.simple-connect-state p {
+  max-width: 20rem;
+  margin: 0.75rem 0 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+}
+
+.simple-connect-primary {
+  width: 100%;
+  min-height: 2.8rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--text-primary);
+  color: var(--text-reversed);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.simple-connect-loader {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 1.25rem;
+  animation: connect-spin 1.2s linear infinite;
+}
+
+.simple-connect-success {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #d9edcb;
+  color: #3e6b15;
+}
+
+.simple-connect-success svg {
+  width: 1.6rem;
+}
+
+.simple-foodies-header {
+  width: min(100%, 68rem);
+  border-bottom: 1px solid var(--stroke-ghost);
+}
+
+.simple-foodies-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.simple-foodies-profile svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.simple-foodies-content {
+  width: min(100%, 56rem);
+  margin-inline: auto;
+  padding: clamp(4rem, 9vw, 7rem) 1rem 8rem;
+}
+
+.simple-foodies-title > span {
+  display: block;
+  margin-top: 0.9rem;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+}
+
+.simple-foodies-list {
+  margin-top: 4rem;
+  border-top: 1px solid var(--text-primary);
+}
+
+.simple-foodies-columns,
+.simple-foodies-row {
+  display: grid;
+  grid-template-columns: 3.5rem 3rem minmax(0, 1fr) 9rem;
+  gap: 1rem;
+  align-items: center;
+}
+
+.simple-foodies-columns {
+  min-height: 2.9rem;
+  border-bottom: 1px solid var(--stroke-ghost);
+  color: var(--text-tertiary);
+  font-size: 0.62rem;
+}
+
+.simple-foodies-columns span:nth-child(2) {
+  grid-column: 2 / 4;
+}
+
+.simple-foodies-columns span:last-child {
+  text-align: right;
+}
+
+.simple-foodies-row {
+  min-height: 5.5rem;
+  border-bottom: 1px solid var(--stroke-ghost);
+}
+
+.simple-foodies-rank {
+  color: var(--text-tertiary);
+  font-family: var(--font-geist-mono);
+  font-size: 0.72rem;
+}
+
+.simple-foodies-avatar {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 0.78rem;
+  font-weight: 660;
+}
+
+.simple-foodies-avatar--peach { background: #f0c2ae; }
+.simple-foodies-avatar--lavender { background: #d8cef5; }
+.simple-foodies-avatar--blue { background: #c4e2fb; }
+.simple-foodies-avatar--lime { background: #d6e6b2; }
+.simple-foodies-avatar--pink { background: #f2cee8; }
+.simple-foodies-avatar--yellow { background: #f1df9d; }
+.simple-foodies-avatar--mint { background: #c2e3d4; }
+
+.simple-foodies-person strong,
+.simple-foodies-person small {
+  display: flex;
+  align-items: center;
+}
+
+.simple-foodies-person strong {
+  gap: 0.32rem;
+  font-size: 0.84rem;
+}
+
+.simple-foodies-person strong svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  color: var(--accent-strong);
+}
+
+.simple-foodies-person small {
+  margin-top: 0.2rem;
+  color: var(--text-tertiary);
+  font-size: 0.66rem;
+}
+
+.simple-foodies-count {
+  text-align: right;
+}
+
+.simple-foodies-count strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.simple-foodies-count span {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  margin-top: 0.15rem;
+  color: var(--text-tertiary);
+  font-size: 0.6rem;
+}
+
+.simple-foodies-count svg {
+  width: 0.7rem;
+  height: 0.7rem;
+}
+
+.simple-foodies-note {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 1rem 0 0;
+  color: var(--text-tertiary);
+  font-size: 0.65rem;
+}
+
+.simple-foodies-note > span {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: #4e8a21;
+}
+
+@media (max-width: 40rem) {
+  .home-foodies-link {
+    padding-inline: 0.3rem;
+    font-size: 0.7rem;
+  }
+
+  .simple-profile-header,
+  .simple-foodies-header {
+    min-height: 64px;
+  }
+
+  .simple-profile-qr {
+    min-height: calc(100svh - 64px);
+  }
+
+  .simple-credential-row {
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+    gap: 0.75rem;
+  }
+
+  .simple-credential-row code {
+    display: none;
+  }
+
+  .simple-request-row {
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto auto;
+    gap: 0.5rem;
+  }
+
+  .simple-credentials-meta {
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .simple-scan-backdrop {
+    place-items: end center;
+    padding: 0;
+  }
+
+  .simple-scan-modal {
+    width: 100%;
+    min-height: min(34rem, 92svh);
+    border-radius: 1.25rem 1.25rem 0 0;
+  }
+
+  .simple-foodies-content {
+    padding-top: 4rem;
+  }
+
+  .simple-foodies-list {
+    margin-top: 3rem;
+  }
+
+  .simple-foodies-columns,
+  .simple-foodies-row {
+    grid-template-columns: 2.2rem 2.75rem minmax(0, 1fr) 5.25rem;
+    gap: 0.65rem;
+  }
+
+  .simple-foodies-count span {
+    font-size: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simple-connect-loader,
+  .simple-profile-code-loading svg,
+  .simple-credential-status svg,
+  .simple-credentials-state svg,
+  .simple-foodies-state svg {
+    animation: none;
+  }
+}

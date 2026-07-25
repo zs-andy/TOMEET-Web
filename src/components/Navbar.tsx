@@ -66,6 +66,9 @@ export default function Navbar({ viewer }: { viewer: AuthViewer | null }) {
               outline: "none",
             }}
           >
+            <Link className="home-foodies-link" href={localizedHref(locale, "/foodies")}>
+              {nav("foodies")} ↗
+            </Link>
             <Link
               href={locale === "zh" ? "/en" : "/"}
               hrefLang={locale === "zh" ? "en" : "zh"}

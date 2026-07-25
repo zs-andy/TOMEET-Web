@@ -1,31 +1,24 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { getTranslations } from "next-intl/server";
-import Logo from "@/components/Logo";
+import ProfileHub from "@/components/ProfileHub";
 import { getAuthenticatedViewer } from "@/lib/auth";
 
 export const metadata: Metadata = {
-  title: "Profile — TOMEET",
+  title: "Profile — TOMEET"
 };
 
 export default async function ProfilePage({
-  params,
+  searchParams
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ invite?: string }>;
 }) {
-  await getAuthenticatedViewer();
-  const { locale } = await params;
-  const t = await getTranslations("profile");
-  const homeHref = locale === "en" ? "/en" : "/";
+  const viewer = await getAuthenticatedViewer();
+  const query = await searchParams;
 
   return (
-    <main className="profile-shell">
-      <header className="agent-header">
-        <Link href={homeHref} className="agent-brand" aria-label={t("backToHome")}>
-          <Logo size={29} />
-        </Link>
-      </header>
-      <section className="profile-empty" aria-label={t("title")} />
-    </main>
+    <ProfileHub
+      viewer={viewer}
+      initialInvite={query.invite ?? null}
+    />
   );
 }
