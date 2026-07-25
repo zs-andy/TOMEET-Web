@@ -29,6 +29,7 @@ type RelationshipCredential = {
   id: string;
   friend_name: string;
   friend_avatar_url: string | null;
+  relationship_label: string;
   confirmed_at: string;
   relationship_status: RelationshipStatus;
   chain_id: number | null;
@@ -44,6 +45,7 @@ type PendingRequest = {
   other_user_id: string;
   other_name: string;
   other_avatar_url: string | null;
+  relationship_label: string;
   request_status: string;
   expires_at: string;
   created_at: string;
@@ -63,6 +65,17 @@ type BarcodeDetectorLike = {
 type BarcodeDetectorConstructor = new (options: {
   formats: string[];
 }) => BarcodeDetectorLike;
+
+const relationshipPresetKeys = [
+  "relationFoodBuddy",
+  "relationCoffeeBuddy",
+  "relationExplorer",
+  "relationIdeaBuddy",
+  "relationOldFriend",
+  "relationJustMet"
+] as const;
+
+type RelationshipPresetKey = (typeof relationshipPresetKeys)[number];
 
 function localizedHref(locale: string, path: string) {
   return locale === "en" ? `/en${path}` : path;
@@ -96,6 +109,10 @@ export default function ProfileHub({
   const [friendName, setFriendName] = useState("");
   const [friendAvatarUrl, setFriendAvatarUrl] = useState<string | null>(null);
   const [scannedToken, setScannedToken] = useState(initialInvite);
+  const [relationshipChoice, setRelationshipChoice] = useState<
+    RelationshipPresetKey | "custom" | ""
+  >("");
+  const [customRelationship, setCustomRelationship] = useState("");
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
   const [credentials, setCredentials] = useState<RelationshipCredential[]>([]);
@@ -112,6 +129,11 @@ export default function ProfileHub({
     process.env.NEXT_PUBLIC_SUPABASE_URL &&
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   );
+  const relationshipLabel = relationshipChoice === "custom"
+    ? customRelationship.trim()
+    : relationshipChoice
+      ? t(relationshipChoice)
+      : "";
 
   const createQrSession = useCallback(async () => {
     if (!isConfigured) {
@@ -246,6 +268,8 @@ export default function ProfileHub({
     setScannedToken(token);
     setFriendName(target.display_name);
     setFriendAvatarUrl(target.avatar_url);
+    setRelationshipChoice("");
+    setCustomRelationship("");
     setConnectStep("found");
     stopCamera();
   }, [isConfigured, stopCamera, t]);
@@ -308,6 +332,8 @@ export default function ProfileHub({
     setScannedToken(null);
     setFriendName("");
     setFriendAvatarUrl(null);
+    setRelationshipChoice("");
+    setCustomRelationship("");
     setConnectStep("scanner");
     setIsScannerOpen(true);
     window.setTimeout(startCamera, 80);
@@ -317,17 +343,20 @@ export default function ProfileHub({
     stopCamera();
     setIsScannerOpen(false);
     setConnectStep("scanner");
+    setRelationshipChoice("");
+    setCustomRelationship("");
   };
 
   const confirmFriend = async () => {
-    if (!scannedToken || !isConfigured) {
+    if (!scannedToken || !relationshipLabel || !isConfigured) {
       setCameraError(t("connectionUnavailable"));
       return;
     }
     setConnectStep("waiting");
     const supabase = createClient();
     const { data, error } = await supabase.rpc("create_relationship_request", {
-      p_token: scannedToken
+      p_token: scannedToken,
+      p_relationship_label: relationshipLabel
     });
     const result = Array.isArray(data) ? data[0] : data;
     if (error || !result?.request_id) {
@@ -427,7 +456,7 @@ export default function ProfileHub({
             {pendingRequests.filter((request) => request.direction === "incoming").map((request) => (
               <article className="simple-request-row" key={request.request_id}>
                 <span className="simple-credential-avatar">{getInitial(request.other_name)}</span>
-                <div><strong>{request.other_name}</strong><small>{t("friendRequest")}</small></div>
+                <div><strong>{request.other_name}</strong><small>{request.relationship_label} · {t("friendRequest")}</small></div>
                 <button type="button" onClick={() => void respondToRequest(request.request_id, false)}>{t("reject")}</button>
                 <button type="button" className="is-primary" onClick={() => void respondToRequest(request.request_id, true)}>{t("accept")}</button>
               </article>
@@ -453,7 +482,7 @@ export default function ProfileHub({
                 </span>
                 <div className="simple-credential-person">
                   <strong>{credential.friend_name}</strong>
-                  <small>{new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(new Date(credential.confirmed_at))}</small>
+                  <small>{credential.relationship_label} · {new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(new Date(credential.confirmed_at))}</small>
                 </div>
                 <code>{credential.chain_tx_hash ? `${credential.chain_tx_hash.slice(0, 8)}…` : credential.id.slice(0, 8)}</code>
                 <div className="simple-credential-actions">
@@ -491,16 +520,51 @@ export default function ProfileHub({
                 <span className={`simple-connect-avatar${friendAvatarUrl ? " has-image" : ""}`} style={friendAvatarUrl ? { backgroundImage: `url(${JSON.stringify(friendAvatarUrl)})` } : undefined}>{!friendAvatarUrl && getInitial(friendName)}</span>
                 <h2 id="simple-scan-title">{friendName || t("nearbyFriend")}</h2>
                 <p>{cameraError || t("confirmCopy", { name: friendName || t("nearbyFriend") })}</p>
-                <button type="button" className="simple-connect-primary" onClick={confirmFriend}>{t("confirmAdd")}</button>
+                <div className="simple-relation-picker" role="group" aria-labelledby="simple-relation-label">
+                  <span id="simple-relation-label" className="simple-relation-label">{t("chooseRelationship")}</span>
+                  <div className="simple-relation-options">
+                    {relationshipPresetKeys.map((key) => (
+                      <button
+                        type="button"
+                        className={`simple-relation-chip${relationshipChoice === key ? " is-selected" : ""}`}
+                        aria-pressed={relationshipChoice === key}
+                        onClick={() => setRelationshipChoice(key)}
+                        key={key}
+                      >
+                        {t(key)}
+                      </button>
+                    ))}
+                    <button
+                      type="button"
+                      className={`simple-relation-chip${relationshipChoice === "custom" ? " is-selected" : ""}`}
+                      aria-pressed={relationshipChoice === "custom"}
+                      onClick={() => setRelationshipChoice("custom")}
+                    >
+                      {t("customRelationship")}
+                    </button>
+                  </div>
+                  {relationshipChoice === "custom" && (
+                    <input
+                      className="simple-relation-custom"
+                      value={customRelationship}
+                      onChange={(event) => setCustomRelationship(event.target.value)}
+                      maxLength={10}
+                      autoFocus
+                      aria-label={t("customRelationship")}
+                      placeholder={t("customRelationshipPlaceholder")}
+                    />
+                  )}
+                </div>
+                <button type="button" className="simple-connect-primary" onClick={confirmFriend} disabled={!relationshipLabel}>{t("confirmAdd")}</button>
               </div>
             )}
 
             {connectStep === "waiting" && (
-              <div className="simple-connect-state"><LoaderCircle className="simple-connect-loader" /><h2 id="simple-scan-title">{t("waitingFor", { name: friendName })}</h2><p>{t("waitingCopy")}</p></div>
+              <div className="simple-connect-state"><LoaderCircle className="simple-connect-loader" /><h2 id="simple-scan-title">{t("waitingFor", { name: friendName })}</h2><span className="simple-relation-preview">{relationshipLabel}</span><p>{t("waitingCopy")}</p></div>
             )}
 
             {connectStep === "success" && (
-              <div className="simple-connect-state"><span className="simple-connect-success"><ShieldCheck /></span><h2 id="simple-scan-title">{t("nowFriends", { name: friendName })}</h2><p>{t("successCopy")}</p><button type="button" className="simple-connect-primary" onClick={closeScanner}>{t("done")}</button></div>
+              <div className="simple-connect-state"><span className="simple-connect-success"><ShieldCheck /></span><h2 id="simple-scan-title">{t("nowFriends", { name: friendName })}</h2><span className="simple-relation-preview">{relationshipLabel}</span><p>{t("successCopy")}</p><button type="button" className="simple-connect-primary" onClick={closeScanner}>{t("done")}</button></div>
             )}
           </section>
         </div>

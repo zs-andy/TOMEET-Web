@@ -3786,6 +3786,75 @@ html[lang="zh"] .wechat-entry-status strong {
   font-size: 0.76rem;
 }
 
+.simple-relation-picker {
+  width: 100%;
+  margin: 0 0 1.2rem;
+  text-align: left;
+}
+
+.simple-relation-label {
+  display: block;
+  margin-bottom: 0.65rem;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+}
+
+.simple-relation-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.simple-relation-chip {
+  min-height: 2rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--stroke-soft);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-geist-sans), "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.68rem;
+  cursor: pointer;
+}
+
+.simple-relation-chip:hover,
+.simple-relation-chip.is-selected {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.simple-relation-chip.is-selected {
+  background: var(--text-primary);
+  color: var(--text-reversed);
+}
+
+.simple-relation-custom {
+  width: 100%;
+  min-height: 2.6rem;
+  margin-top: 0.6rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--stroke-soft);
+  border-radius: 0.65rem;
+  outline: none;
+  background: transparent;
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.75rem;
+}
+
+.simple-relation-custom:focus {
+  border-color: var(--text-primary);
+}
+
+.simple-relation-preview {
+  margin-top: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--stroke-soft);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  font-size: 0.68rem;
+}
+
 .simple-connect-primary {
   width: 100%;
   min-height: 2.8rem;
@@ -3796,6 +3865,11 @@ html[lang="zh"] .wechat-entry-status strong {
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+.simple-connect-primary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 .simple-connect-loader {
