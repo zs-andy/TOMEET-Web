@@ -1,13 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import WechatQrEntry from "@/components/WechatQrEntry";
 import type { CreatedWechatConnectSession } from "@/lib/wechat-connect";
-
-function localizedHref(locale: string, path: string) {
-  return locale === "en" ? `/en${path}` : path;
-}
 
 export default function Hero({
   initialWechatSession,
@@ -71,14 +66,7 @@ export default function Hero({
             </span>
             {landing("heroBridgeAfter")}
           </p>
-          <div className="hero-actions">
-            <Link
-              href={localizedHref(locale, "/login")}
-              className="primary-button web-access-button"
-            >
-              {access("webCta")}
-            </Link>
-          </div>
+          <p className="hero-start-hint">{access("startHint")}</p>
         </div>
 
         {isChinese ? (

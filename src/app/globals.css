@@ -3153,6 +3153,14 @@ html[lang="zh"] .wechat-entry-status strong {
   transform: none;
 }
 
+.hero-start-hint {
+  margin: 0.8rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
 .wechat-access-notice {
   width: 100%;
   margin: 0.55rem 0 0;

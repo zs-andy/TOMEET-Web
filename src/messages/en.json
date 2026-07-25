@@ -6,7 +6,8 @@
     "home": "Home",
     "howItWorks": "How it Works",
     "features": "Features",
-    "joinWaitlist": "Log In"
+    "joinWaitlist": "Log In",
+    "openProfile": "Open profile"
   },
   "hero": {
     "title": "Find <highlight>the right</highlight> people through <highlight>conversation</highlight>",
@@ -19,12 +20,9 @@
   },
   "access": {
     "label": "Choose how to enter TOMEET",
-    "webKicker": "WEB",
-    "webTitle": "Web app",
-    "webDescription": "The full TOMEET experience",
-    "webCta": "Try Now",
     "wechatKicker": "WECHAT BOT",
     "qrAlt": "QR code for connecting to the TOMEET WeChat Bot",
+    "startHint": "Once connected, send any message to get started.",
     "refreshing": "Refreshing the QR code",
     "unavailable": "The WeChat entry is temporarily unavailable",
     "pollError": "The connection is unstable. Retrying now",
@@ -258,7 +256,7 @@
   },
   "profile": {
     "title": "Profile",
-    "backToAgent": "Back to Agent"
+    "backToHome": "Back to home"
   },
   "footer": {
     "tagline": "Connecting people through conversation",

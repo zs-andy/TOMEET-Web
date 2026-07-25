@@ -17,10 +17,17 @@ export default async function HomePage() {
     process.env.WECHAT_RAPID_QR_EMAIL ?? DEFAULT_RAPID_QR_EMAIL
   ).toLowerCase();
   const rapidQrAvailable = currentUser?.email?.toLowerCase() === rapidQrEmail;
+  const viewer = currentUser
+    ? {
+        id: currentUser.id,
+        avatarUrl: currentUser.avatarUrl,
+        label: currentUser.label,
+      }
+    : null;
 
   return (
     <>
-      <Navbar />
+      <Navbar viewer={viewer} />
       <main className="landing-main">
         <Hero
           initialWechatSession={initialWechatSession}

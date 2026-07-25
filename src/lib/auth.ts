@@ -10,8 +10,7 @@ export type AuthViewer = {
   label: string;
 };
 
-export type CurrentAuthUser = {
-  id: string;
+export type CurrentAuthUser = AuthViewer & {
   email: string | null;
   metadata: Record<string, unknown>;
 };
@@ -53,6 +52,8 @@ export const getCurrentAuthUser = cache(async (): Promise<CurrentAuthUser | null
 
   return {
     id: user.id,
+    avatarUrl: getAvatarUrl(metadata),
+    label: getViewerLabel(metadata, user.email ?? undefined),
     email: user.email ?? null,
     metadata,
   };
@@ -65,7 +66,7 @@ export const getAuthenticatedViewer = cache(async (): Promise<AuthViewer> => {
 
   return {
     id: user.id,
-    avatarUrl: getAvatarUrl(user.metadata),
-    label: getViewerLabel(user.metadata, user.email ?? undefined),
+    avatarUrl: user.avatarUrl,
+    label: user.label,
   };
 });

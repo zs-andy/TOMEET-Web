@@ -17,7 +17,7 @@ export default function SignupPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [loadingAction, setLoadingAction] = useState<LoadingAction>(null);
-  const fallbackNext = locale === "en" ? "/en/agent" : "/agent";
+  const fallbackNext = locale === "en" ? "/en" : "/";
 
   const getNext = () => {
     if (typeof window === "undefined") return fallbackNext;

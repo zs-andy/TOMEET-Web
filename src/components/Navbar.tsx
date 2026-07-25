@@ -2,16 +2,24 @@
 
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
+import type { AuthViewer } from "@/lib/auth";
 import Logo from "./Logo";
 
 function localizedHref(locale: string, path: string) {
   return locale === "en" ? `/en${path === "/" ? "" : path}` : path;
 }
 
-export default function Navbar() {
+function getInitial(label: string) {
+  return label.trim().charAt(0).toUpperCase() || "Y";
+}
+
+export default function Navbar({ viewer }: { viewer: AuthViewer | null }) {
   const nav = useTranslations("nav");
   const banner = useTranslations("banner");
   const locale = useLocale();
+  const avatarStyle = viewer?.avatarUrl
+    ? { backgroundImage: `url(${JSON.stringify(viewer.avatarUrl)})` }
+    : undefined;
 
   return (
     <>
@@ -66,12 +74,29 @@ export default function Navbar() {
             >
               {locale === "zh" ? "EN" : "中文"}
             </Link>
-            <Link
-              href={localizedHref(locale, "/login")}
-              className="login-button"
-            >
-              {nav("joinWaitlist")}
-            </Link>
+            {viewer ? (
+              <Link
+                href={localizedHref(locale, "/profile")}
+                className="user-avatar"
+                aria-label={nav("openProfile")}
+                title={viewer.label}
+              >
+                <span
+                  className={`user-avatar-image${viewer.avatarUrl ? " has-image" : ""}`}
+                  style={avatarStyle}
+                  aria-hidden="true"
+                >
+                  {!viewer.avatarUrl && getInitial(viewer.label)}
+                </span>
+              </Link>
+            ) : (
+              <Link
+                href={localizedHref(locale, "/login")}
+                className="login-button"
+              >
+                {nav("joinWaitlist")}
+              </Link>
+            )}
           </div>
         </nav>
       </div>

@@ -6,7 +6,8 @@
     "home": "首页",
     "howItWorks": "如何运作",
     "features": "特性",
-    "joinWaitlist": "登录"
+    "joinWaitlist": "登录",
+    "openProfile": "打开个人资料"
   },
   "hero": {
     "title": "用<highlight>对话</highlight>，<br/>找到<highlight>对</highlight>的人",
@@ -19,12 +20,9 @@
   },
   "access": {
     "label": "选择进入 TOMEET 的方式",
-    "webKicker": "WEB",
-    "webTitle": "网页端",
-    "webDescription": "完整体验 TOMEET",
-    "webCta": "Try Now",
     "wechatKicker": "微信 BOT",
     "qrAlt": "用于连接 TOMEET 微信 Bot 的二维码",
+    "startHint": "连接成功后，发送任意消息开始。",
     "refreshing": "正在刷新二维码",
     "unavailable": "微信入口暂时不可用",
     "pollError": "连接有些不稳定，正在重试",
@@ -258,7 +256,7 @@
   },
   "profile": {
     "title": "个人资料",
-    "backToAgent": "返回 Agent"
+    "backToHome": "返回首页"
   },
   "footer": {
     "tagline": "用对话，连接人与人",

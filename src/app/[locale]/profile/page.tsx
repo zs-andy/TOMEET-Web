@@ -16,12 +16,12 @@ export default async function ProfilePage({
   await getAuthenticatedViewer();
   const { locale } = await params;
   const t = await getTranslations("profile");
-  const agentHref = locale === "en" ? "/en/agent" : "/agent";
+  const homeHref = locale === "en" ? "/en" : "/";
 
   return (
     <main className="profile-shell">
       <header className="agent-header">
-        <Link href={agentHref} className="agent-brand" aria-label={t("backToAgent")}>
+        <Link href={homeHref} className="agent-brand" aria-label={t("backToHome")}>
           <Logo size={29} />
         </Link>
       </header>
