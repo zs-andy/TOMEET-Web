@@ -2980,7 +2980,8 @@ html[lang="zh"] .wechat-entry-status strong {
 
 /* Minimal first-screen access: one Web glyph and the live WeChat QR. */
 .hero-access-choices {
-  width: fit-content;
+  --hero-qr-size: clamp(8rem, min(16vw, 24svh), 10rem);
+  width: min(82vw, max(13rem, calc(var(--hero-qr-size) + 2rem)));
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -2990,7 +2991,8 @@ html[lang="zh"] .wechat-entry-status strong {
 }
 
 .hero-core > .hero-core-title {
-  margin-top: 1.65rem;
+  margin-top: clamp(1.35rem, 3svh, 1.85rem);
+  font-size: clamp(1.35rem, min(1.8vw, 3svh), 1.8rem);
 }
 
 .hero-ai-native-anchor {
@@ -3016,8 +3018,8 @@ html[lang="zh"] .wechat-entry-status strong {
 }
 
 .wechat-access-frame {
-  width: 7.25rem;
-  height: 7.25rem;
+  width: var(--hero-qr-size);
+  height: var(--hero-qr-size);
   border-radius: 0.8rem;
 }
 
@@ -3030,7 +3032,7 @@ html[lang="zh"] .wechat-entry-status strong {
 
 .wechat-access-tile {
   position: relative;
-  width: min(13rem, 82vw);
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3155,9 +3157,9 @@ html[lang="zh"] .wechat-entry-status strong {
 }
 
 .hero-start-hint {
-  margin: 0.8rem 0 0;
+  margin: clamp(0.75rem, 1.8svh, 1rem) 0 0;
   color: var(--text-secondary);
-  font-size: 0.78rem;
+  font-size: clamp(0.8rem, min(1vw, 2svh), 0.95rem);
   line-height: 1.45;
   text-align: center;
 }
@@ -3217,7 +3219,7 @@ html[lang="zh"] .wechat-entry-status strong {
 }
 
 .wechat-access-verify {
-  width: 7.25rem;
+  width: var(--hero-qr-size);
   margin-top: 0.55rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 2rem;
@@ -3272,11 +3274,13 @@ html[lang="zh"] .wechat-entry-status strong {
 
 @media (max-width: 47.999rem) {
   .hero-access-choices {
+    --hero-qr-size: clamp(7rem, min(34vw, 32svh), 9rem);
     gap: 0.65rem;
   }
 
   .hero-core > .hero-core-title {
-    margin-top: 1.3rem;
+    margin-top: clamp(1.05rem, 3.8svh, 1.4rem);
+    font-size: clamp(1.08rem, min(5vw, 3.8svh), 1.3rem);
   }
 
   .hero-ai-native-arrow {
@@ -3284,16 +3288,10 @@ html[lang="zh"] .wechat-entry-status strong {
   }
 
   .wechat-access-frame {
-    width: 6rem;
     border-radius: 0.7rem;
   }
 
-  .wechat-access-frame {
-    height: 6rem;
-  }
-
   .wechat-access-verify {
-    width: 6rem;
     grid-template-columns: 1fr;
   }
 
