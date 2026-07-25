@@ -67,12 +67,10 @@ type BarcodeDetectorConstructor = new (options: {
 }) => BarcodeDetectorLike;
 
 const relationshipPresetKeys = [
-  "relationFoodBuddy",
-  "relationCoffeeBuddy",
-  "relationExplorer",
-  "relationIdeaBuddy",
-  "relationOldFriend",
-  "relationJustMet"
+  "relationBuddy",
+  "relationTeammate",
+  "relationFriend",
+  "relationCouple"
 ] as const;
 
 type RelationshipPresetKey = (typeof relationshipPresetKeys)[number];
