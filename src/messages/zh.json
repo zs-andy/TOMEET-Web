@@ -258,6 +258,7 @@
   "profile": {
     "title": "个人资料",
     "backToHome": "返回首页",
+    "logout": "退出登录",
     "heading": "这是你的关系护照",
     "subheading": "每一次真实见面，都可以沉淀为一份由双方共同签名的关系凭证。",
     "chainReady": "关系网络已连接",

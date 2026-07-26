@@ -7,6 +7,7 @@ import {
   Check,
   ExternalLink,
   LoaderCircle,
+  LogOut,
   ScanLine,
   ShieldCheck,
   X
@@ -416,9 +417,16 @@ export default function ProfileHub({
         <Link href={localizedHref(locale, "") || "/"} aria-label={t("backToHome")}>
           <Logo size={29} />
         </Link>
-        <button type="button" className="simple-profile-scan" onClick={openScanner}>
-          <ScanLine aria-hidden="true" />{t("scan")}
-        </button>
+        <div className="simple-profile-header-actions">
+          <form action={`/api/auth/signout?locale=${locale}`} method="post">
+            <button type="submit" className="simple-profile-logout">
+              <LogOut aria-hidden="true" />{t("logout")}
+            </button>
+          </form>
+          <button type="button" className="simple-profile-scan" onClick={openScanner}>
+            <ScanLine aria-hidden="true" />{t("scan")}
+          </button>
+        </div>
       </header>
 
       <section className="simple-profile-qr" aria-label={t("title")}>

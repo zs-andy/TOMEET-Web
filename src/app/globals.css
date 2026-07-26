@@ -3365,7 +3365,18 @@ html[lang="zh"] .wechat-entry-status strong {
   display: inline-flex;
 }
 
-.simple-profile-scan {
+.simple-profile-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.simple-profile-header-actions form {
+  display: flex;
+}
+
+.simple-profile-scan,
+.simple-profile-logout {
   min-height: 40px;
   display: inline-flex;
   align-items: center;
@@ -3380,13 +3391,19 @@ html[lang="zh"] .wechat-entry-status strong {
   cursor: pointer;
 }
 
-.simple-profile-scan:hover {
+.simple-profile-scan:hover,
+.simple-profile-logout:hover {
   border-color: var(--text-primary);
 }
 
-.simple-profile-scan svg {
+.simple-profile-scan svg,
+.simple-profile-logout svg {
   width: 1rem;
   height: 1rem;
+}
+
+.simple-profile-logout {
+  color: var(--text-secondary);
 }
 
 .simple-profile-qr {

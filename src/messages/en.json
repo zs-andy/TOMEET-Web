@@ -258,6 +258,7 @@
   "profile": {
     "title": "Profile",
     "backToHome": "Back to home",
+    "logout": "Log out",
     "heading": "Your relationship passport",
     "subheading": "Every real-world meeting can become a relationship credential signed by both people.",
     "chainReady": "Relationship network connected",
