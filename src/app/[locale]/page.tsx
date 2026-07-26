@@ -5,7 +5,7 @@ import { getCurrentAuthUser } from "@/lib/auth";
 import { createInitialWechatConnectSession } from "@/lib/wechat-connect-server";
 import { connection } from "next/server";
 
-const DEFAULT_RAPID_QR_EMAIL = "andy4fe0119@gmail.com";
+const RAPID_QR_EMAIL = "andy4fe0119@gmail.com";
 
 export default async function HomePage() {
   await connection();
@@ -13,10 +13,7 @@ export default async function HomePage() {
     createInitialWechatConnectSession(),
     getCurrentAuthUser(),
   ]);
-  const rapidQrEmail = (
-    process.env.WECHAT_RAPID_QR_EMAIL ?? DEFAULT_RAPID_QR_EMAIL
-  ).toLowerCase();
-  const rapidQrAvailable = currentUser?.email?.toLowerCase() === rapidQrEmail;
+  const rapidQrAvailable = currentUser?.email?.toLowerCase() === RAPID_QR_EMAIL;
   const viewer = currentUser
     ? {
         id: currentUser.id,

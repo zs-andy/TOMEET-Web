@@ -15,7 +15,6 @@ import {
 } from "@/lib/wechat-connect";
 
 const EARLY_REFRESH_MS = 30_000;
-const RAPID_ROTATION_MS = 250;
 const STREAM_RECONNECT_MS = 1_500;
 const NOTICE_DISPLAY_MS = 8_000;
 
@@ -208,7 +207,11 @@ export default function WechatQrEntry({
         );
         if (cancelled) return;
         setSessions((current) => [
-          ...current.filter((session) => !isTerminalStatus(session.status)),
+          ...current.filter(
+            (session) =>
+              !isTerminalStatus(session.status) &&
+              session.sessionId !== created.sessionId
+          ),
           created,
         ]);
         if (promoteNextCreatedRef.current || displaySessionIdRef.current === null) {
@@ -350,13 +353,10 @@ export default function WechatQrEntry({
     if (displaySession.status === "pending") {
       const earlyExpiryDelay =
         Date.parse(displaySession.expiresAt) - Date.now() - EARLY_REFRESH_MS;
-      const delay = rapidRotation
-        ? Math.min(RAPID_ROTATION_MS, earlyExpiryDelay)
-        : earlyExpiryDelay;
-      if (delay > 0) {
+      if (earlyExpiryDelay > 0) {
         const timer = setTimeout(() => {
           replaceDisplayedSession(displaySession.sessionId);
-        }, delay);
+        }, earlyExpiryDelay);
         return () => clearTimeout(timer);
       }
     }
@@ -366,12 +366,24 @@ export default function WechatQrEntry({
       0
     );
     return () => clearTimeout(timer);
-  }, [displaySession, rapidRotation, replaceDisplayedSession]);
+  }, [displaySession, replaceDisplayedSession]);
+
+  useEffect(() => {
+    if (rapidRotation) return;
+    const standby = standbySessionRef.current;
+    if (!standby) return;
+    standbySessionRef.current = null;
+    setStandbySessionId(null);
+    setSessions((current) =>
+      current.filter((session) => session.sessionId !== standby.sessionId)
+    );
+  }, [rapidRotation]);
 
   useEffect(() => {
     if (
       !displaySession ||
       displaySession.status !== "pending" ||
+      !rapidRotation ||
       standbySession ||
       isCreating ||
       isReplacingDisplay ||
@@ -386,6 +398,7 @@ export default function WechatQrEntry({
     isCreating,
     isReplacingDisplay,
     nextCreateRetryAt,
+    rapidRotation,
     requestNewSession,
     standbySession,
   ]);
@@ -449,6 +462,9 @@ export default function WechatQrEntry({
     : status
       ? t(`status.${status}.detail`)
       : t("status.loading.detail");
+  const shouldMaskDisplayedQr = Boolean(
+    displaySession && displaySession.status !== "pending" && displaySession.status !== "active"
+  );
   return (
     <div className="wechat-access-tile">
       <div className="wechat-access-frame">
@@ -470,6 +486,18 @@ export default function WechatQrEntry({
           <div className="wechat-access-success" aria-hidden="true">
             <Check />
           </div>
+        ) : null}
+
+        {shouldMaskDisplayedQr ? (
+          <div className="wechat-access-claimed" aria-label={t("refreshing")}>
+            <RefreshCw aria-hidden="true" />
+          </div>
+        ) : null}
+
+        {isCreating && isReplacingDisplay && displaySession?.qrCodeDataUrl ? (
+          <span className="wechat-access-refreshing" aria-label={t("refreshing")}>
+            <RefreshCw aria-hidden="true" />
+          </span>
         ) : null}
 
         {createError && !isCreating ? (

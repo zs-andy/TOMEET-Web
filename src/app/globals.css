@@ -3121,6 +3121,8 @@ html[lang="zh"] .wechat-entry-status strong {
 }
 
 .wechat-access-loading svg,
+.wechat-access-claimed svg,
+.wechat-access-refreshing svg,
 .wechat-access-retry svg,
 .wechat-access-verify button svg {
   animation: wechat-spin 900ms linear infinite;
@@ -3149,6 +3151,24 @@ html[lang="zh"] .wechat-entry-status strong {
   stroke-width: 1.4;
 }
 
+.wechat-access-claimed {
+  position: absolute;
+  inset: 0.38rem;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  border-radius: 0.65rem;
+  background: #fffdf6f2;
+  color: var(--accent-strong);
+  backdrop-filter: blur(4px);
+}
+
+.wechat-access-claimed svg {
+  width: 1.65rem;
+  height: 1.65rem;
+}
+
+.wechat-access-refreshing,
 .wechat-access-retry {
   position: absolute;
   z-index: 4;
@@ -3161,6 +3181,14 @@ html[lang="zh"] .wechat-entry-status strong {
   box-shadow: 0 3px 10px #1c1b1b20;
 }
 
+.wechat-access-refreshing {
+  top: 0.65rem;
+  right: 0.65rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.wechat-access-refreshing svg,
 .wechat-access-retry--corner svg {
   width: 0.8rem;
   height: 0.8rem;
