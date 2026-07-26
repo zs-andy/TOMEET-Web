@@ -66,7 +66,11 @@ export default function Hero({
             </span>
             {landing("heroBridgeAfter")}
           </p>
-          <p className="hero-core-subtitle">{landing("heroBridgeSubtitle")}</p>
+          <p className="hero-core-subtitle">
+            {landing.rich("heroBridgeSubtitle", {
+              latin: (chunks) => <span className="hero-core-subtitle-latin">{chunks}</span>,
+            })}
+          </p>
           <p className="hero-start-hint">{access("startHint")}</p>
         </div>
 

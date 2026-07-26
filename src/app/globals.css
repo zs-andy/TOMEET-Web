@@ -103,8 +103,9 @@
   --accent-ink: #3325bd;
   --placeholder: #d9d9d4;
   --placeholder-dark: #b8b8b2;
-  --font-editorial: "American Typewriter", "Roboto Slab", Rockwell, Georgia,
-    "Times New Roman", "Songti SC", STSong, serif;
+  --font-editorial-latin: "American Typewriter", "Roboto Slab", Rockwell,
+    Georgia, "Times New Roman", serif;
+  --font-editorial: var(--font-editorial-latin);
   --page-max: 106.75rem;
   --page-pad: 1rem;
   --grid-gap: 1rem;
@@ -2038,6 +2039,11 @@ html[lang="zh"]
   line-height: 1.35;
 }
 
+.hero-core-subtitle-latin {
+  font-family: var(--font-editorial-latin);
+  letter-spacing: normal;
+}
+
 .hero-actions {
   margin-top: 0.8rem;
 }
@@ -2150,9 +2156,17 @@ html[lang="zh"] .hero-prompt {
   width: min(32rem, 34vw);
 }
 
+html[lang="zh"] .hero-core-title {
+  font-family: var(--font-editorial-zh);
+}
+
+html[lang="zh"] .hero-core-subtitle {
+  font-family: var(--font-xiangcui-dengcusong-agent), "Songti SC", STSong,
+    serif;
+}
+
 html[lang="zh"] .hero-core-title,
 html[lang="zh"] .hero-core-subtitle {
-  font-family: var(--font-editorial-zh);
   font-weight: 400;
   letter-spacing: -0.045em;
 }
