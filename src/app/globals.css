@@ -266,17 +266,34 @@ a {
 
 .announcement-bar {
   min-height: 37px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.45rem var(--page-pad);
+  background: var(--text-primary);
+  color: var(--text-reversed);
+}
+
+.announcement-copy {
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.7rem;
-  padding: 0.45rem 1rem;
-  background: var(--text-primary);
-  color: var(--text-reversed);
   font-size: 0.875rem;
   font-weight: 520;
   letter-spacing: 0.02em;
   text-align: center;
+}
+
+.roadshow-booth {
+  color: #e58b41;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .announcement-dot {
@@ -1843,8 +1860,12 @@ html[lang="zh"]
 }
 
 @media (max-width: 34rem) {
-  .announcement-bar {
+  .announcement-copy {
     font-size: 0.75rem;
+  }
+
+  .roadshow-booth {
+    font-size: 1rem;
   }
 
   .site-nav {
@@ -2475,6 +2496,9 @@ html[lang="zh"] .hero-core-title {
     min-height: 43px;
     gap: 0.5rem;
     padding: 0.4rem var(--page-pad);
+  }
+
+  .announcement-copy {
     font-size: 0.7rem;
     line-height: 1.25;
   }

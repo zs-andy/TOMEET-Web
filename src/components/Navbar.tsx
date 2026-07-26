@@ -25,9 +25,17 @@ export default function Navbar({ viewer }: { viewer: AuthViewer | null }) {
     <>
       <header className="site-header">
         <div className="announcement-bar">
-          <span className="announcement-dot" aria-hidden="true" />
-          <span>{banner("text")}</span>
-          <span aria-hidden="true">→</span>
+          <div className="announcement-copy">
+            <span className="announcement-dot" aria-hidden="true" />
+            <span>{banner("text")}</span>
+            <span aria-hidden="true">→</span>
+          </div>
+          <span
+            className="roadshow-booth"
+            aria-label={locale === "zh" ? "路演摊位 D47" : "Roadshow booth D47"}
+          >
+            D47
+          </span>
         </div>
       </header>
 
