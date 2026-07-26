@@ -66,6 +66,7 @@ export default function Hero({
             </span>
             {landing("heroBridgeAfter")}
           </p>
+          <p className="hero-core-subtitle">{landing("heroBridgeSubtitle")}</p>
           <p className="hero-start-hint">{access("startHint")}</p>
         </div>
 
