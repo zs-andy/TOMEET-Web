@@ -3037,6 +3037,33 @@ html[lang="zh"] .wechat-entry-status strong {
   gap: 0.7rem;
 }
 
+.qr-service-paused {
+  width: var(--hero-qr-size);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 1rem;
+  border: 1px solid var(--stroke-soft);
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  text-align: center;
+}
+
+.qr-service-paused span {
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 640;
+}
+
+.qr-service-paused small {
+  color: var(--text-tertiary);
+  font-size: 0.62rem;
+  line-height: 1.45;
+}
+
 .hero-core > .hero-core-title,
 .hero-core > .hero-core-subtitle {
   font-size: clamp(1.35rem, min(1.8vw, 3svh), 1.8rem);
@@ -3543,6 +3570,37 @@ html[lang="zh"] .wechat-entry-status strong {
   width: 1.3rem;
   height: 1.3rem;
   animation: connect-spin 1.2s linear infinite;
+}
+
+.simple-profile-service-paused {
+  width: min(72vw, 17.5rem);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 1.5rem;
+  border: 1px solid var(--stroke-soft);
+  border-radius: 1rem;
+}
+
+.simple-profile-service-paused > svg {
+  width: 1.7rem;
+  height: 1.7rem;
+  color: var(--text-tertiary);
+}
+
+.simple-profile-service-paused > strong {
+  font-size: 0.9rem;
+}
+
+.simple-profile-service-paused > p {
+  max-width: 14rem;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  line-height: 1.55;
 }
 
 .simple-profile-qr > p {

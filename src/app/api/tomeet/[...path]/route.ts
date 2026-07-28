@@ -1,4 +1,5 @@
 import QRCode from "qrcode";
+import { QR_SERVICE_ENABLED } from "@/lib/feature-flags";
 
 export const maxDuration = 300;
 
@@ -109,6 +110,13 @@ async function proxyToTomeet(
 
   const isWechatConnect = isWechatConnectRoute(path);
   const isWechatEvents = isWechatSessionEvents(request.method, path);
+  if (isWechatConnect && !QR_SERVICE_ENABLED) {
+    return jsonError(
+      503,
+      "QR_SERVICE_PAUSED",
+      "二维码服务暂停中"
+    );
+  }
   const authorization = request.headers.get("authorization");
   if (!isWechatConnect && !authorization?.startsWith("Bearer ")) {
     return jsonError(401, "UNAUTHENTICATED", "缺少 Bearer access token");

@@ -7,9 +7,11 @@ import type { CreatedWechatConnectSession } from "@/lib/wechat-connect";
 export default function Hero({
   initialWechatSession,
   rapidQrAvailable,
+  qrServiceAvailable,
 }: {
   initialWechatSession: CreatedWechatConnectSession | null;
   rapidQrAvailable: boolean;
+  qrServiceAvailable: boolean;
 }) {
   const landing = useTranslations("landing");
   const access = useTranslations("access");
@@ -45,10 +47,17 @@ export default function Hero({
 
         <div className="hero-core">
           <div className="hero-access-choices" aria-label={access("wechatKicker")}>
-            <WechatQrEntry
-              initialSession={initialWechatSession}
-              rapidRotationAvailable={rapidQrAvailable}
-            />
+            {qrServiceAvailable ? (
+              <WechatQrEntry
+                initialSession={initialWechatSession}
+                rapidRotationAvailable={rapidQrAvailable}
+              />
+            ) : (
+              <div className="qr-service-paused" role="status">
+                <span>{access("servicePausedTitle")}</span>
+                <small>{access("servicePausedDetail")}</small>
+              </div>
+            )}
           </div>
           <p className="hero-core-title">
             {landing("heroBridgeBefore")}
@@ -71,7 +80,9 @@ export default function Hero({
               latin: (chunks) => <span className="hero-core-subtitle-latin">{chunks}</span>,
             })}
           </p>
-          <p className="hero-start-hint">{access("startHint")}</p>
+          {qrServiceAvailable ? (
+            <p className="hero-start-hint">{access("startHint")}</p>
+          ) : null}
         </div>
 
         {isChinese ? (

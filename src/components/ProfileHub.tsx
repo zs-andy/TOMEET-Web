@@ -8,6 +8,7 @@ import {
   ExternalLink,
   LoaderCircle,
   LogOut,
+  PauseCircle,
   ScanLine,
   ShieldCheck,
   X
@@ -15,6 +16,7 @@ import {
 import QRCode from "qrcode";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { AuthViewer } from "@/lib/auth";
+import { FOODIES_ENABLED, QR_SERVICE_ENABLED } from "@/lib/feature-flags";
 import { createClient } from "@/lib/supabase/client";
 import Logo from "./Logo";
 
@@ -101,13 +103,17 @@ export default function ProfileHub({
 }) {
   const t = useTranslations("profile");
   const locale = useLocale();
-  const [isScannerOpen, setIsScannerOpen] = useState(Boolean(initialInvite));
+  const [isScannerOpen, setIsScannerOpen] = useState(
+    QR_SERVICE_ENABLED && Boolean(initialInvite)
+  );
   const [connectStep, setConnectStep] = useState<ConnectStep>(
-    initialInvite ? "found" : "scanner"
+    QR_SERVICE_ENABLED && initialInvite ? "found" : "scanner"
   );
   const [friendName, setFriendName] = useState("");
   const [friendAvatarUrl, setFriendAvatarUrl] = useState<string | null>(null);
-  const [scannedToken, setScannedToken] = useState(initialInvite);
+  const [scannedToken, setScannedToken] = useState(
+    QR_SERVICE_ENABLED ? initialInvite : null
+  );
   const [relationshipChoice, setRelationshipChoice] = useState<
     RelationshipPresetKey | "custom" | ""
   >("");
@@ -135,6 +141,7 @@ export default function ProfileHub({
       : "";
 
   const createQrSession = useCallback(async () => {
+    if (!QR_SERVICE_ENABLED) return;
     if (!isConfigured) {
       setCredentialError(true);
       return;
@@ -170,14 +177,16 @@ export default function ProfileHub({
     const [credentialResult, requestResult, visibilityResult] = await Promise.all([
       supabase.rpc("get_my_relationship_credentials"),
       supabase.rpc("get_my_pending_relationship_requests"),
-      supabase.rpc("get_my_foodies_visibility")
+      FOODIES_ENABLED
+        ? supabase.rpc("get_my_foodies_visibility")
+        : Promise.resolve({ data: null, error: null })
     ]);
     if (credentialResult.error || requestResult.error || visibilityResult.error) {
       setCredentialError(true);
     } else {
       setCredentials((credentialResult.data ?? []) as RelationshipCredential[]);
       setPendingRequests((requestResult.data ?? []) as PendingRequest[]);
-      setShowOnFoodies(visibilityResult.data ?? true);
+      if (FOODIES_ENABLED) setShowOnFoodies(visibilityResult.data ?? true);
       setCredentialError(false);
     }
     setCredentialsLoading(false);
@@ -203,6 +212,7 @@ export default function ProfileHub({
   }, [isConfigured, loadActivity, t]);
 
   useEffect(() => {
+    if (!QR_SERVICE_ENABLED) return;
     const initial = window.setTimeout(() => void createQrSession(), 0);
     const refresh = window.setInterval(() => void createQrSession(), 60_000);
     return () => {
@@ -253,7 +263,11 @@ export default function ProfileHub({
   }, []);
 
   const resolveScannedToken = useCallback(async (token: string) => {
-    if (!/^[0-9a-f]{64}$/u.test(token) || !isConfigured) return;
+    if (
+      !QR_SERVICE_ENABLED ||
+      !/^[0-9a-f]{64}$/u.test(token) ||
+      !isConfigured
+    ) return;
     setCameraError(null);
     const supabase = createClient();
     const { data, error } = await supabase.rpc("resolve_relationship_qr_session", {
@@ -322,12 +336,13 @@ export default function ProfileHub({
   useEffect(() => () => stopCamera(), [stopCamera]);
 
   useEffect(() => {
-    if (!initialInvite) return;
+    if (!QR_SERVICE_ENABLED || !initialInvite) return;
     const timer = window.setTimeout(() => void resolveScannedToken(initialInvite), 0);
     return () => window.clearTimeout(timer);
   }, [initialInvite, resolveScannedToken]);
 
   const openScanner = () => {
+    if (!QR_SERVICE_ENABLED) return;
     setScannedToken(null);
     setFriendName("");
     setFriendAvatarUrl(null);
@@ -347,7 +362,12 @@ export default function ProfileHub({
   };
 
   const confirmFriend = async () => {
-    if (!scannedToken || !relationshipLabel || !isConfigured) {
+    if (
+      !QR_SERVICE_ENABLED ||
+      !scannedToken ||
+      !relationshipLabel ||
+      !isConfigured
+    ) {
       setCameraError(t("connectionUnavailable"));
       return;
     }
@@ -378,7 +398,7 @@ export default function ProfileHub({
   };
 
   const toggleVisibility = async () => {
-    if (visibilitySaving) return;
+    if (!FOODIES_ENABLED || visibilitySaving) return;
     setVisibilitySaving(true);
     const next = !showOnFoodies;
     const supabase = createClient();
@@ -423,25 +443,37 @@ export default function ProfileHub({
               <LogOut aria-hidden="true" />{t("logout")}
             </button>
           </form>
-          <button type="button" className="simple-profile-scan" onClick={openScanner}>
-            <ScanLine aria-hidden="true" />{t("scan")}
-          </button>
+          {QR_SERVICE_ENABLED ? (
+            <button type="button" className="simple-profile-scan" onClick={openScanner}>
+              <ScanLine aria-hidden="true" />{t("scan")}
+            </button>
+          ) : null}
         </div>
       </header>
 
       <section className="simple-profile-qr" aria-label={t("title")}>
-        <div className="simple-profile-person">
-          <span aria-hidden="true">{getInitial(viewer.label)}</span>
-          <div><strong>{viewer.label}</strong><small>{t("dynamicQr")}</small></div>
-        </div>
-        <div className="simple-profile-code">
-          {qrDataUrl ? (
-            <Image src={qrDataUrl} alt={t("personalQrAlt")} width={720} height={720} unoptimized priority />
-          ) : (
-            <span className="simple-profile-code-loading"><LoaderCircle aria-hidden="true" /></span>
-          )}
-        </div>
-        <p>{credentialError ? t("connectionUnavailable") : t("scanHint")}</p>
+        {QR_SERVICE_ENABLED ? (
+          <>
+            <div className="simple-profile-person">
+              <span aria-hidden="true">{getInitial(viewer.label)}</span>
+              <div><strong>{viewer.label}</strong><small>{t("dynamicQr")}</small></div>
+            </div>
+            <div className="simple-profile-code">
+              {qrDataUrl ? (
+                <Image src={qrDataUrl} alt={t("personalQrAlt")} width={720} height={720} unoptimized priority />
+              ) : (
+                <span className="simple-profile-code-loading"><LoaderCircle aria-hidden="true" /></span>
+              )}
+            </div>
+            <p>{credentialError ? t("connectionUnavailable") : t("scanHint")}</p>
+          </>
+        ) : (
+          <div className="simple-profile-service-paused" role="status">
+            <PauseCircle aria-hidden="true" />
+            <strong>{t("qrServicePaused")}</strong>
+            <p>{t("qrServicePausedDetail")}</p>
+          </div>
+        )}
         <span className="simple-profile-scroll-hint">{t("scrollCredentials")} ↓</span>
       </section>
 
@@ -450,9 +482,11 @@ export default function ProfileHub({
           <h1>{t("credentialsHeading")}</h1>
           <div className="simple-credentials-meta">
             {!credentialsLoading && !credentialError && <span>{credentials.length}</span>}
-            <button type="button" onClick={toggleVisibility} disabled={visibilitySaving}>
-              {showOnFoodies ? t("rankingVisibleShort") : t("rankingHiddenShort")}
-            </button>
+            {FOODIES_ENABLED ? (
+              <button type="button" onClick={toggleVisibility} disabled={visibilitySaving}>
+                {showOnFoodies ? t("rankingVisibleShort") : t("rankingHiddenShort")}
+              </button>
+            ) : null}
           </div>
         </div>
         <p className="simple-credentials-copy">{t("credentialCopy")}</p>
@@ -512,7 +546,7 @@ export default function ProfileHub({
         </div>
       </section>
 
-      {isScannerOpen && (
+      {QR_SERVICE_ENABLED && isScannerOpen && (
         <div className="simple-scan-backdrop" role="presentation" onMouseDown={closeScanner}>
           <section className="simple-scan-modal" role="dialog" aria-modal="true" aria-labelledby="simple-scan-title" onMouseDown={(event) => event.stopPropagation()}>
             <button type="button" className="simple-scan-close" onClick={closeScanner} aria-label={t("close")}><X /></button>

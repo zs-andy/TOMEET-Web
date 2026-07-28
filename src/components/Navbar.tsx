@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import type { AuthViewer } from "@/lib/auth";
+import { FOODIES_ENABLED } from "@/lib/feature-flags";
 import Logo from "./Logo";
 
 function localizedHref(locale: string, path: string) {
@@ -74,9 +75,11 @@ export default function Navbar({ viewer }: { viewer: AuthViewer | null }) {
               outline: "none",
             }}
           >
-            <Link className="home-foodies-link" href={localizedHref(locale, "/foodies")}>
-              {nav("foodies")} ↗
-            </Link>
+            {FOODIES_ENABLED ? (
+              <Link className="home-foodies-link" href={localizedHref(locale, "/foodies")}>
+                {nav("foodies")} ↗
+              </Link>
+            ) : null}
             <Link
               href={locale === "zh" ? "/en" : "/"}
               hrefLang={locale === "zh" ? "en" : "zh"}
