@@ -3105,9 +3105,9 @@ html[lang="zh"] .wechat-entry-status strong {
 }
 
 .web-access-button {
-  width: 100%;
+  width: auto;
   min-height: 44px;
-  padding-inline: 1rem;
+  padding-inline: 1.25rem;
   white-space: nowrap;
 }
 
@@ -3394,8 +3394,7 @@ html[lang="zh"] .wechat-entry-status strong {
     width: calc(100% - (2 * var(--page-pad)));
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: stretch;
   }
 
   .hero-headline .hero-word,
@@ -3406,16 +3405,27 @@ html[lang="zh"] .wechat-entry-status strong {
     width: 100%;
     max-width: none;
     transform: none;
-    align-items: center;
-    text-align: center;
   }
 
   .hero-headline .hero-word-identity {
-    justify-content: center;
+    justify-content: flex-start;
+    text-align: left;
   }
 
   .hero-headline .hero-word-connect {
+    align-items: flex-start;
     row-gap: 0;
+    text-align: left;
+  }
+
+  html[lang="zh"] .hero-headline .hero-word-zh-understand {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  html[lang="zh"] .hero-headline .hero-word-zh-connect {
+    align-items: flex-start;
+    text-align: left;
   }
 
   .hero-core,
