@@ -6,19 +6,8 @@ export const metadata: Metadata = {
   title: "Profile — TOMEET"
 };
 
-export default async function ProfilePage({
-  searchParams
-}: {
-  params: Promise<{ locale: string }>;
-  searchParams: Promise<{ invite?: string }>;
-}) {
-  const viewer = await getAuthenticatedViewer();
-  const query = await searchParams;
+export default async function ProfilePage() {
+  await getAuthenticatedViewer();
 
-  return (
-    <ProfileHub
-      viewer={viewer}
-      initialInvite={query.invite ?? null}
-    />
-  );
+  return <ProfileHub />;
 }

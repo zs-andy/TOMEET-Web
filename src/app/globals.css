@@ -1944,6 +1944,10 @@ html[lang="zh"]
   white-space: nowrap;
 }
 
+.hero-headline {
+  display: contents;
+}
+
 .hero-word-learns {
   top: 4.5%;
   left: var(--page-pad);
@@ -3025,10 +3029,9 @@ html[lang="zh"] .wechat-entry-status strong {
   }
 }
 
-/* Minimal first-screen access: one Web glyph and the live WeChat QR. */
+/* Minimal first-screen access. */
 .hero-access-choices {
-  --hero-qr-size: clamp(8rem, min(16vw, 24svh), 10rem);
-  width: min(82vw, max(13rem, calc(var(--hero-qr-size) + 2rem)));
+  width: min(82vw, 13rem);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -3102,7 +3105,7 @@ html[lang="zh"] .wechat-entry-status strong {
 }
 
 .web-access-button {
-  min-width: 8.75rem;
+  width: 100%;
   min-height: 44px;
   padding-inline: 1rem;
   white-space: nowrap;
@@ -3380,8 +3383,44 @@ html[lang="zh"] .wechat-entry-status strong {
 
 @media (max-width: 47.999rem) {
   .hero-access-choices {
-    --hero-qr-size: clamp(7rem, min(34vw, 32svh), 9rem);
     gap: 0.65rem;
+  }
+
+  .hero-headline {
+    position: absolute;
+    z-index: 3;
+    top: clamp(1.25rem, 4svh, 2.25rem);
+    left: var(--page-pad);
+    width: calc(100% - (2 * var(--page-pad)));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-headline .hero-word,
+  html[lang="zh"] .hero-headline .hero-word-zh-understand,
+  html[lang="zh"] .hero-headline .hero-word-zh-connect {
+    position: static;
+    inset: auto;
+    width: 100%;
+    max-width: none;
+    transform: none;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-headline .hero-word-identity {
+    justify-content: center;
+  }
+
+  .hero-headline .hero-word-connect {
+    row-gap: 0;
+  }
+
+  .hero-core,
+  html[lang="zh"] .hero-core {
+    top: 66%;
   }
 
   .hero-core > .hero-core-title,
@@ -3431,6 +3470,10 @@ html[lang="zh"] .wechat-entry-status strong {
   min-height: 100svh;
   background: var(--background-primary);
   color: var(--text-primary);
+}
+
+.simple-profile-empty {
+  min-height: calc(100svh - 72px);
 }
 
 .simple-profile-header,

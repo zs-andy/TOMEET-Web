@@ -21,6 +21,7 @@
   },
   "access": {
     "label": "Choose how to enter TOMEET",
+    "tryNow": "Try Now",
     "wechatKicker": "WECHAT BOT",
     "qrAlt": "QR code for connecting to the TOMEET WeChat Bot",
     "startHint": "Scan to connect, then send any message to get started.",

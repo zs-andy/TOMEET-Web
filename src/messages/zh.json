@@ -21,6 +21,7 @@
   },
   "access": {
     "label": "选择进入 TOMEET 的方式",
+    "tryNow": "Try Now",
     "wechatKicker": "微信 BOT",
     "qrAlt": "用于连接 TOMEET 微信 Bot 的二维码",
     "startHint": "扫码连接成功后发送任意消息开始",
