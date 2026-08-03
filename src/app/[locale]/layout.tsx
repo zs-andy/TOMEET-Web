@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Geist } from "next/font/google";
 import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
@@ -13,6 +14,11 @@ type Props = {
 };
 
 const metadataBase = new URL("https://www.tomeet.chat");
+const tomeetWordmark = Geist({
+  variable: "--font-tomeet-wordmark",
+  subsets: ["latin"],
+  display: "swap",
+});
 const xiangcuiDengcusongLanding = localFont({
   src: "../fonts/xiangcui-dengcusong-landing.woff2",
   variable: "--font-xiangcui-dengcusong-landing",
@@ -122,7 +128,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html
       lang={locale}
-      className={`${xiangcuiDengcusongLanding.variable} ${xiangcuiDengcusongAgent.variable}`}
+      className={`${tomeetWordmark.variable} ${xiangcuiDengcusongLanding.variable} ${xiangcuiDengcusongAgent.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>

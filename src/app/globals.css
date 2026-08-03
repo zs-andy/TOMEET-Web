@@ -423,10 +423,13 @@ a {
 }
 
 .brand-word {
+  font-family: var(--font-tomeet-wordmark), "Geist", "Helvetica Neue", Arial,
+    sans-serif;
   font-size: calc(var(--logo-size) * 0.66);
-  font-weight: 780;
+  font-feature-settings: "ss07" on;
+  font-weight: 900;
   line-height: 1;
-  letter-spacing: -0.045em;
+  letter-spacing: 0;
 }
 
 .brand-wordmark .brand-word > span,
