@@ -9,6 +9,10 @@
     "showSteps": "How",
     "iosInstruction": "Tap Share, then “Add to Home Screen”",
     "androidInstruction": "Tap ⋮, then “Add to Home Screen”",
+    "edgeInstruction": "Open Edge’s bottom menu, then choose “Add to phone”",
+    "miuiTitle": "Install with Chrome",
+    "miuiDescription": "Mi Browser can only create a regular web shortcut",
+    "openChrome": "Open Chrome",
     "dismiss": "Dismiss install prompt"
   },
   "nav": {

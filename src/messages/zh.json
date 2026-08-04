@@ -9,6 +9,10 @@
     "showSteps": "方法",
     "iosInstruction": "点“分享”，再选“添加到主屏幕”",
     "androidInstruction": "点“⋮”，再选“添加到主屏幕”",
+    "edgeInstruction": "点 Edge 底部“⋯”，选择“添加到手机”",
+    "miuiTitle": "请用 Chrome 安装",
+    "miuiDescription": "小米浏览器只能保存普通网页快捷方式",
+    "openChrome": "Chrome 打开",
     "dismiss": "暂时关闭安装提示"
   },
   "nav": {

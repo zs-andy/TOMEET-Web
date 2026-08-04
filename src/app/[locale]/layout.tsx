@@ -114,6 +114,27 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
       title: "TOMEET",
       statusBarStyle: "black-translucent",
     },
+    icons: {
+      icon: [
+        {
+          url: "/tomeet-icon-v2-96x96.png",
+          sizes: "96x96",
+          type: "image/png",
+        },
+        {
+          url: "/tomeet-icon-v2-192x192.png",
+          sizes: "192x192",
+          type: "image/png",
+        },
+      ],
+      apple: [
+        {
+          url: "/tomeet-icon-v2-192x192.png",
+          sizes: "192x192",
+          type: "image/png",
+        },
+      ],
+    },
   };
 }
 
