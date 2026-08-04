@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -19,7 +19,7 @@ type NavigatorWithStandalone = Navigator & {
   standalone?: boolean;
 };
 
-type InstallEnvironment = "ios" | "android" | "edge-android" | "miui";
+type InstallEnvironment = "ios" | "android" | "edge-android";
 
 function wasRecentlyDismissed() {
   try {
@@ -54,19 +54,8 @@ function getInstallEnvironment(userAgent: string): InstallEnvironment | null {
 
   if (isiOSDevice) return "ios";
   if (!/Android/i.test(userAgent)) return null;
-  if (/MiuiBrowser|XiaoMi\/MiuiBrowser/i.test(userAgent)) return "miui";
   if (/EdgA\//i.test(userAgent)) return "edge-android";
   return "android";
-}
-
-function openCurrentPageInChrome() {
-  const currentUrl = new URL(window.location.href);
-  const fallbackUrl = encodeURIComponent(currentUrl.href);
-  const intentPath = `${currentUrl.host}${currentUrl.pathname}${currentUrl.search}`;
-
-  window.location.href =
-    `intent://${intentPath}#Intent;scheme=${currentUrl.protocol.replace(":", "")};` +
-    `package=com.android.chrome;S.browser_fallback_url=${fallbackUrl};end`;
 }
 
 export default function InstallAppPrompt() {
@@ -75,7 +64,6 @@ export default function InstallAppPrompt() {
   const [environment, setEnvironment] = useState<InstallEnvironment | null>(null);
   const [showInstructions, setShowInstructions] = useState(false);
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-  const miuiNativePromptSeen = useRef(false);
 
   useEffect(() => {
     const userAgent = window.navigator.userAgent;
@@ -95,20 +83,13 @@ export default function InstallAppPrompt() {
     const canShow = detectedEnvironment && !standalone && !wasRecentlyDismissed();
     const revealTimer = canShow
       ? window.setTimeout(() => {
-          if (detectedEnvironment === "miui" && miuiNativePromptSeen.current) return;
           setEnvironment(detectedEnvironment);
           setIsVisible(true);
-        }, detectedEnvironment === "miui" ? 3500 : 1200)
+        }, 1200)
       : undefined;
 
     const handleBeforeInstallPrompt = (event: Event) => {
       if (!detectedEnvironment) return;
-
-      if (detectedEnvironment === "miui") {
-        miuiNativePromptSeen.current = true;
-        setIsVisible(false);
-        return;
-      }
 
       event.preventDefault();
 
@@ -144,11 +125,6 @@ export default function InstallAppPrompt() {
   };
 
   const install = async () => {
-    if (environment === "miui") {
-      openCurrentPageInChrome();
-      return;
-    }
-
     if (environment === "edge-android") {
       setShowInstructions(true);
       return;
@@ -187,20 +163,16 @@ export default function InstallAppPrompt() {
         </p>
       ) : (
         <p id="install-app-title" className="install-app-copy">
-          <strong>{environment === "miui" ? copy("miuiTitle") : copy("title")}</strong>
-          <span>
-            {environment === "miui" ? copy("miuiDescription") : copy("description")}
-          </span>
+          <strong>{copy("title")}</strong>
+          <span>{copy("description")}</span>
         </p>
       )}
 
       {!showInstructions ? (
         <button type="button" className="install-app-action" onClick={install}>
-          {environment === "miui"
-            ? copy("openChrome")
-            : installPrompt && environment !== "edge-android"
-              ? copy("install")
-              : copy("showSteps")}
+          {installPrompt && environment !== "edge-android"
+            ? copy("install")
+            : copy("showSteps")}
         </button>
       ) : null}
 
