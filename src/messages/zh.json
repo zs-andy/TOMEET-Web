@@ -2,6 +2,15 @@
   "banner": {
     "text": "AI Agent 驱动的全新社交方式，现已开放早期体验"
   },
+  "installApp": {
+    "title": "添加到主屏幕",
+    "description": "全屏使用 TOMEET",
+    "install": "添加",
+    "showSteps": "方法",
+    "iosInstruction": "点“分享”，再选“添加到主屏幕”",
+    "androidInstruction": "点“⋮”，再选“添加到主屏幕”",
+    "dismiss": "暂时关闭安装提示"
+  },
   "nav": {
     "home": "首页",
     "howItWorks": "如何运作",

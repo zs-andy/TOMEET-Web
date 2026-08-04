@@ -2,6 +2,15 @@
   "banner": {
     "text": "A new AI-native way to meet people is now in early access"
   },
+  "installApp": {
+    "title": "Add to Home Screen",
+    "description": "Use TOMEET full screen",
+    "install": "Add",
+    "showSteps": "How",
+    "iosInstruction": "Tap Share, then “Add to Home Screen”",
+    "androidInstruction": "Tap ⋮, then “Add to Home Screen”",
+    "dismiss": "Dismiss install prompt"
+  },
   "nav": {
     "home": "Home",
     "howItWorks": "How it Works",

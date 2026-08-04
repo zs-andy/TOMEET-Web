@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
@@ -6,6 +6,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import ThemeCycleSync from "@/components/ThemeCycleSync";
+import InstallAppPrompt from "@/components/InstallAppPrompt";
 import "../globals.css";
 
 type Props = {
@@ -39,6 +40,13 @@ const xiangcuiDengcusongAgent = localFont({
   fallback: ["Songti SC", "STSong", "serif"],
   adjustFontFallback: false,
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#1c1b1b",
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -101,6 +109,11 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
         "max-video-preview": -1,
       },
     },
+    appleWebApp: {
+      capable: true,
+      title: "TOMEET",
+      statusBarStyle: "black-translucent",
+    },
   };
 }
 
@@ -143,6 +156,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <ThemeCycleSync />
         <NextIntlClientProvider messages={messages}>
           {children}
+          <InstallAppPrompt />
         </NextIntlClientProvider>
       </body>
     </html>

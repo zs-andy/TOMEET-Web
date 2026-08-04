@@ -25,6 +25,10 @@
 /output/
 /tmp/
 
+# local agent tooling
+/.agents/
+/skills-lock.json
+
 # misc
 .DS_Store
 *.pem
