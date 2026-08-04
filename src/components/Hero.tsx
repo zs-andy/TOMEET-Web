@@ -79,11 +79,6 @@ export default function Hero() {
             </span>
             {landing("heroBridgeAfter")}
           </p>
-          <p className="hero-core-subtitle">
-            {landing.rich("heroBridgeSubtitle", {
-              latin: (chunks) => <span className="hero-core-subtitle-latin">{chunks}</span>,
-            })}
-          </p>
         </div>
       </div>
     </section>

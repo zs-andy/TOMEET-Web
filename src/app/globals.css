@@ -375,53 +375,6 @@ a {
 }
 
 /* Navigation */
-.site-header {
-  position: relative;
-  z-index: 50;
-  background: var(--background-primary);
-}
-
-.announcement-bar {
-  min-height: 37px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.45rem var(--page-pad);
-  background: var(--text-primary);
-  color: var(--text-reversed);
-}
-
-.announcement-copy {
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.7rem;
-  font-size: 0.875rem;
-  font-weight: 520;
-  letter-spacing: 0.02em;
-  text-align: center;
-}
-
-.roadshow-booth {
-  color: #e58b41;
-  font-size: 1.05rem;
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.announcement-dot {
-  width: 0.7rem;
-  height: 0.7rem;
-  border-radius: 999px;
-  background: var(--accent-strong);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-strong) 18%, transparent);
-  flex: 0 0 auto;
-}
-
 .site-nav-wrap {
   position: sticky;
   top: 0;
@@ -1980,14 +1933,6 @@ html[lang="zh"]
 }
 
 @media (max-width: 34rem) {
-  .announcement-copy {
-    font-size: 0.75rem;
-  }
-
-  .roadshow-booth {
-    font-size: 1rem;
-  }
-
   .site-nav {
     min-height: 68px;
   }
@@ -2154,19 +2099,6 @@ html[lang="zh"]
   color: var(--accent-ink);
 }
 
-.hero-core-subtitle {
-  margin: 0.35rem 0 0;
-  color: var(--text-secondary);
-  font-family: var(--font-editorial);
-  font-weight: 400;
-  line-height: 1.35;
-}
-
-.hero-core-subtitle-latin {
-  font-family: var(--font-editorial-latin);
-  letter-spacing: normal;
-}
-
 .hero-actions {
   margin-top: 0.8rem;
 }
@@ -2214,7 +2146,7 @@ html[lang="zh"]
 
 @media (min-width: 80rem) {
   .hero-grid {
-    height: clamp(700px, calc(100svh - 115px), 900px);
+    height: clamp(700px, calc(100svh - 78px), 900px);
     min-height: 0;
     grid-template-columns: none;
     grid-template-rows: none;
@@ -2283,13 +2215,7 @@ html[lang="zh"] .hero-core-title {
   font-family: var(--font-editorial-zh);
 }
 
-html[lang="zh"] .hero-core-subtitle {
-  font-family: var(--font-xiangcui-dengcusong-agent), "Songti SC", STSong,
-    serif;
-}
-
-html[lang="zh"] .hero-core-title,
-html[lang="zh"] .hero-core-subtitle {
+html[lang="zh"] .hero-core-title {
   font-weight: 400;
   letter-spacing: -0.045em;
 }
@@ -2638,22 +2564,6 @@ html[lang="zh"] .hero-core-subtitle {
     --page-pad: clamp(1rem, 4.5vw, 1.25rem);
   }
 
-  .announcement-bar {
-    min-height: 43px;
-    gap: 0.5rem;
-    padding: 0.4rem var(--page-pad);
-  }
-
-  .announcement-copy {
-    font-size: 0.7rem;
-    line-height: 1.25;
-  }
-
-  .announcement-dot {
-    width: 0.6rem;
-    height: 0.6rem;
-  }
-
   .site-nav {
     min-height: 64px;
   }
@@ -2670,8 +2580,8 @@ html[lang="zh"] .hero-core-subtitle {
   }
 
   .hero-grid {
-    height: calc(100svh - 6.6875rem);
-    min-height: min(34rem, calc(100svh - 6.6875rem));
+    height: calc(100svh - 4rem);
+    min-height: min(34rem, calc(100svh - 4rem));
   }
 
   .hero-word {
@@ -2723,7 +2633,7 @@ html[lang="zh"] .hero-core-subtitle {
   }
 
   html[lang="zh"] .hero-grid {
-    min-height: min(34rem, calc(100svh - 6.6875rem));
+    min-height: min(34rem, calc(100svh - 4rem));
   }
 
   .manifesto-intro {
@@ -2738,10 +2648,6 @@ html[lang="zh"] .hero-core-subtitle {
 }
 
 @media (max-width: 22.5rem) {
-  .announcement-bar {
-    font-size: 0.675rem;
-  }
-
   .hero-word-connect {
     font-size: 2.35rem;
   }
@@ -3186,8 +3092,7 @@ html[lang="zh"] .wechat-entry-status strong {
   line-height: 1.45;
 }
 
-.hero-core > .hero-core-title,
-.hero-core > .hero-core-subtitle {
+.hero-core > .hero-core-title {
   font-size: clamp(1.35rem, min(1.8vw, 3svh), 1.8rem);
 }
 
@@ -3552,8 +3457,7 @@ html[lang="zh"] .wechat-entry-status strong {
     top: 66%;
   }
 
-  .hero-core > .hero-core-title,
-  .hero-core > .hero-core-subtitle {
+  .hero-core > .hero-core-title {
     font-size: clamp(1.08rem, min(5vw, 3.8svh), 1.3rem);
   }
 

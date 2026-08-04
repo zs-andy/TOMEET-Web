@@ -1,7 +1,4 @@
 {
-  "banner": {
-    "text": "AI Agent 驱动的全新社交方式，现已开放早期体验"
-  },
   "installApp": {
     "title": "添加到主屏幕",
     "description": "全屏使用 TOMEET",
@@ -95,9 +92,8 @@
     "heroThen": "都从被真正",
     "heroSocial": "理解开始。",
     "heroBridgeBefore": "更懂你的 ",
-    "heroBridgeHighlight": "线下社交",
+    "heroBridgeHighlight": "全新社交",
     "heroBridgeAfter": "方式",
-    "heroBridgeSubtitle": "<latin>AI</latin> 时代的 <latin>Dating App</latin>",
     "heroBody": "像聊天一样告诉 AI 你喜欢什么、想做什么，以及想认识怎样的人。",
     "heroPortrait": "人物肖像｜你的真实生活状态",
     "heroAgent": "TOMEET 社交搭档｜角色或装置",
