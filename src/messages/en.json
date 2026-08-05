@@ -15,7 +15,8 @@
     "features": "Features",
     "foodies": "Must-Meet List",
     "joinWaitlist": "Log In",
-    "openProfile": "Open profile"
+    "openProfile": "Open profile",
+    "back": "Back"
   },
   "hero": {
     "title": "Find <highlight>the right</highlight> people through <highlight>conversation</highlight>",

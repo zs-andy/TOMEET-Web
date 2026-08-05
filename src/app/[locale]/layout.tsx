@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import ThemeCycleSync from "@/components/ThemeCycleSync";
 import InstallAppPrompt from "@/components/InstallAppPrompt";
+import MobileBackButton from "@/components/MobileBackButton";
 import "../globals.css";
 
 type Props = {
@@ -176,6 +177,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body className="antialiased">
         <ThemeCycleSync />
         <NextIntlClientProvider messages={messages}>
+          <MobileBackButton />
           {children}
           <InstallAppPrompt />
         </NextIntlClientProvider>

@@ -15,7 +15,8 @@
     "features": "特性",
     "foodies": "必吃榜",
     "joinWaitlist": "登录",
-    "openProfile": "打开个人资料"
+    "openProfile": "打开个人资料",
+    "back": "返回"
   },
   "hero": {
     "title": "用<highlight>对话</highlight>，<br/>找到<highlight>对</highlight>的人",
