@@ -273,7 +273,7 @@ body {
   display: grid;
   padding: 0;
   border: 0;
-  border-radius: 0.85rem;
+  border-radius: 50%;
   background: color-mix(in srgb, var(--background-card) 94%, transparent);
   box-shadow: 0 0.75rem 2.5rem rgb(28 27 27 / 14%);
   color: var(--text-primary);
