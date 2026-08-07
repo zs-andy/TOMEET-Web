@@ -87,7 +87,7 @@ export default function Navbar({ viewer }: { viewer: AuthViewer | null }) {
             </Link>
           ) : (
             <Link
-              href={localizedHref(locale, "/login")}
+              href={localizedHref(locale, "/agent")}
               className="login-button"
             >
               {nav("joinWaitlist")}

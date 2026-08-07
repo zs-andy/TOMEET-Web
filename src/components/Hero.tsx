@@ -58,7 +58,7 @@ export default function Hero() {
           <div className="hero-access-choices">
             <Link
               className="primary-button web-access-button"
-              href={localizedHref(locale, "/login")}
+              href={localizedHref(locale, "/agent")}
             >
               {access("tryNow")}
             </Link>

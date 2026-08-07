@@ -46,7 +46,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#1c1b1b",
+  themeColor: "#fdfdfc",
+  colorScheme: "light",
 };
 
 export function generateStaticParams() {
@@ -113,7 +114,7 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
     appleWebApp: {
       capable: true,
       title: "TOMEET",
-      statusBarStyle: "black-translucent",
+      statusBarStyle: "default",
     },
     icons: {
       icon: [

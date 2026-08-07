@@ -16,8 +16,9 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [confirmationSent, setConfirmationSent] = useState(false);
   const [loadingAction, setLoadingAction] = useState<LoadingAction>(null);
-  const fallbackNext = locale === "en" ? "/en" : "/";
+  const fallbackNext = locale === "en" ? "/en/agent" : "/agent";
 
   const getNext = () => {
     if (typeof window === "undefined") return fallbackNext;
@@ -76,6 +77,7 @@ export default function SignupPage() {
         email: authIdentifier.email,
         password,
         options: {
+          emailRedirectTo: `${window.location.origin}/api/auth/callback?next=${encodeURIComponent(next)}`,
           data: {
             login_identifier: authIdentifier.original,
             login_identifier_kind: authIdentifier.kind,
@@ -89,7 +91,11 @@ export default function SignupPage() {
       }
 
       if (!data.session) {
-        setError(t("errorServer"));
+        if (authIdentifier.kind === "email") {
+          setConfirmationSent(true);
+        } else {
+          setError(t("errorServer"));
+        }
         return;
       }
 
@@ -124,6 +130,17 @@ export default function SignupPage() {
       setLoadingAction(null);
     }
   };
+
+  if (confirmationSent) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
+        <div className="w-full max-w-sm text-center">
+          <h1 className="text-2xl font-bold text-gray-900">{t("checkEmail")}</h1>
+          <p className="mt-3 text-sm text-gray-500">{t("checkEmailDesc")}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">

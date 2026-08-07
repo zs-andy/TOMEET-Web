@@ -7,7 +7,7 @@ const intlMiddleware = createIntlMiddleware(routing);
 
 // Routes that authed users should be redirected away from
 const authPaths = ["/login", "/signup"];
-const protectedPaths = ["/profile"];
+const protectedPaths = ["/agent", "/profile"];
 
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -19,16 +19,6 @@ export default async function proxy(request: NextRequest) {
   // Run intl middleware first (handles locale detection/redirect)
   const intlResponse = intlMiddleware(request);
   const response = intlResponse || NextResponse.next();
-
-  if (
-    pathnameWithoutLocale === "/agent" ||
-    pathnameWithoutLocale.startsWith("/agent/")
-  ) {
-    const url = request.nextUrl.clone();
-    url.pathname = localePrefix || "/";
-    url.search = "";
-    return NextResponse.redirect(url);
-  }
 
   const isAuthPath = authPaths.some((path) =>
     pathnameWithoutLocale.startsWith(path)

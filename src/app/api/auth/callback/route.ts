@@ -17,7 +17,7 @@ export async function GET(request: Request) {
     !requestedPath.startsWith("//") &&
     !requestedPath.includes("\\")
       ? requestedPath
-      : "/";
+      : "/agent";
   const loginPath = next === "/en" || next.startsWith("/en/")
     ? "/en/login"
     : "/login";

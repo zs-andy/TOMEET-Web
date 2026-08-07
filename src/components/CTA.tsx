@@ -41,7 +41,7 @@ export default function CTA() {
           <p>{cta("subtitle")}</p>
           <Link
             className="primary-button"
-            href={localizedHref(locale, "/login")}
+            href={localizedHref(locale, "/agent")}
           >
             {cta("button")}
             <span aria-hidden="true">→</span>

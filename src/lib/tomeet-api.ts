@@ -14,8 +14,13 @@ export type LlmJob = {
   id: string;
   type:
     | "agent_reply"
+    | "agent_event_reply"
     | "multimodal_understanding"
     | "matchmaking"
+    | "match_round_generate"
+    | "match_round_settle"
+    | "match_status_notify"
+    | "room_change_notify"
     | "feedback_update"
     | "memory_extract"
     | "memory_consolidate";

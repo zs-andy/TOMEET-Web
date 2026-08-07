@@ -1058,6 +1058,12 @@ html[lang="zh"]
   }
 }
 
+@media (max-width: 820px) {
+  .agent-header {
+    padding-left: calc(env(safe-area-inset-left) + 4.5rem);
+  }
+}
+
 @media (max-width: 34rem) {
   .agent-header {
     min-height: 64px;

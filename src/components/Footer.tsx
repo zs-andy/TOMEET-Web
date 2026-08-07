@@ -26,7 +26,7 @@ export default function Footer() {
             <h3>{footer("product")}</h3>
             <a href="#why">{nav("features")}</a>
             <a href="#how">{nav("howItWorks")}</a>
-            <Link href={localizedHref(locale, "/login")}>
+            <Link href={localizedHref(locale, "/agent")}>
               {nav("joinWaitlist")}
             </Link>
           </div>
